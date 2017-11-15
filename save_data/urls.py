@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^save_data/$', views.save_data, name='save_data'),
     url(r'^$', views.index, name='index'),
     url(r'^levels.html/$', views.get_list_levels, name='get_list_levels'),
-    url(r'^levels.html/level.html$', views.get_list_levels, name='get_list_levels'),
+    url(r'^levels.html/level.html$', views.get_level, name='get_level'),
 ]
 
 if settings.DEBUG:

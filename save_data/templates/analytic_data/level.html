@@ -12,5 +12,51 @@
 <body>
 
 
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th colspan="2">Время</th>
+      <th rowspan="2">Попытка</th>
+      <th rowspan="2">Результат</th>
+      <th colspan="2">Потрачено</th>
+      <th colspan="2">Цели</th>
+      <th colspan="2">Дано</th>
+    </tr>
+
+    <tr>
+      <th>Начало</th>
+      <th>Конец</th>
+      <th>Ходов</th>
+      <th>Секунд</th>
+      <th>Цель 1</th>
+      <th>Цель 2</th>
+      <th>Ходов</th>
+      <th>Секунд</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for key, value in events.items %}
+  {% comment %}{{key}} - {{value}} <br>{% endcomment %}
+
+    <tr>
+      <td>{{value.starttime}}</td>
+      <td>{{value.endtime}}</td>
+      <td>{{value.try}}</td>
+      <td>{{value.result}}</td>
+      <td>{{value.wasturns}}</td>
+      <td>{{value.wasseconds}}</td>
+      <td>{{value.target1.m_type}} - {{value.target1.m_required}}</td>
+      <td>{{value.target2.m_type}} - {{value.target2.m_required}}</td>
+      <td>{{value.turns}}</td>
+      <td>{{value.seconds}}</td>
+    </tr>
+
+{% endfor %}
+  </tbody>
+</table>
+
 </body>
 </html>
