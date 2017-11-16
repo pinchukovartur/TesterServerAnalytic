@@ -1,7 +1,6 @@
-<!--{% load staticfiles %}-->
 <html>
 <head>
-    <title>All scripts</title>
+    <title>Level info</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -11,50 +10,68 @@
 </head>
 <body>
 
-
-
-
 <table class="table table-bordered">
   <thead>
     <tr>
+      <th rowspan="2">№</th>
       <th colspan="2">Время</th>
-      <th rowspan="2">Попытка</th>
-      <th rowspan="2">Результат</th>
+      <th colspan="2">Результат</th>
       <th colspan="2">Потрачено</th>
       <th colspan="2">Цели</th>
       <th colspan="2">Дано</th>
+      <th colspan="2">Было Собрано</th>
     </tr>
 
     <tr>
       <th>Начало</th>
       <th>Конец</th>
+      <th>Победа</th>
+      <th>Поражение</th>
       <th>Ходов</th>
       <th>Секунд</th>
-      <th>Цель 1</th>
-      <th>Цель 2</th>
+      <th>{{ target1 }}</th>
+      <th>{{ target2 }}</th>
       <th>Ходов</th>
       <th>Секунд</th>
+      <th>{{ target1 }}</th>
+      <th>{{ target2 }}</th>
     </tr>
   </thead>
   <tbody>
 
   {% for key, value in events.items %}
-  {% comment %}{{key}} - {{value}} <br>{% endcomment %}
-
     <tr>
+      <th scope="row">{{ key }}</th>
       <td>{{value.starttime}}</td>
       <td>{{value.endtime}}</td>
-      <td>{{value.try}}</td>
-      <td>{{value.result}}</td>
+      <td>{{value.completegame}}</td>
+      <td>{{value.failgame}}</td>
       <td>{{value.wasturns}}</td>
       <td>{{value.wasseconds}}</td>
-      <td>{{value.target1.m_type}} - {{value.target1.m_required}}</td>
-      <td>{{value.target2.m_type}} - {{value.target2.m_required}}</td>
+      <td>{{value.target1}}</td>
+      <td>{{value.target2}}</td>
       <td>{{value.turns}}</td>
       <td>{{value.seconds}}</td>
+      <td>{{value.target1sent}}</td>
+      <td>{{value.target2sent}}</td>
     </tr>
 
-{% endfor %}
+  {% endfor %}
+  <tr>
+      <th></th>
+      <th></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.try }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.complete }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.fail }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.spent_turn }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.spent_second }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.target1 }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.target2 }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.give_turn }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.give_second }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.target1sent }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.target2sent }}</h4></th>
+  </tr>
   </tbody>
 </table>
 
