@@ -82,10 +82,10 @@ def sort_levels(request):
 
         from_date = ""
         if request.GET.get('from', "") != "":
-            from_date = datetime.datetime.strptime(str(request.GET.get('from', "")), "%Y-%m-%d")
+            from_date = datetime.datetime.strptime(str(request.GET.get('from', "")), "%m/%d/%Y %H:%M %p")
         until_date = ""
         if request.GET.get('until', "") != "":
-            until_date = datetime.datetime.strptime(str(request.GET.get('until', "")), "%Y-%m-%d")
+            until_date = datetime.datetime.strptime(str(request.GET.get('until', "")), "%m/%d/%Y %H:%M %p")
 
         #
         if json_data["m_levelID"] not in levels:
@@ -109,8 +109,8 @@ def sort_levels(request):
                     levels[json_data["m_levelID"]] = value["event_datetime"]
                 if levels[json_data["m_levelID"]] > value["event_datetime"]:
                     levels[json_data["m_levelID"]] = value["event_datetime"]
-
-    return render(request, 'analytic_data/levels.html', {'levels': levels})
+    sorted_levels = sorted(levels.items(), key=lambda p: p[1])
+    return render(request, 'analytic_data/levels.html', {'levels': sorted_levels})
 
 
 def get_level(request):
