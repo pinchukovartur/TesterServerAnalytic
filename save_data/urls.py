@@ -5,28 +5,11 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
 
-"""
-urlpatterns = [
-    url(r'^$', views.post_list, name='post_list'),
-    url(r'^upload/$', views.model_form_upload, name='model_form_upload'),
-    url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'),
-    url(r'^start/$', views.post_start, name='post_start'),
-    url(r'^stop/$', views.post_stop, name='post_stop'),
-    url(r'^delete/$', views.post_delete, name='post_delete'),
-    url(r'^update/$', views.post_update, name='post_update'),
-    url(r'^cpu/$', views.get_cpu_info, name='get_cpu_info'),
-    url(r'^memory/$', views.get_memory_info, name='get_memory_info'),
-    url(r'^disk/$', views.get_disk_info, name='get_disk_info'),
-    url(r'^post/new/$', views.model_form_upload, name='model_form_upload'),
-    url(r'^start_download/(?P<status_code>[a-z]+)/$$', views.post_start_insert_in_db, name='post_start_insert_in_db'),
-    url(r'^delete_log/(?P<log_file>.+)/(?P<pk>[0-9]+)/$$', views.delete_log_file, name='delete_log_file'),
-]
-"""
-
 urlpatterns = [
     url(r'^save_data/$', views.save_data, name='save_data'),
     url(r'^$', views.index, name='index'),
     url(r'^levels.html/$', views.get_list_levels, name='get_list_levels'),
+    url(r'^levels.html/sort$', views.sort_levels, name='sort_levels'),
     url(r'^levels.html/level.html$', views.get_level, name='get_level'),
 ]
 

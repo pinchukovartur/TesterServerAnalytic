@@ -6,6 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 import json
 import collections
+import datetime
+import operator
 
 
 @csrf_exempt
@@ -55,23 +57,74 @@ def __insert__(query):
 def get_list_levels(request):
     # получение даных с бд
     data = __get_events_from_db__("startgame")
-    levels = set()
+    levels = dict()
+    data = collections.OrderedDict(sorted(data.items()))
     for key, value in data.items():
         json_data = json.loads(str(value["json_data"]).replace('"{', '{').replace('}"', '}'))
-        levels.add(json_data["m_levelID"])
-    if len(levels) == 0:
-        return HttpResponse("Levels Not Found")
+
+        if json_data["m_levelID"] not in levels:
+            levels[json_data["m_levelID"]] = value["event_datetime"]
+        else:
+            if levels[json_data["m_levelID"]] > value["event_datetime"]:
+                levels[json_data["m_levelID"]] = value["event_datetime"]
+    sorted_levels = sorted(levels.items(), key=lambda p: p[1])
+
+    return render(request, 'analytic_data/levels.html', {'levels': sorted_levels})
+
+
+def sort_levels(request):
+    # получение даных с бд
+    data = __get_events_from_db__("startgame")
+    levels = dict()
+
+    for key, value in data.items():
+        json_data = json.loads(str(value["json_data"]).replace('"{', '{').replace('}"', '}'))
+
+        from_date = ""
+        if request.GET.get('from', "") != "":
+            from_date = datetime.datetime.strptime(str(request.GET.get('from', "")), "%Y-%m-%d")
+        until_date = ""
+        if request.GET.get('until', "") != "":
+            until_date = datetime.datetime.strptime(str(request.GET.get('until', "")), "%Y-%m-%d")
+
+        #
+        if json_data["m_levelID"] not in levels:
+            if from_date != "" and until_date != "" and until_date > value["event_datetime"] > from_date:
+                    levels[json_data["m_levelID"]] = value["event_datetime"]
+            if from_date == "" and until_date != "" and value["event_datetime"] < until_date:
+                    levels[json_data["m_levelID"]] = value["event_datetime"]
+            if from_date != "" and until_date == "" and value["event_datetime"] > from_date:
+                    levels[json_data["m_levelID"]] = value["event_datetime"]
+            if from_date == "" and until_date == "":
+                    levels[json_data["m_levelID"]] = value["event_datetime"]
+        else:
+            if from_date != "" and until_date != "":
+                if levels[json_data["m_levelID"]] > value["event_datetime"] and until_date > value["event_datetime"] > from_date:
+                    levels[json_data["m_levelID"]] = value["event_datetime"]
+            if from_date == "" and until_date != "":
+                if levels[json_data["m_levelID"]] > value["event_datetime"] < until_date:
+                    levels[json_data["m_levelID"]] = value["event_datetime"]
+            if from_date != "" and until_date == "":
+                if levels[json_data["m_levelID"]] > value["event_datetime"] > from_date:
+                    levels[json_data["m_levelID"]] = value["event_datetime"]
+                if levels[json_data["m_levelID"]] > value["event_datetime"]:
+                    levels[json_data["m_levelID"]] = value["event_datetime"]
+
     return render(request, 'analytic_data/levels.html', {'levels': levels})
 
 
 def get_level(request):
     # получение даных с бд
-    global events_data, try_count, common_data, complete_count, fail_count, spent_turn_count, spent_second_count, target1_count, target2_count, give_turn_count, give_second_count, event_data, target2sent_count, target1sent_count
-    level_name = request.GET['level_name']
+    global events_data, try_count, common_data, complete_count, fail_count, spent_turn_count, spent_second_count,\
+        target1_count, target2_count, give_turn_count, give_second_count, event_data, target2sent_count,\
+        target1sent_count
+    level_name = request.GET.get('level_name', "")
+    if level_name == "":
+        return HttpResponse("Level Not Found")
 
     data = __get_events_from_db__("startgame")
     # sort
-    #data = collections.OrderedDict(sorted(data.items()))
+    # data = collections.OrderedDict(sorted(data.items()))
     # получаем pk всех ивентов, которые содержат level_name
     level_events = dict()
     event_key = 1
@@ -81,7 +134,7 @@ def get_level(request):
         if value["event_data"]["m_levelID"] == level_name:
 
             # проверяем, были ли они окончены
-            final_event = __get_final_event__(value["level_session_id"])
+            final_event = __get_failgame_event__(value["level_session_id"])
             if final_event:
 
                 # добавляем финальный event
@@ -151,12 +204,14 @@ def get_level(request):
                 give_turn_count.append(give_turn)
 
             target1 = int(value["endevent"]["event_data"]["m_firstTarget"]["m_required"])
+            event_data["target1type"] = ""
             if target1 > 0:
                 # m_required - надо было собрать,   m_remainder - было собрано
                 target1_count.append(target1)
                 event_data["target1"] = str(target1)
                 event_data["target1type"] = value["endevent"]["event_data"]["m_firstTarget"]["m_type"]
             target2 = int(value["endevent"]["event_data"]["m_secondTarget"]["m_required"])
+            event_data["target2type"] = ""
             if target2 > 0:
                 # m_required - надо было собрать,   m_remainder - было собрано
                 target2_count.append(target2)
@@ -168,42 +223,42 @@ def get_level(request):
                 target1sent_count.append(target1sent)
                 event_data["target1sent"] = str(target1sent)
             target2sent = int(value["endevent"]["event_data"]["m_secondTarget"]["m_remainder"])
-            print(value["endevent"]["event_data"]["m_secondTarget"])
             if target2sent > 0:
                 target2sent_count.append(target2sent)
                 event_data["target2sent"] = str(target2sent)
 
             events_data[len(events_data) + 1] = event_data
-
+    if len(events_data) == 0:
+        return HttpResponse("level not found: 232")
     common_data["complete"] = sum(complete_count)
     common_data["fail"] = sum(fail_count)
     if len(spent_turn_count) > 0:
         common_data["spent_turn"] = str(float(sum(spent_turn_count) / len(spent_turn_count))) + " +- " \
-                                + str((max(spent_turn_count) - min(spent_turn_count)) / 2)
+                                    + str((max(spent_turn_count) - min(spent_turn_count)) / 2)
     if len(spent_second_count) > 0:
         common_data["spent_second"] = str(float(sum(spent_second_count) / len(spent_second_count))) + " +- " \
-                                + str((max(spent_second_count) - min(spent_second_count)) / 2)
+                                      + str((max(spent_second_count) - min(spent_second_count)) / 2)
     if len(target1_count) > 0:
         common_data["target1"] = str(float(sum(target1_count) / len(target1_count))) + " +- " \
-                                + str((max(target1_count) - min(target1_count)) / 2)
+                                 + str((max(target1_count) - min(target1_count)) / 2)
     if len(target2_count) > 0:
         common_data["target2"] = str(float(sum(target2_count) / len(target2_count))) + " +- " \
-                                + str((max(target2_count) - min(target2_count)) / 2)
+                                 + str((max(target2_count) - min(target2_count)) / 2)
     if len(target1sent_count) > 0:
         common_data["target1sent"] = str(float(sum(target1sent_count) / len(target1sent_count))) + " +- " \
-                                + str((max(target1sent_count) - min(target1sent_count)) / 2)
+                                     + str((max(target1sent_count) - min(target1sent_count)) / 2)
     if len(target2sent_count) > 0:
         common_data["target2sent"] = str(float(sum(target2sent_count) / len(target2sent_count))) + " +- " \
-                                + str((max(target2sent_count) - min(target2sent_count)) / 2)
+                                     + str((max(target2sent_count) - min(target2sent_count)) / 2)
     if len(spent_turn_count) > 0:
         common_data["spent_turn"] = str(float(sum(spent_turn_count) / len(spent_turn_count))) + " +- " \
-                                + str((max(spent_turn_count) - min(spent_turn_count)) / 2)
+                                    + str((max(spent_turn_count) - min(spent_turn_count)) / 2)
     if len(give_turn_count) > 0:
         common_data["give_turn"] = str(float(sum(give_turn_count) / len(give_turn_count))) + " +- " \
-                                + str((max(give_turn_count) - min(give_turn_count)) / 2)
+                                   + str((max(give_turn_count) - min(give_turn_count)) / 2)
     if len(give_second_count) > 0:
         common_data["give_second"] = str(float(sum(give_second_count) / len(give_second_count))) + " +- " \
-                                + str((max(give_second_count) - min(give_second_count)) / 2)
+                                     + str((max(give_second_count) - min(give_second_count)) / 2)
 
     return render(request, 'analytic_data/level.html', {'events': events_data, "common_data": common_data,
                                                         "target1": event_data["target1type"],
@@ -230,10 +285,10 @@ def __get_events_from_db__(key_event):
         return data
 
 
-def __get_final_event__(session_key):
+def __get_failgame_event__(session_key):
     game_query = "SELECT id, key_event, json_data, user_secret_key, level_session_id, event_datetime" \
                  " FROM analytic_data_store.tester_data" \
-                 " WHERE key_event != 'startgame' and level_session_id = '" + session_key + "' order by event_datetime;"
+                 " WHERE key_event != 'finishlevel' and key_event != 'startgame' and level_session_id = '" + session_key + "' order by event_datetime;"
     cnx = mysql.connector.connect(user='root', database='analytic_data_store', password="root")
     cursor = cnx.cursor()
 
@@ -252,4 +307,29 @@ def __get_final_event__(session_key):
     if len(final_event) == 1:
         return final_event
     elif len(final_event) > 1:
+        raise NameError("> 1 level finish, check validate data base")
+
+
+def __get_level_finish_event__(session_key):
+    game_query = "SELECT id, key_event, json_data, user_secret_key, level_session_id, event_datetime" \
+                 " FROM analytic_data_store.tester_data" \
+                 " WHERE key_event = 'finishlevel' and level_session_id = '" + session_key + "' order by event_datetime;"
+    cnx = mysql.connector.connect(user='root', database='analytic_data_store', password="root")
+    cursor = cnx.cursor()
+
+    final_event = dict()
+    try:
+        cursor.execute(game_query)
+        for id, key_event, json_data, user_secret_key, level_session_id, event_datetime in cursor:
+            final_event[id] = {"json_data": json_data, "user_secret_key": user_secret_key, "key_event": key_event,
+                               "level_session_id": level_session_id, "event_datetime": event_datetime}
+    except Exception as mysql_error:
+        print(mysql_error)
+    finally:
+        cursor.close()
+        cnx.close()
+
+    if len(final_event) == 2:
+        return final_event
+    elif len(final_event) > 2:
         raise NameError("> 1 level finish, check validate data base")
