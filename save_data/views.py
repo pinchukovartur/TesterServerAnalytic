@@ -9,6 +9,10 @@ import collections
 import datetime
 import operator
 
+from save_data.utils.db_utils import insert
+from save_data.utils.events_utils import get_events, sort_by_key_event, sort_by_event_datetime, \
+    delete_copy_event_with_big_date, sort_by_date_time, get_analytic_data
+
 
 @csrf_exempt
 def save_data(request):
@@ -20,7 +24,7 @@ def save_data(request):
 
         query = "INSERT INTO analytic_data_store.tester_data (key_event, json_data, user_secret_key, level_session_id)" \
                 " VALUES('" + key + "', '" + data + "', '" + user_secret_key + "', '" + level_session_id + "'); "
-        __insert__(query)
+        insert(query)
 
     except Exception as error:
         print(error)
@@ -30,102 +34,53 @@ def save_data(request):
 
 
 def index(request):
+    print(len())
     return render(request, 'analytic_data/index.html')
 
 
-def __insert__(query):
-    """
-    Метод подключается к БД и делает insert
-    :param query: insert query
-    :return: null
-    """
-    cnx = mysql.connector.connect(user='root', database='analytic_data_store', password="root")
-    cursor = cnx.cursor()
-
-    try:
-        cursor.execute(query)
-        # Make sure data is committed to the database
-        cnx.commit()
-    except Exception as mysql_error:
-        print(query)
-        print(mysql_error)
-    finally:
-        cursor.close()
-        cnx.close()
+def __get_sorted_levels():
+    events = get_events()
+    start_game_events = sort_by_key_event(events, "startgame")
+    dict_level_info = delete_copy_event_with_big_date(start_game_events)
+    return sorted(dict_level_info.items(), key=lambda p: p[1])
 
 
 def get_list_levels(request):
-    # получение даных с бд
-    data = __get_events_from_db__("startgame")
-    levels = dict()
-    data = collections.OrderedDict(sorted(data.items()))
-    for key, value in data.items():
-        json_data = json.loads(str(value["json_data"]).replace('"{', '{').replace('}"', '}'))
-
-        if json_data["m_levelID"] not in levels:
-            levels[json_data["m_levelID"]] = value["event_datetime"]
-        else:
-            if levels[json_data["m_levelID"]] > value["event_datetime"]:
-                levels[json_data["m_levelID"]] = value["event_datetime"]
-    sorted_levels = sorted(levels.items(), key=lambda p: p[1])
-
-    return render(request, 'analytic_data/levels.html', {'levels': sorted_levels})
+    set_level_info = __get_sorted_levels()
+    return render(request, 'analytic_data/levels.html', {'levels': set_level_info})
 
 
 def sort_levels(request):
-    # получение даных с бд
-    data = __get_events_from_db__("startgame")
-    levels = dict()
+    set_level_info = __get_sorted_levels()
 
-    for key, value in data.items():
-        json_data = json.loads(str(value["json_data"]).replace('"{', '{').replace('}"', '}'))
+    until_date = request.GET.get('until', "12/12/3012 0:00 PM")
+    from_date = request.GET.get('from', "12/12/2012 0:00 PM")
 
-        from_date = ""
-        if request.GET.get('from', "") != "":
-            from_date = datetime.datetime.strptime(str(request.GET.get('from', "")), "%m/%d/%Y %H:%M %p")
-        until_date = ""
-        if request.GET.get('until', "") != "":
-            until_date = datetime.datetime.strptime(str(request.GET.get('until', "")), "%m/%d/%Y %H:%M %p")
-
-        #
-        if json_data["m_levelID"] not in levels:
-            if from_date != "" and until_date != "" and until_date > value["event_datetime"] > from_date:
-                    levels[json_data["m_levelID"]] = value["event_datetime"]
-            if from_date == "" and until_date != "" and value["event_datetime"] < until_date:
-                    levels[json_data["m_levelID"]] = value["event_datetime"]
-            if from_date != "" and until_date == "" and value["event_datetime"] > from_date:
-                    levels[json_data["m_levelID"]] = value["event_datetime"]
-            if from_date == "" and until_date == "":
-                    levels[json_data["m_levelID"]] = value["event_datetime"]
-        else:
-            if from_date != "" and until_date != "":
-                if levels[json_data["m_levelID"]] > value["event_datetime"] and until_date > value["event_datetime"] > from_date:
-                    levels[json_data["m_levelID"]] = value["event_datetime"]
-            if from_date == "" and until_date != "":
-                if levels[json_data["m_levelID"]] > value["event_datetime"] < until_date:
-                    levels[json_data["m_levelID"]] = value["event_datetime"]
-            if from_date != "" and until_date == "":
-                if levels[json_data["m_levelID"]] > value["event_datetime"] > from_date:
-                    levels[json_data["m_levelID"]] = value["event_datetime"]
-                if levels[json_data["m_levelID"]] > value["event_datetime"]:
-                    levels[json_data["m_levelID"]] = value["event_datetime"]
-    sorted_levels = sorted(levels.items(), key=lambda p: p[1])
-    return render(request, 'analytic_data/levels.html', {'levels': sorted_levels})
+    return render(request, 'analytic_data/levels.html',
+                  {'levels': sort_by_date_time(from_date, until_date, set_level_info)})
 
 
 def get_level(request):
-    # получение даных с бд
-    global events_data, try_count, common_data, complete_count, fail_count, spent_turn_count, spent_second_count,\
-        target1_count, target2_count, give_turn_count, give_second_count, event_data, target2sent_count,\
-        target1sent_count
     level_name = request.GET.get('level_name', "")
     if level_name == "":
         return HttpResponse("Level Not Found")
 
-    data = __get_events_from_db__("startgame")
-    # sort
-    # data = collections.OrderedDict(sorted(data.items()))
-    # получаем pk всех ивентов, которые содержат level_name
+    print(get_analytic_data(level_name)[0][0].level_info.firstTarget)
+    list_events = get_analytic_data(level_name)
+    return render(request, 'analytic_data/level.html', {'events': list_events})
+
+    """
+    # получение даных с бд
+    global events_data, try_count, common_data, complete_count, fail_count, spent_turn_count, spent_second_count, \
+        target1_count, target2_count, give_turn_count, give_second_count, event_data, target2sent_count, \
+        target1sent_count
+
+
+
+    events = get_events()
+    data = sort_by_key_event(events, "startgame")
+
+
     level_events = dict()
     event_key = 1
     for key, value in data.items():
@@ -258,32 +213,12 @@ def get_level(request):
                                    + str((max(give_turn_count) - min(give_turn_count)) / 2)
     if len(give_second_count) > 0:
         common_data["give_second"] = str(float(sum(give_second_count) / len(give_second_count))) + " +- " \
-                                     + str((max(give_second_count) - min(give_second_count)) / 2)
 
     return render(request, 'analytic_data/level.html', {'events': events_data, "common_data": common_data,
                                                         "target1": event_data["target1type"],
                                                         "target2": event_data["target2type"]})
-
-
-def __get_events_from_db__(key_event):
-    game_query = "SELECT id, key_event, json_data, user_secret_key, level_session_id, event_datetime " \
-                 "FROM analytic_data_store.tester_data WHERE key_event = '" + key_event + "' order by event_datetime;"
-    cnx = mysql.connector.connect(user='root', database='analytic_data_store', password="root")
-    cursor = cnx.cursor()
-
-    data = dict()
-    try:
-        cursor.execute(game_query)
-        for id, key_event, json_data, user_secret_key, level_session_id, event_datetime in cursor:
-            data[id] = {"json_data": json_data, "user_secret_key": user_secret_key, "key_event": key_event,
-                        "level_session_id": level_session_id, "event_datetime": event_datetime}
-    except Exception as mysql_error:
-        print(mysql_error)
-    finally:
-        cursor.close()
-        cnx.close()
-        return data
-
+                                     + str((max(give_second_count) - min(give_second_count)) / 2)
+"""
 
 def __get_failgame_event__(session_key):
     game_query = "SELECT id, key_event, json_data, user_secret_key, level_session_id, event_datetime" \

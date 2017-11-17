@@ -39,25 +39,25 @@
   </thead>
   <tbody>
 
-  {% for key, value in events.items %}
+  {% for event in events %}
     <tr>
-      <th scope="row">{{ key }}</th>
-      <td>{{value.starttime}}</td>
-      <td>{{value.endtime}}</td>
-      <td>{{value.completegame}}</td>
-      <td>{{value.failgame}}</td>
-      <td>{{value.wasturns}}</td>
-      <td>{{value.wasseconds}}</td>
-      <td>{{value.target1}}</td>
-      <td>{{value.target2}}</td>
-      <td>{{value.turns}}</td>
-      <td>{{value.seconds}}</td>
-      <td>{{value.target1sent}}</td>
-      <td>{{value.target2sent}}</td>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{event.0.event_datetime}}</td>
+      <td>{{event.1.event_datetime}}</td>
+      <td>{{event.completegame}}</td>
+      <td>{{event.failgame}}</td>
+      <td>{{event.0.level_info.firstTarget.m_required}}</td>
+      <td>{{event.0.level_info.m_secondTarget.m_required}}</td>
+      <td>{{event.0.level_info.firstTarget.m_required}}</td>
+      <td>{{event.0.level_info.firstTarget.m_required}}</td>
+      <td>{{event.turns}}</td>
+      <td>{{event.seconds}}</td>
+      <td>{{event.target1sent}}</td>
+      <td>{{event.target2sent}}</td>
     </tr>
 
   {% endfor %}
-  <tr>
+ {% comment %} <tr>
       <th></th>
       <th></th>
       <th style="color: dodgerblue"><h4>{{ common_data.try }}</h4></th>
@@ -71,7 +71,7 @@
       <th style="color: dodgerblue"><h4>{{ common_data.give_second }}</h4></th>
       <th style="color: dodgerblue"><h4>{{ common_data.target1sent }}</h4></th>
       <th style="color: dodgerblue"><h4>{{ common_data.target2sent }}</h4></th>
-  </tr>
+  </tr>{% endcomment %}
   </tbody>
 </table>
 
