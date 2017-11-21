@@ -181,7 +181,7 @@ def get_totals_data(analytic_data):
         if row.third_bonus == "True":
             third_bonus.append(1)
         if row.game_currency.isdigit():
-            game_currency.append(row.game_currency)
+            game_currency.append(int(row.game_currency))
 
     result_dict = dict()
     if len(wins) != 0:
