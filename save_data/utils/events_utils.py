@@ -1,6 +1,7 @@
 import json
 import operator
 import datetime
+
 from save_data.utils.db_utils import get_events_from_db
 
 
@@ -10,7 +11,20 @@ class LevelInfo:
         if json_data:
             self.levelID = json_data["m_levelID"]
             self.firstTarget = json_data["m_firstTarget"]
-            self.seconds = json_data["m_secondTarget"]
+            self.secondTarget = json_data["m_secondTarget"]
+            self.seconds = json_data["m_seconds"]
+            self.turns = json_data["m_turns"]
+            self.gameCurrency = json_data["m_gameCurrencyCount"]
+            print(json_data["m_gameCurrencyCount"])
+            self.firstBonus = ""
+            self.secondBonus = ""
+            self.thirdBonus = ""
+            if "m_firstBonus" in json_data.keys():
+                self.firstBonus = json_data["m_firstBonus"]
+            if "m_secondBonus" in json_data.keys():
+                self.secondBonus = json_data["m_secondBonus"]
+            if "m_thirdBonus" in json_data.keys():
+                self.thirdBonus = json_data["m_thirdBonus"]
 
 
 class Event:
@@ -76,23 +90,4 @@ def sort_by_date_time(from_date, until_date, set_level_info):
     return set_level_info
 
 
-def get_analytic_data(level_name):
-    events = get_events()
-
-    level_events = list()
-    for event in events:
-        if event.level_info.levelID == level_name:
-            level_events.append(event)
-
-    finished_levels = list()
-    for lvl_event_i in level_events:
-        for lvl_event_j in level_events:
-            if lvl_event_i.key_event == "startgame" and lvl_event_j.key_event != "startgame" and lvl_event_i.level_session_id == lvl_event_j.level_session_id:
-                finished_levels.append((lvl_event_i, lvl_event_j))
-
-
-
-
-
-    return finished_levels
 

@@ -19,7 +19,12 @@
       <th colspan="2">Потрачено</th>
       <th colspan="2">Цели</th>
       <th colspan="2">Дано</th>
-      <th colspan="2">Было Собрано</th>
+      <th colspan="2">Собрано</th>
+      <th colspan="2">Доп собранно</th>
+      <th rowspan="2">Бонус 1</th>
+      <th rowspan="2">Бонус 2</th>
+      <th rowspan="2">Бонус 3</th>
+      <th rowspan="2">Игровой <br> валюты <br> собранно</th>
     </tr>
 
     <tr>
@@ -29,49 +34,62 @@
       <th>Поражение</th>
       <th>Ходов</th>
       <th>Секунд</th>
-      <th>{{ target1 }}</th>
-      <th>{{ target2 }}</th>
+      <th>Цель 1 ({{ events.0.target1_name }})</th>
+      <th>Цель 2 ({{ events.0.target2_name }})</th>
       <th>Ходов</th>
       <th>Секунд</th>
-      <th>{{ target1 }}</th>
-      <th>{{ target2 }}</th>
+      <th>{{ events.0.target1_name }}</th>
+      <th>{{ events.0.target2_name }}</th>
+      <th>{{ events.0.target1_name }}</th>
+      <th>{{ events.0.target2_name }}</th>
     </tr>
   </thead>
   <tbody>
-
   {% for event in events %}
     <tr>
       <th scope="row">{{ forloop.counter }}</th>
-      <td>{{event.0.event_datetime}}</td>
-      <td>{{event.1.event_datetime}}</td>
-      <td>{{event.completegame}}</td>
-      <td>{{event.failgame}}</td>
-      <td>{{event.0.level_info.firstTarget.m_required}}</td>
-      <td>{{event.0.level_info.m_secondTarget.m_required}}</td>
-      <td>{{event.0.level_info.firstTarget.m_required}}</td>
-      <td>{{event.0.level_info.firstTarget.m_required}}</td>
-      <td>{{event.turns}}</td>
-      <td>{{event.seconds}}</td>
-      <td>{{event.target1sent}}</td>
-      <td>{{event.target2sent}}</td>
+      <td>{{event.start_date}}</td>
+      <td>{{event.end_date}}</td>
+      <td>{{ event.win_game }}</td>
+      <td>{{ event.fail_game }}</td>
+      <td>{{ event.spent_turn }}</td>
+      <td>{{ event.spent_second }}</td>
+      <td>{{ event.target1_count }}</td>
+      <td>{{ event.target2_count }}</td>
+      <td>{{ event.give_turn }}</td>
+      <td>{{ event.give_seconds }}</td>
+      <td>{{ event.target1_count_collected }}</td>
+      <td>{{ event.target2_count_collected }}</td>
+      <td>{{ event.target1_count_overflow }}</td>
+      <td>{{ event.target2_count_overflow }}</td>
+      <td>{{ event.first_bonus }}</td>
+      <td>{{ event.second_bonus }}</td>
+      <td>{{ event.third_bonus }}</td>
+      <td>{{ event.game_currency }}</td>
     </tr>
 
   {% endfor %}
- {% comment %} <tr>
+  <tr>
       <th></th>
       <th></th>
       <th style="color: dodgerblue"><h4>{{ common_data.try }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.complete }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.fail }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.wins }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.fails }}</h4></th>
       <th style="color: dodgerblue"><h4>{{ common_data.spent_turn }}</h4></th>
       <th style="color: dodgerblue"><h4>{{ common_data.spent_second }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.target1 }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.target2 }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.target1_count }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.target2_count }}</h4></th>
       <th style="color: dodgerblue"><h4>{{ common_data.give_turn }}</h4></th>
       <th style="color: dodgerblue"><h4>{{ common_data.give_second }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.target1sent }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.target2sent }}</h4></th>
-  </tr>{% endcomment %}
+      <th style="color: dodgerblue"><h4>{{ common_data.target1_count_collected }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.target2_count_collected }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.target1_count_overflow }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.target2_count_overflow }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.first_bonus }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.second_bonus }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.third_bonus }}</h4></th>
+      <th style="color: dodgerblue"><h4>{{ common_data.game_currency }}</h4></th>
+  </tr>
   </tbody>
 </table>
 
