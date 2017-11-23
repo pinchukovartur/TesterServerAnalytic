@@ -26,6 +26,7 @@ class AnalyticEvenData:
         self.game_currency = ""
         self.target1_count_overflow = ""
         self.target2_count_overflow = ""
+        self.diff_time = ""
 
         if start_event:
             start_date = start_event.event_datetime
@@ -93,6 +94,9 @@ class AnalyticEvenData:
             if target2_count_overflow:
                 self.target2_count_overflow = target2_count_overflow
 
+        if self.start_date and self.end_date:
+            self.diff_time = self.end_date - self.start_date
+
 
 def get_analytic_data(level_name):
     events = get_events()
@@ -119,16 +123,28 @@ def get_analytic_data(level_name):
         elif lvl_event.key_event == "finishlevel":
             level_complete_events.append(lvl_event)
 
-    for start_vent in start_game_events:
-        for target_event in target_complete_events:
-            for complete_event in level_complete_events:
-                if start_vent.level_session_id == target_event.level_session_id == complete_event.level_session_id:
-                    finished_levels.append(AnalyticEvenData(start_vent, target_event, complete_event))
-        for fail_game_event in fail_game_events:
-            if start_vent.level_session_id == fail_game_event.level_session_id:
-                finished_levels.append(AnalyticEvenData(start_vent, fail_game_event, None))
+    for start_event in start_game_events:
+
+        fail_event = get_event(fail_game_events, start_event.level_session_id)
+        if fail_event is not None:
+            finished_levels.append(AnalyticEvenData(start_event, fail_event, None))
+        else:
+            complete_lvl_event = get_event(level_complete_events, start_event.level_session_id)
+            target_event = get_event(target_complete_events, start_event.level_session_id)
+            if complete_lvl_event is not None:
+                finished_levels.append(AnalyticEvenData(start_event, target_event, complete_lvl_event))
+            else:
+                finished_levels.append(AnalyticEvenData(start_event, target_event, None))
 
     return finished_levels, get_totals_data(finished_levels)
+
+
+def get_event(events, level_key):
+    for event in events:
+        if event.level_session_id == level_key:
+            return event
+    return None
+
 
 
 def get_totals_data(analytic_data):
@@ -148,6 +164,7 @@ def get_totals_data(analytic_data):
     second_bonus = list()
     third_bonus = list()
     game_currency = list()
+    diff_time = list()
 
     for row in analytic_data:
         if row.win_game != "":
@@ -182,6 +199,8 @@ def get_totals_data(analytic_data):
             third_bonus.append(1)
         if row.game_currency.isdigit():
             game_currency.append(int(row.game_currency))
+        if row.diff_time:
+            diff_time.append(row.diff_time)
 
     result_dict = dict()
     if len(wins) != 0:
@@ -216,5 +235,7 @@ def get_totals_data(analytic_data):
         result_dict["third_bonus"] = str(round(median(third_bonus), 2)) + " +-" + str(round(var(third_bonus) ** 0.5, 2))
     if len(game_currency) != 0:
         result_dict["game_currency"] = str(round(median(game_currency), 2)) + " +-" + str(round(var(game_currency) ** 0.5, 2))
+    if len(diff_time) != 0:
+        result_dict["diff_time"] = ""
 
     return result_dict
