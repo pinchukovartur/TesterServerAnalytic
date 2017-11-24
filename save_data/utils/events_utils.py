@@ -15,16 +15,18 @@ class LevelInfo:
             self.seconds = json_data["m_seconds"]
             self.turns = json_data["m_turns"]
             self.gameCurrency = json_data["m_gameCurrencyCount"]
-            print(json_data["m_gameCurrencyCount"])
             self.firstBonus = ""
             self.secondBonus = ""
             self.thirdBonus = ""
+            self.userName = ""
             if "m_firstBonus" in json_data.keys():
                 self.firstBonus = json_data["m_firstBonus"]
             if "m_secondBonus" in json_data.keys():
                 self.secondBonus = json_data["m_secondBonus"]
             if "m_thirdBonus" in json_data.keys():
                 self.thirdBonus = json_data["m_thirdBonus"]
+            if "m_userName" in json_data.keys():
+                self.userName = json_data["m_userName"]
 
 
 class Event:

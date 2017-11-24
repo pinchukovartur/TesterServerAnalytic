@@ -27,6 +27,7 @@ class AnalyticEvenData:
         self.target1_count_overflow = ""
         self.target2_count_overflow = ""
         self.diff_time = ""
+        self.user_name = ""
 
         if start_event:
             start_date = start_event.event_datetime
@@ -59,6 +60,8 @@ class AnalyticEvenData:
             give_seconds = start_event.level_info.seconds
             if give_seconds:
                 self.give_second = give_seconds
+
+            self.user_name = start_event.level_info.userName
 
         if finish_event:
             spent_turn = int(finish_event.level_info.turns)
@@ -237,5 +240,7 @@ def get_totals_data(analytic_data):
         result_dict["game_currency"] = str(round(median(game_currency), 2)) + " +-" + str(round(var(game_currency) ** 0.5, 2))
     if len(diff_time) != 0:
         result_dict["diff_time"] = ""
+
+    result_dict["complexity"] = round(len(fails) * 100 / len(analytic_data), 2)
 
     return result_dict

@@ -1,12 +1,17 @@
+{% load staticfiles %}
 <html>
 <head>
     <title>Level info</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{% static '/css/level_info.css' %}">
 </head>
 <body>
 
@@ -14,18 +19,19 @@
   <thead>
     <tr>
       <th rowspan="2">№</th>
-      <th colspan="2">Время</th>
-      <th rowspan="2">Затрачено <br> времени</th>
-      <th colspan="2">Результат</th>
-      <th colspan="2">Потрачено</th>
-      <th colspan="2">Цели</th>
-      <th colspan="2">Дано</th>
-      <th colspan="2">Собрано</th>
-      <th colspan="2">Доп собранно</th>
-      <th rowspan="2">Бонус 1</th>
-      <th rowspan="2">Бонус 2</th>
-      <th rowspan="2">Бонус 3</th>
-      <th rowspan="2">Игровой <br> валюты <br> собранно</th>
+      <th colspan="2" title="Дата начала и конца прохождения уровня">Время</th>
+      <th rowspan="2" title="Затраченое время на прохождение уровня">Затрачено <br> времени</th>
+      <th colspan="2" title="Итог игры">Результат</th>
+      <th colspan="2" title="Затраченные ресурсы">Потрачено</th>
+      <th colspan="2" title="Что требовалось собрать">Цели</th>
+      <th colspan="2" title="Сколько дано ходов и секунд">Дано</th>
+      <th colspan="2" title="Сколько было собрано элементов цели">Собрано</th>
+      <th colspan="2" title="Сколько было собрано после выполнения цели">Всего собранно</th>
+      <th rowspan="2" title="Был ли активирован первый бонус">Бонус 1</th>
+      <th rowspan="2" title="Был ли активирован второй бонус">Бонус 2</th>
+      <th rowspan="2" title="Был ли активирован третий бонус">Бонус 3</th>
+      <th rowspan="2" title="Количество собранной игровой валюты(на момент после преобразования всех ходов в бонусы)">Игровой <br> валюты <br> собранно</th>
+      <th rowspan="2" title="Ключ тестировщика">Секретный <br> ключ <br> тестировщика</th>
     </tr>
 
     <tr>
@@ -68,33 +74,37 @@
       <td>{{ event.second_bonus }}</td>
       <td>{{ event.third_bonus }}</td>
       <td>{{ event.game_currency }}</td>
+      <td>{{ event.user_name }}</td>
     </tr>
 
   {% endfor %}
   <tr>
       <th></th>
       <th></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.diff_time }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.try }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.wins }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.fails }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.spent_turn }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.spent_second }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.target1_count }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.target2_count }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.give_turn }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.give_second }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.target1_count_collected }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.target2_count_collected }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.target1_count_overflow }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.target2_count_overflow }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.first_bonus }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.second_bonus }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.third_bonus }}</h4></th>
-      <th style="color: dodgerblue"><h4>{{ common_data.game_currency }}</h4></th>
+      <th><h4>{{ common_data.diff_time }}</h4></th>
+      <th><h4>{{ common_data.try }}</h4></th>
+      <th><h4>{{ common_data.wins }}</h4></th>
+      <th><h4>{{ common_data.fails }}</h4></th>
+      <th><h4>{{ common_data.spent_turn }}</h4></th>
+      <th><h4>{{ common_data.spent_second }}</h4></th>
+      <th><h4>{{ common_data.target1_count }}</h4></th>
+      <th><h4>{{ common_data.target2_count }}</h4></th>
+      <th><h4>{{ common_data.give_turn }}</h4></th>
+      <th><h4>{{ common_data.give_second }}</h4></th>
+      <th><h4>{{ common_data.target1_count_collected }}</h4></th>
+      <th><h4>{{ common_data.target2_count_collected }}</h4></th>
+      <th><h4>{{ common_data.target1_count_overflow }}</h4></th>
+      <th><h4>{{ common_data.target2_count_overflow }}</h4></th>
+      <th><h4>{{ common_data.first_bonus }}</h4></th>
+      <th><h4>{{ common_data.second_bonus }}</h4></th>
+      <th><h4>{{ common_data.third_bonus }}</h4></th>
+      <th><h4>{{ common_data.game_currency }}</h4></th>
+      <th></th>
   </tr>
   </tbody>
 </table>
+
+<p> Сложность уровня = {{ common_data.complexity }} %</p>
 
 </body>
 </html>
