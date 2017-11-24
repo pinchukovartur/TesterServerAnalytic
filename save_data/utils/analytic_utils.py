@@ -1,6 +1,6 @@
 from save_data.utils.events_utils import get_events
 from numpy import var, median
-from math import sqrt
+import datetime
 
 class AnalyticEvenData:
     def __init__(self, start_event, finish_event, lvl_end_event):
@@ -239,7 +239,12 @@ def get_totals_data(analytic_data):
     if len(game_currency) != 0:
         result_dict["game_currency"] = str(round(median(game_currency), 2)) + " +-" + str(round(var(game_currency) ** 0.5, 2))
     if len(diff_time) != 0:
-        result_dict["diff_time"] = ""
+        delta_time = 0
+        for time in diff_time:
+            delta_time += time.total_seconds()
+        diff_time = datetime.timedelta(seconds=(delta_time / len(diff_time)))
+        result_dict["diff_time"] = str(diff_time)[:7]
+
     if len(fails) != 0 and len(analytic_data) != 0:
         result_dict["complexity"] = str(len(fails)) + " * 100 / " + str(len(analytic_data)) + " = " + str(round(len(fails) * 100 / len(analytic_data), 2))
     elif len(fails) == 0:

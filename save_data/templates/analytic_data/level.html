@@ -79,14 +79,14 @@
 
   {% endfor %}
   <tr>
-      <th></th>
-      <th></th>
+      <th>Сводка:</th>
+      <th>---</th>
+      <th>---</th>
       <th><h4>{{ common_data.diff_time }}</h4></th>
-      <th><h4>{{ common_data.try }}</h4></th>
-      <th><h4>{{ common_data.wins }}</h4></th>
-      <th><h4>{{ common_data.fails }}</h4></th>
-      <th><h4>{{ common_data.spent_turn }}</h4></th>
-      <th><h4>{{ common_data.spent_second }}</h4></th>
+      <th title="Кол-во побед"><h4>{{ common_data.wins }}</h4></th>
+      <th title="Кол-во поражений"><h4>{{ common_data.fails }}</h4></th>
+      <th title="median(sum(spent_turn_list) +- var(sum(spent_turn_list)) ^ 0.5"><h4>{{ common_data.spent_turn }}</h4></th>
+      <th title="median(sum(spent_second) +- var(sum(spent_second)) ^ 0.5"><h4>{{ common_data.spent_second }}</h4></th>
       <th><h4>{{ common_data.target1_count }}</h4></th>
       <th><h4>{{ common_data.target2_count }}</h4></th>
       <th><h4>{{ common_data.give_turn }}</h4></th>
@@ -99,7 +99,7 @@
       <th><h4>{{ common_data.second_bonus }}</h4></th>
       <th><h4>{{ common_data.third_bonus }}</h4></th>
       <th><h4>{{ common_data.game_currency }}</h4></th>
-      <th></th>
+      <th>---</th>
   </tr>
   </tbody>
 </table>
