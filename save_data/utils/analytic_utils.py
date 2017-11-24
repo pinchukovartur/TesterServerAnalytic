@@ -134,9 +134,9 @@ def get_analytic_data(level_name):
         else:
             complete_lvl_event = get_event(level_complete_events, start_event.level_session_id)
             target_event = get_event(target_complete_events, start_event.level_session_id)
-            if complete_lvl_event is not None:
+            if complete_lvl_event is not None and target_event is not None:
                 finished_levels.append(AnalyticEvenData(start_event, target_event, complete_lvl_event))
-            else:
+            elif target_event is not None:
                 finished_levels.append(AnalyticEvenData(start_event, target_event, None))
 
     return finished_levels, get_totals_data(finished_levels)
