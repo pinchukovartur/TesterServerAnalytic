@@ -80,10 +80,10 @@ class AnalyticEvenData:
                 elif result_game == "failgame":
                     self.fail_game = "1"
             target1_count_collected = finish_event.level_info.firstTarget["m_remainder"]
-            if target1_count_collected:
+            if str(target1_count_collected)  and start_event.level_info.firstTarget["m_type"]:
                 self.target1_count_collected = target1_count_collected
             target2_count_collected = finish_event.level_info.secondTarget["m_remainder"]
-            if target2_count_collected:
+            if str(target2_count_collected) and start_event.level_info.secondTarget["m_type"]:
                 self.target2_count_collected = target2_count_collected
 
         if lvl_end_event:
@@ -240,7 +240,9 @@ def get_totals_data(analytic_data):
         result_dict["game_currency"] = str(round(median(game_currency), 2)) + " +-" + str(round(var(game_currency) ** 0.5, 2))
     if len(diff_time) != 0:
         result_dict["diff_time"] = ""
-
-    result_dict["complexity"] = round(len(fails) * 100 / len(analytic_data), 2)
+    if len(fails) != 0 and len(analytic_data) != 0:
+        result_dict["complexity"] = str(len(fails)) + " * 100 / " + str(len(analytic_data)) + " = " + str(round(len(fails) * 100 / len(analytic_data), 2))
+    elif len(fails) == 0:
+        result_dict["complexity"] = "100"
 
     return result_dict
