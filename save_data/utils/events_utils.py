@@ -14,7 +14,10 @@ class LevelInfo:
             self.secondTarget = json_data["m_secondTarget"]
             self.seconds = json_data["m_seconds"]
             self.turns = json_data["m_turns"]
-            self.game_components = GameComponents(json_data["m_Stat"])
+
+            self.game_components = ""
+            if "m_Stat" in json_data.keys():
+                self.game_components = GameComponents(json_data["m_Stat"])
 
             self.firstBonus = ""
             self.secondBonus = ""
