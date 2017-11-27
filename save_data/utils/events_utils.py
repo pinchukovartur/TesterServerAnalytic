@@ -14,11 +14,15 @@ class LevelInfo:
             self.secondTarget = json_data["m_secondTarget"]
             self.seconds = json_data["m_seconds"]
             self.turns = json_data["m_turns"]
-            self.gameCurrency = json_data["m_gameCurrencyCount"]
+            self.game_components = GameComponents(json_data["m_Stat"])
+
             self.firstBonus = ""
             self.secondBonus = ""
             self.thirdBonus = ""
             self.userName = ""
+            self.gameCurrency = ""
+            if "m_gameCurrencyCount" in json_data.keys():
+                self.gameCurrency = json_data["m_gameCurrencyCount"]
             if "m_firstBonus" in json_data.keys():
                 self.firstBonus = json_data["m_firstBonus"]
             if "m_secondBonus" in json_data.keys():
@@ -27,6 +31,41 @@ class LevelInfo:
                 self.thirdBonus = json_data["m_thirdBonus"]
             if "m_userName" in json_data.keys():
                 self.userName = json_data["m_userName"]
+
+
+class GameComponents:
+    def __init__(self, game_component):
+        self.Color6_Red = ""
+        self.Color6_Yellow = ""
+        self.Color6_Blue = ""
+        self.Color6_Green = ""
+        self.Color6_White = ""
+        self.Color6_Black = ""
+        if "Color6_Red" in game_component.keys():
+            Color6_Red = game_component["Color6_Red"]
+            if Color6_Red:
+                self.Color6_Red = Color6_Red
+        if "Color6_Yellow" in game_component.keys():
+            Color6_Yellow = game_component["Color6_Yellow"]
+            if Color6_Yellow:
+                self.Color6_Yellow = Color6_Yellow
+        if "Color6_Blue" in game_component.keys():
+            Color6_Blue = game_component["Color6_Blue"]
+            if Color6_Blue:
+                self.Color6_Blue = Color6_Blue
+        if "Color6_Green" in game_component.keys():
+            Color6_Green = game_component["Color6_Green"]
+            if Color6_Green:
+                self.Color6_Green = Color6_Green
+        if "Color6_White" in game_component.keys():
+            Color6_White = game_component["Color6_White"]
+            if Color6_White:
+                self.Color6_White = Color6_White
+        if "Color6_Black" in game_component.keys():
+            Color6_Black = game_component["Color6_Black"]
+            if Color6_Black:
+                self.Color6_Black = Color6_Black
+
 
 
 class Event:

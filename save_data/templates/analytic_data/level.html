@@ -32,6 +32,12 @@
       <th rowspan="2" title="Был ли активирован третий бонус">Бонус 3</th>
       <th rowspan="2" title="Количество собранной игровой валюты(на момент после преобразования всех ходов в бонусы)">Игровой <br> валюты <br> собранно</th>
       <th rowspan="2" title="Ключ тестировщика">Секретный <br> ключ <br> тестировщика</th>
+      <th rowspan="2" title="Красные">Красные</th>
+      <th rowspan="2" title="Желтые">Желтые</th>
+      <th rowspan="2" title="Синие">Синие</th>
+      <th rowspan="2" title="Зеленые">Зеленые</th>
+      <th rowspan="2" title="Белые">Белые</th>
+      <th rowspan="2" title="Черные">Черные</th>
     </tr>
 
     <tr>
@@ -55,8 +61,8 @@
   {% for event in events %}
     <tr>
       <th scope="row">{{ forloop.counter }}</th>
-      <td>{{event.start_date}}</td>
-      <td>{{event.end_date}}</td>
+      <td>{{ event.start_date}}</td>
+      <td>{{ event.end_date}}</td>
       <td>{{ event.diff_time }}</td>
       <td>{{ event.win_game }}</td>
       <td>{{ event.fail_game }}</td>
@@ -75,6 +81,12 @@
       <td>{{ event.third_bonus }}</td>
       <td>{{ event.game_currency }}</td>
       <td>{{ event.user_name }}</td>
+      <td>{{ event.red }}</td>
+      <td>{{ event.yellow }}</td>
+      <td>{{ event.blue }}</td>
+      <td>{{ event.green }}</td>
+      <td>{{ event.white }}</td>
+      <td>{{ event.black }}</td>
     </tr>
 
   {% endfor %}

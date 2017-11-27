@@ -2,6 +2,7 @@ from save_data.utils.events_utils import get_events
 from numpy import var, median
 import datetime
 
+
 class AnalyticEvenData:
     def __init__(self, start_event, finish_event, lvl_end_event):
         self.start_date = ""
@@ -29,22 +30,52 @@ class AnalyticEvenData:
         self.diff_time = ""
         self.user_name = ""
 
+        self.red = ""
+        if str(finish_event.level_info.game_components.Color6_Red):
+            self.red = int(finish_event.level_info.game_components.Color6_Red)
+
+        self.yellow = ""
+        if str(finish_event.level_info.game_components.Color6_Yellow):
+            self.yellow = int(finish_event.level_info.game_components.Color6_Yellow)
+
+        self.blue = ""
+        if str(finish_event.level_info.game_components.Color6_Blue):
+            self.blue = int(finish_event.level_info.game_components.Color6_Blue)
+
+        self.green = ""
+        if str(finish_event.level_info.game_components.Color6_Green):
+            self.green = int(finish_event.level_info.game_components.Color6_Green)
+
+        self.white = ""
+        if str(finish_event.level_info.game_components.Color6_White):
+            self.white = int(finish_event.level_info.game_components.Color6_White)
+
+        self.black = ""
+        if str(finish_event.level_info.game_components.Color6_Black):
+            self.black = int(finish_event.level_info.game_components.Color6_Black)
+
+
         if start_event:
             start_date = start_event.event_datetime
             if start_date:
                 self.start_date = start_date
-            target1_name = start_event.level_info.firstTarget["m_type"]
-            if target1_name:
-                self.target1_name = target1_name
-            target2_name = start_event.level_info.secondTarget["m_type"]
-            if target2_name:
-                self.target2_name = target2_name
-            target1_count = start_event.level_info.firstTarget["m_required"]
-            if target1_count:
-                self.target1_count = target1_count
-            target2_count = start_event.level_info.secondTarget["m_required"]
-            if target2_count:
-                self.target2_count = target2_count
+            if start_event.level_info.firstTarget:
+                target1_name = start_event.level_info.firstTarget["m_type"]
+                if target1_name:
+                    self.target1_name = target1_name
+
+            if start_event.level_info.secondTarget:
+                target2_name = start_event.level_info.secondTarget["m_type"]
+                if target2_name:
+                    self.target2_name = target2_name
+            if start_event.level_info.firstTarget:
+                target1_count = start_event.level_info.firstTarget["m_required"]
+                if target1_count:
+                    self.target1_count = target1_count
+            if start_event.level_info.secondTarget:
+                target2_count = start_event.level_info.secondTarget["m_required"]
+                if target2_count:
+                    self.target2_count = target2_count
             first_bonus = str(start_event.level_info.firstBonus)
             if first_bonus:
                 self.first_bonus = first_bonus
@@ -79,23 +110,27 @@ class AnalyticEvenData:
                     self.win_game = "1"
                 elif result_game == "failgame":
                     self.fail_game = "1"
-            target1_count_collected = finish_event.level_info.firstTarget["m_remainder"]
-            if str(target1_count_collected)  and start_event.level_info.firstTarget["m_type"]:
-                self.target1_count_collected = target1_count_collected
-            target2_count_collected = finish_event.level_info.secondTarget["m_remainder"]
-            if str(target2_count_collected) and start_event.level_info.secondTarget["m_type"]:
-                self.target2_count_collected = target2_count_collected
+            if finish_event.level_info.firstTarget and start_event.level_info.firstTarget:
+                target1_count_collected = finish_event.level_info.firstTarget["m_remainder"]
+                if str(target1_count_collected) and start_event.level_info.firstTarget["m_type"]:
+                    self.target1_count_collected = target1_count_collected
+            if finish_event.level_info.secondTarget and start_event.level_info.secondTarget:
+                target2_count_collected = finish_event.level_info.secondTarget["m_remainder"]
+                if str(target2_count_collected) and start_event.level_info.secondTarget["m_type"]:
+                    self.target2_count_collected = target2_count_collected
 
         if lvl_end_event:
             game_currency = lvl_end_event.level_info.gameCurrency
             if game_currency:
                 self.game_currency = game_currency
-            target1_count_overflow = lvl_end_event.level_info.firstTarget["m_remainder"]
-            if target1_count_overflow:
-                self.target1_count_overflow = target1_count_overflow
-            target2_count_overflow = lvl_end_event.level_info.secondTarget["m_remainder"]
-            if target2_count_overflow:
-                self.target2_count_overflow = target2_count_overflow
+            if lvl_end_event.level_info.firstTarget:
+                target1_count_overflow = lvl_end_event.level_info.firstTarget["m_remainder"]
+                if target1_count_overflow:
+                    self.target1_count_overflow = target1_count_overflow
+            if lvl_end_event.level_info.secondTarget:
+                target2_count_overflow = lvl_end_event.level_info.secondTarget["m_remainder"]
+                if target2_count_overflow:
+                    self.target2_count_overflow = target2_count_overflow
 
         if self.start_date and self.end_date:
             self.diff_time = self.end_date - self.start_date
@@ -147,7 +182,6 @@ def get_event(events, level_key):
         if event.level_session_id == level_key:
             return event
     return None
-
 
 
 def get_totals_data(analytic_data):
@@ -207,37 +241,46 @@ def get_totals_data(analytic_data):
 
     result_dict = dict()
     if len(wins) != 0:
-        result_dict["wins"]  = str(len(wins))
+        result_dict["wins"] = str(len(wins))
     if len(fails) != 0:
         result_dict["fails"] = str(len(fails))
     if len(spent_turn) != 0:
         result_dict["spent_turn"] = str(round(median(spent_turn), 2)) + " +-" + str(round(var(spent_turn) ** 0.5, 2))
     if len(spent_second) != 0:
-        result_dict["spent_second"] = str(round(median(spent_second), 2)) + " +-" + str(round(var(spent_second) ** 0.5, 2))
+        result_dict["spent_second"] = str(round(median(spent_second), 2)) + " +-" + str(
+            round(var(spent_second) ** 0.5, 2))
     if len(target1_count) != 0:
-        result_dict["target1_count"] = str(round(median(target1_count), 2)) + " +-" + str(round(var(target1_count) ** 0.5, 2))
+        result_dict["target1_count"] = str(round(median(target1_count), 2)) + " +-" + str(
+            round(var(target1_count) ** 0.5, 2))
     if len(target2_count) != 0:
-        result_dict["target2_count"] = str(round(median(target2_count), 2)) + " +-" + str(round(var(target2_count) ** 0.5, 2))
+        result_dict["target2_count"] = str(round(median(target2_count), 2)) + " +-" + str(
+            round(var(target2_count) ** 0.5, 2))
     if len(give_turn) != 0:
         result_dict["give_turn"] = str(round(median(give_turn), 2)) + " +-" + str(round(var(give_turn) ** 0.5, 2))
     if len(give_second) != 0:
         result_dict["give_second"] = str(round(median(give_second), 2)) + " +-" + str(round(var(give_second) ** 0.5, 2))
     if len(target1_count_collected) != 0:
-        result_dict["target1_count_collected"] = str(round(median(target1_count_collected), 2)) + " +-" + str(round(var(target1_count_collected) ** 0.5, 2))
+        result_dict["target1_count_collected"] = str(round(median(target1_count_collected), 2)) + " +-" + str(
+            round(var(target1_count_collected) ** 0.5, 2))
     if len(target2_count_collected) != 0:
-        result_dict["target2_count_collected"] = str(round(median(target2_count_collected), 2)) + " +-" + str(round(var(target2_count_collected) ** 0.5, 2))
+        result_dict["target2_count_collected"] = str(round(median(target2_count_collected), 2)) + " +-" + str(
+            round(var(target2_count_collected) ** 0.5, 2))
     if len(target1_count_overflow) != 0:
-        result_dict["target1_count_overflow"] = str(round(median(target1_count_overflow), 2)) + " +-" + str(round(var(target1_count_overflow) ** 0.5, 2))
+        result_dict["target1_count_overflow"] = str(round(median(target1_count_overflow), 2)) + " +-" + str(
+            round(var(target1_count_overflow) ** 0.5, 2))
     if len(target2_count_overflow) != 0:
-        result_dict["target2_count_overflow"] = str(round(median(target2_count_overflow), 2)) + " +-" + str(round(var(target2_count_overflow) ** 0.5, 2))
+        result_dict["target2_count_overflow"] = str(round(median(target2_count_overflow), 2)) + " +-" + str(
+            round(var(target2_count_overflow) ** 0.5, 2))
     if len(first_bonus) != 0:
         result_dict["first_bonus"] = str(round(median(first_bonus), 2)) + " +-" + str(round(var(first_bonus) ** 0.5, 2))
     if len(second_bonus) != 0:
-        result_dict["second_bonus"] = str(round(median(second_bonus), 2)) + " +-" + str(round(var(second_bonus) ** 0.5, 2))
+        result_dict["second_bonus"] = str(round(median(second_bonus), 2)) + " +-" + str(
+            round(var(second_bonus) ** 0.5, 2))
     if len(third_bonus) != 0:
         result_dict["third_bonus"] = str(round(median(third_bonus), 2)) + " +-" + str(round(var(third_bonus) ** 0.5, 2))
     if len(game_currency) != 0:
-        result_dict["game_currency"] = str(round(median(game_currency), 2)) + " +-" + str(round(var(game_currency) ** 0.5, 2))
+        result_dict["game_currency"] = str(round(median(game_currency), 2)) + " +-" + str(
+            round(var(game_currency) ** 0.5, 2))
     if len(diff_time) != 0:
         delta_time = 0
         for time in diff_time:
@@ -246,8 +289,9 @@ def get_totals_data(analytic_data):
         result_dict["diff_time"] = str(diff_time)[:7]
 
     if len(fails) != 0 and len(analytic_data) != 0:
-        result_dict["complexity"] = str(len(fails)) + " * 100 / " + str(len(analytic_data)) + " = " + str(round(len(fails) * 100 / len(analytic_data), 2))
+        result_dict["complexity"] = str(len(fails)) + " * 100 / " + str(len(analytic_data)) + " = " + str(
+            round(len(fails) * 100 / len(analytic_data), 2))
     elif len(fails) == 0:
-        result_dict["complexity"] = "100"
+        result_dict["complexity"] = "0"
 
     return result_dict
