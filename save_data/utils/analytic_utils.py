@@ -31,28 +31,29 @@ class AnalyticEvenData:
         self.user_name = ""
 
         self.red = ""
-        if str(finish_event.level_info.game_components.Color6_Red):
-            self.red = int(finish_event.level_info.game_components.Color6_Red)
-
         self.yellow = ""
-        if str(finish_event.level_info.game_components.Color6_Yellow):
-            self.yellow = int(finish_event.level_info.game_components.Color6_Yellow)
-
         self.blue = ""
-        if str(finish_event.level_info.game_components.Color6_Blue):
-            self.blue = int(finish_event.level_info.game_components.Color6_Blue)
-
         self.green = ""
-        if str(finish_event.level_info.game_components.Color6_Green):
-            self.green = int(finish_event.level_info.game_components.Color6_Green)
-
         self.white = ""
-        if str(finish_event.level_info.game_components.Color6_White):
-            self.white = int(finish_event.level_info.game_components.Color6_White)
-
         self.black = ""
-        if str(finish_event.level_info.game_components.Color6_Black):
-            self.black = int(finish_event.level_info.game_components.Color6_Black)
+        if finish_event.level_info.game_components:
+            if str(finish_event.level_info.game_components.Color6_Red):
+                self.red = int(finish_event.level_info.game_components.Color6_Red)
+
+            if str(finish_event.level_info.game_components.Color6_Yellow):
+                self.yellow = int(finish_event.level_info.game_components.Color6_Yellow)
+
+            if str(finish_event.level_info.game_components.Color6_Blue):
+                self.blue = int(finish_event.level_info.game_components.Color6_Blue)
+
+            if str(finish_event.level_info.game_components.Color6_Green):
+                self.green = int(finish_event.level_info.game_components.Color6_Green)
+
+            if str(finish_event.level_info.game_components.Color6_White):
+                self.white = int(finish_event.level_info.game_components.Color6_White)
+
+            if str(finish_event.level_info.game_components.Color6_Black):
+                self.black = int(finish_event.level_info.game_components.Color6_Black)
 
 
         if start_event:
