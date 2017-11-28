@@ -26,6 +26,28 @@ def insert(query):
         cnx.close()
 
 
+def delete(level_session_id):
+    """
+    Метод
+    :param level_sessin_id:
+    :return: null
+    """
+    query = "DELETE FROM `analytic_data_store`.`tester_data` WHERE `level_session_id`='"+level_session_id+"';"
+    cnx = mysql.connector.connect(user=USER_NAME, database=DATE_BASE_NAME, password=PASSWORD)
+    cursor = cnx.cursor()
+
+    try:
+        cursor.execute(query)
+        # Make sure data is committed to the database
+        cnx.commit()
+    except Exception as mysql_error:
+        print(query)
+        print(mysql_error)
+    finally:
+        cursor.close()
+        cnx.close()
+
+
 def get_events_from_db():
     game_query = "SELECT id, key_event, json_data, user_secret_key, level_session_id, event_datetime " \
                  "FROM analytic_data_store.tester_data"

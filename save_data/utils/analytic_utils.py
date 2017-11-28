@@ -4,9 +4,13 @@ import datetime
 
 
 class AnalyticEvenData:
-    def __init__(self, start_event, finish_event, lvl_end_event):
+    def __init__(self, start_event, finish_event, lvl_end_event, level_name):
+
+        self.level_name = level_name
         self.start_date = ""
         self.end_date = ""
+
+        self.level_session_id = ""
 
         self.target1_name = ""
         self.target1_count = ""
@@ -113,6 +117,11 @@ class AnalyticEvenData:
                 self.StarBonus = int(finish_event.level_info.game_components.StarBonus)
 
         if start_event:
+
+            level_session_id = start_event.level_session_id
+            if level_session_id:
+                self.level_session_id = level_session_id
+
             start_date = start_event.event_datetime
             if start_date:
                 self.start_date = start_date
@@ -205,15 +214,16 @@ def get_analytic_data(level_name):
 
         fail_event = get_event(fail_game_events, start_event.level_session_id)
         if fail_event is not None:
-            finished_levels.append(AnalyticEvenData(start_event, fail_event, None))
+            finished_levels.append(AnalyticEvenData(start_event, fail_event, None, level_name))
+
         else:
+
             complete_lvl_event = get_event(level_complete_events, start_event.level_session_id)
             target_event = get_event(target_complete_events, start_event.level_session_id)
             if complete_lvl_event is not None and target_event is not None:
-                finished_levels.append(AnalyticEvenData(start_event, target_event, complete_lvl_event))
+                finished_levels.append(AnalyticEvenData(start_event, target_event, complete_lvl_event, level_name))
             elif target_event is not None:
-                finished_levels.append(AnalyticEvenData(start_event, target_event, None))
-
+                finished_levels.append(AnalyticEvenData(start_event, target_event, None, level_name))
     return finished_levels, get_totals_data(finished_levels)
 
 

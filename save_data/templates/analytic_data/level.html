@@ -56,6 +56,7 @@
       <th rowspan="2" title="Lamp"><img width="30" src="{% static '/icons/Lamp/lamp_lvl2.png'%}"></th>
       <th rowspan="2" title="Balloon"><img width="30" src="{% static '/icons/balloon.png'%}"></th>
       <th rowspan="2" title="StarBonus"><img width="30" src="{% static '/icons/Super-fishka/0000007.png'%}"></th>
+      <th rowspan="2" title="StarBonus">Action</th>
 
     </tr>
     <tr>
@@ -119,6 +120,7 @@
       <td>{{ event.Lamp }}</td>
       <td>{{ event.Balloon }}</td>
       <td>{{ event.StarBonus }}</td>
+      <td><a href="delete?event_id={{ event.level_session_id }}&level_name={{ event.level_name }}">Удалить</a></td>
 
     </tr>
 

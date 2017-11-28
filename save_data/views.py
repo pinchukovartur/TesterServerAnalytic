@@ -1,11 +1,12 @@
 from django.http import HttpResponse
+from django.shortcuts import redirect
 import mysql.connector
 
 # the method return user script
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 
-from save_data.utils.db_utils import insert
+from save_data.utils.db_utils import insert, delete
 from save_data.utils.events_utils import get_events, sort_by_key_event, sort_by_event_datetime, \
     delete_copy_event_with_big_date, sort_by_date_time
 
@@ -45,6 +46,16 @@ def __get_sorted_levels():
 def get_list_levels(request):
     set_level_info = __get_sorted_levels()
     return render(request, 'analytic_data/levels.html', {'levels': set_level_info})
+
+
+def delete_events(request):
+    event_id = request.GET.get('event_id', "")
+    level_name = request.GET.get('level_name', "")
+    if event_id == "" or level_name == "":
+        return HttpResponse("event_id or level_name cannot be null")
+    delete(event_id)
+    print(level_name)
+    return redirect("/levels.html/level.html?level_name=" + level_name)
 
 
 def sort_levels(request):
