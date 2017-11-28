@@ -38,12 +38,27 @@ class LevelInfo:
 
 class GameComponents:
     def __init__(self, game_component):
-        self.Color6_Red = ""
-        self.Color6_Yellow = ""
-        self.Color6_Blue = ""
-        self.Color6_Green = ""
-        self.Color6_White = ""
-        self.Color6_Black = ""
+        self.Color6_Red = 0
+        self.Color6_Yellow = 0
+        self.Color6_Blue = 0
+        self.Color6_Green = 0
+        self.Color6_White = 0
+        self.Color6_Black = 0
+
+        self.Super_FireSpark = 0
+        self.Super_FireRing = 0
+        self.Super_BigLightning_h = 0
+        self.Super_BigLightning_v = 0
+        self.Super_SmallLightning_v = 0
+        self.Super_SmallLightning_h = 0
+        self.Super_SphereOfFire = 0
+
+        self.Stone = 0
+        self.Weight = 0
+        self.Lamp = 0
+        self.Balloon = 0
+        self.StarBonus = 0
+
         if "Color6_Red" in game_component.keys():
             Color6_Red = game_component["Color6_Red"]
             if Color6_Red:
@@ -69,7 +84,56 @@ class GameComponents:
             if Color6_Black:
                 self.Color6_Black = Color6_Black
 
+        if "Super_FireSpark" in game_component.keys():
+            Super_FireSpark = game_component["Super_FireSpark"]
+            if Super_FireSpark:
+                self.Super_FireSpark = Super_FireSpark
+        if "Super_FireRing" in game_component.keys():
+            Super_FireRing = game_component["Super_FireRing"]
+            if Super_FireRing:
+                self.Super_FireRing = Super_FireRing
+        if "Super_BigLightning_h" in game_component.keys():
+            Super_BigLightning_h = game_component["Super_BigLightning_h"]
+            if Super_BigLightning_h:
+                self.Super_BigLightning_h = Super_BigLightning_h
+        if "Super_BigLightning_v" in game_component.keys():
+            Super_BigLightning_v = game_component["Super_BigLightning_v"]
+            if Super_BigLightning_v:
+                self.Super_BigLightning_v = Super_BigLightning_v
+        if "Super_SmallLightning_v" in game_component.keys():
+            Super_SmallLightning_v = game_component["Super_SmallLightning_v"]
+            if Super_SmallLightning_v:
+                self.Super_SmallLightning_v = Super_SmallLightning_v
+        if "Super_SmallLightning_h" in game_component.keys():
+            Super_SmallLightning_h = game_component["Super_SmallLightning_h"]
+            if Super_SmallLightning_h:
+                self.Super_SmallLightning_h = Super_SmallLightning_h
+        if "Super_SphereOfFire" in game_component.keys():
+            Super_SphereOfFire = game_component["Super_SphereOfFire"]
+            if Super_SphereOfFire:
+                self.Super_SphereOfFire = Super_SphereOfFire
 
+
+        if "Stone" in game_component.keys():
+            Stone = game_component["Stone"]
+            if Stone:
+                self.Stone = Stone
+        if "Weight" in game_component.keys():
+            Weight = game_component["Weight"]
+            if Weight:
+                self.Weight = Weight
+        if "Lamp" in game_component.keys():
+            Lamp = game_component["Lamp"]
+            if Lamp:
+                self.Lamp = Lamp
+        if "Balloon" in game_component.keys():
+            Balloon = game_component["Balloon"]
+            if Balloon:
+                self.Balloon = Balloon
+        if "StarBonus" in game_component.keys():
+            StarBonus = game_component["StarBonus"]
+            if StarBonus:
+                self.Color6_Black = StarBonus
 
 class Event:
     def __init__(self, id, key_event, json_data, user_secret_key, level_session_id, event_datetime):

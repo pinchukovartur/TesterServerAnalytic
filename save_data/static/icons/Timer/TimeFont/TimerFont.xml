@@ -1,0 +1,23 @@
+<font>
+	<info face="TimerFont" size="71" />
+	<common lineHeight="71" scaleW="64" scaleH="256" pages="1" />
+	<pages>
+		<page id="0" file="TimerFont.png" />
+	</pages>
+	<chars count="12">
+		<char id="48" x="0" y="0" width="36" height="47" xoffset="0" yoffset="26" xadvance="40" /><!-- 0 -->
+		<char id="49" x="37" y="0" width="22" height="47" xoffset="0" yoffset="22" xadvance="26" /><!-- 1 -->
+		<char id="50" x="33" y="145" width="29" height="46" xoffset="0" yoffset="24" xadvance="33" /><!-- 2 -->
+		<char id="51" x="0" y="97" width="32" height="49" xoffset="0" yoffset="23" xadvance="36" /><!-- 3 -->
+		<char id="52" x="32" y="197" width="31" height="48" xoffset="0" yoffset="22" xadvance="35" /><!-- 4 -->
+		<char id="53" x="0" y="48" width="34" height="48" xoffset="0" yoffset="23" xadvance="38" /><!-- 5 -->
+		<char id="54" x="0" y="147" width="32" height="49" xoffset="0" yoffset="22" xadvance="36" /><!-- 6 -->
+		<char id="55" x="35" y="48" width="26" height="47" xoffset="0" yoffset="26" xadvance="30" /><!-- 7 -->
+		<char id="56" x="33" y="97" width="30" height="47" xoffset="0" yoffset="24" xadvance="34" /><!-- 8 -->
+		<char id="57" x="0" y="197" width="31" height="49" xoffset="0" yoffset="22" xadvance="35" /><!-- 9 -->
+		<char id="32" x="0" y="0" width="0" height="0" xoffset="0" yoffset="0" xadvance="21" /><!--   -->
+		<char id="9" x="0" y="0" width="0" height="0" xoffset="0" yoffset="0" xadvance="168" /><!-- 	 -->
+	</chars>
+	<kernings count="0">
+	</kernings>
+</font>
