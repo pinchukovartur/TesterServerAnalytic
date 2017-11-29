@@ -339,7 +339,7 @@ def _get_data_for_target_count_collected(events, attr):
 def _get_analytic_data_by_list_events(events, attr):
     full_attr_value = list()
     for row in events:
-        if str(getattr(row, attr)):
+        if str(getattr(row, attr)) and str(getattr(row, attr)).isdigit():
             full_attr_value.append(int(getattr(row, attr)))
     return __get_analytic_data(full_attr_value)
 
