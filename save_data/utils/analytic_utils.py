@@ -24,8 +24,8 @@ class AnalyticEvenData:
 
         self.left_turn = 0
 
-        self.fail_game = "0"
-        self.win_game = "0"
+        self.fail_game = 0
+        self.win_game = 0
 
         self.first_bonus = 0
         self.second_bonus = 0
@@ -282,8 +282,10 @@ def get_totals_data(analytic_data):
                 elif attribute == "target2_count_collected" or attribute == "target2_count_collected":
                     result_dict[attribute] = _get_data_for_target_count_collected(analytic_data, attribute)
                     pass
+                elif attribute == "fail_game" or attribute == "win_game":
+                    result_dict[attribute] = get_count_analytic_data(analytic_data, attribute)
                 else:
-                    result_dict[attribute] = _get_analytic_data_by_list_events(analytic_data, str(attribute))
+                    result_dict[attribute] = _get_analytic_data_by_list_events(analytic_data, attribute)
 
     result_dict["complexity"] = _get_complexity(analytic_data)
 
@@ -292,6 +294,14 @@ def get_totals_data(analytic_data):
 
 def get_class_attributes(cls):
     return [i for i in cls.__dict__.keys() if i[:1] != '_']
+
+
+def get_count_analytic_data(events, attr):
+    full_attr_value = list()
+    for row in events:
+        if getattr(row, attr):
+            full_attr_value.append(int(getattr(row, attr)))
+    return len(full_attr_value)
 
 
 def _get_complexity(events):
