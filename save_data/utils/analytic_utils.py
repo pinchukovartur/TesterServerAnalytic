@@ -269,7 +269,7 @@ def get_totals_data(analytic_data):
     result_dict = dict()
 
     if len(analytic_data) != 0:
-        class_attributes = get_class_attributes(analytic_data[0])
+        class_attributes = __get_class_attributes(analytic_data[0])
         if len(class_attributes) != 0:
             for attribute in class_attributes:
                 if attribute == "diff_time":
@@ -283,7 +283,7 @@ def get_totals_data(analytic_data):
                     result_dict[attribute] = _get_data_for_target_count_collected(analytic_data, attribute)
                     pass
                 elif attribute == "fail_game" or attribute == "win_game":
-                    result_dict[attribute] = get_count_analytic_data(analytic_data, attribute)
+                    result_dict[attribute] = _get_count_analytic_data(analytic_data, attribute)
                 else:
                     result_dict[attribute] = _get_analytic_data_by_list_events(analytic_data, attribute)
 
@@ -292,11 +292,11 @@ def get_totals_data(analytic_data):
     return result_dict
 
 
-def get_class_attributes(cls):
+def __get_class_attributes(cls):
     return [i for i in cls.__dict__.keys() if i[:1] != '_']
 
 
-def get_count_analytic_data(events, attr):
+def _get_count_analytic_data(events, attr):
     full_attr_value = list()
     for row in events:
         if getattr(row, attr):
@@ -305,13 +305,11 @@ def get_count_analytic_data(events, attr):
 
 
 def _get_complexity(events):
-    full_attr_value = list()
-    for row in events:
-        if str(getattr(row, "fail_game")):
-            full_attr_value.append(int(getattr(row, "fail_game")))
-    if len(full_attr_value) != 0 and events != 0:
-        return str(len(full_attr_value)) + " * 100 / " + str(len(events)) + " = " + str(
-            round((len(full_attr_value) * 100) / len(events), 2))
+    fails = _get_count_analytic_data(events, "fail_game")
+
+    if fails != 0 and events != 0:
+        return str(fails) + " * 100 / " + str(len(events)) + " = " + str(
+            round(((fails) * 100) / len(events), 2))
     else:
         return "0"
 
