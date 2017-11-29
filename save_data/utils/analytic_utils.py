@@ -22,6 +22,8 @@ class AnalyticEvenData:
         self.give_turn = 0
         self.give_seconds = 0
 
+        self.left_turn = 0
+
         self.fail_game = "0"
         self.win_game = "0"
 
@@ -31,8 +33,8 @@ class AnalyticEvenData:
 
         self.game_currency = ""
 
-        # self.target1_count_collected = ""
-        # self.target2_count_collected = ""
+        self.target1_count_collected = ""
+        self.target2_count_collected = ""
 
         # self.target1_count_overflow = ""
         # self.target2_count_overflow = ""
@@ -61,60 +63,85 @@ class AnalyticEvenData:
         self.Balloon = 0
         self.StarBonus = 0
 
+        self.Box_Level1 = 0
+        self.Box_Level2 = 0
+        self.Box_Level3 = 0
+
+        self.Carpet_Level1 = 0
+        self.Carpet_Level2 = 0
+        self.Carpet_Level3 = 0
+
+        self.Chain_Level1 = 0
+        self.Chain_Level2 = 0
+        self.Chain_Level3 = 0
+
         if finish_event.level_info.game_components:
+            if finish_event.level_info.firstTarget:
+                if str(finish_event.level_info.firstTarget["m_required"]):
+                    self.target1_count_collected = finish_event.level_info.firstTarget["m_remainder"]
+            if finish_event.level_info.secondTarget:
+                if str(finish_event.level_info.secondTarget["m_required"]):
+                    self.target2_count_collected = finish_event.level_info.secondTarget["m_remainder"]
+
             if str(finish_event.level_info.game_components.Color6_Red):
                 self.red = int(finish_event.level_info.game_components.Color6_Red)
-
             if str(finish_event.level_info.game_components.Color6_Yellow):
                 self.yellow = int(finish_event.level_info.game_components.Color6_Yellow)
-
             if str(finish_event.level_info.game_components.Color6_Blue):
                 self.blue = int(finish_event.level_info.game_components.Color6_Blue)
-
             if str(finish_event.level_info.game_components.Color6_Green):
                 self.green = int(finish_event.level_info.game_components.Color6_Green)
-
             if str(finish_event.level_info.game_components.Color6_White):
                 self.white = int(finish_event.level_info.game_components.Color6_White)
-
             if str(finish_event.level_info.game_components.Color6_Black):
                 self.black = int(finish_event.level_info.game_components.Color6_Black)
 
             if str(finish_event.level_info.game_components.Super_FireSpark):
                 self.Super_FireSpark = int(finish_event.level_info.game_components.Super_FireSpark)
-
             if str(finish_event.level_info.game_components.Super_FireRing):
                 self.Super_FireRing = int(finish_event.level_info.game_components.Super_FireRing)
-
             if str(finish_event.level_info.game_components.Super_BigLightning_h):
                 self.Super_BigLightning_h = int(finish_event.level_info.game_components.Super_BigLightning_h)
-
             if str(finish_event.level_info.game_components.Super_BigLightning_v):
                 self.Super_BigLightning_v = int(finish_event.level_info.game_components.Super_BigLightning_v)
-
             if str(finish_event.level_info.game_components.Super_SmallLightning_v):
                 self.Super_SmallLightning_v = int(finish_event.level_info.game_components.Super_SmallLightning_v)
-
             if str(finish_event.level_info.game_components.Super_SmallLightning_h):
                 self.Super_SmallLightning_h = int(finish_event.level_info.game_components.Super_SmallLightning_h)
-
             if str(finish_event.level_info.game_components.Super_SphereOfFire):
                 self.Super_SphereOfFire = int(finish_event.level_info.game_components.Super_SphereOfFire)
 
             if str(finish_event.level_info.game_components.Stone):
                 self.Stone = int(finish_event.level_info.game_components.Stone)
-
             if str(finish_event.level_info.game_components.Weight):
                 self.Weight = int(finish_event.level_info.game_components.Weight)
-
             if str(finish_event.level_info.game_components.Lamp):
                 self.Lamp = int(finish_event.level_info.game_components.Lamp)
-
             if str(finish_event.level_info.game_components.Balloon):
                 self.Balloon = int(finish_event.level_info.game_components.Balloon)
-
             if str(finish_event.level_info.game_components.StarBonus):
                 self.StarBonus = int(finish_event.level_info.game_components.StarBonus)
+
+            if str(finish_event.level_info.game_components.Box_Level1):
+                self.Box_Level1 = int(finish_event.level_info.game_components.Box_Level1)
+            if str(finish_event.level_info.game_components.Box_Level2):
+                self.Box_Level2 = int(finish_event.level_info.game_components.Box_Level2)
+            if str(finish_event.level_info.game_components.Box_Level3):
+                self.Box_Level3 = int(finish_event.level_info.game_components.Box_Level3)
+
+            if str(finish_event.level_info.game_components.Carpet_Level1):
+                self.Carpet_Level1 = int(finish_event.level_info.game_components.Carpet_Level1)
+            if str(finish_event.level_info.game_components.Carpet_Level2):
+                self.Carpet_Level2 = int(finish_event.level_info.game_components.Carpet_Level2)
+            if str(finish_event.level_info.game_components.Carpet_Level3):
+                self.Carpet_Level3 = int(finish_event.level_info.game_components.Carpet_Level3)
+
+            if str(finish_event.level_info.game_components.Chain_Level1):
+                self.Chain_Level1 = int(finish_event.level_info.game_components.Chain_Level1)
+            if str(finish_event.level_info.game_components.Chain_Level2):
+                self.Chain_Level2 = int(finish_event.level_info.game_components.Chain_Level2)
+            if str(finish_event.level_info.game_components.Chain_Level3):
+                self.Chain_Level3 = int(finish_event.level_info.game_components.Chain_Level3)
 
         if start_event:
 
@@ -181,8 +208,12 @@ class AnalyticEvenData:
             game_currency = lvl_end_event.level_info.gameCurrency
             if game_currency:
                 self.game_currency = game_currency
+
         if self.start_date and self.end_date:
             self.diff_time = self.end_date - self.start_date
+
+        if self.spent_turn and self.give_turn:
+            self.left_turn = self.give_turn - self.spent_turn
 
 
 def get_analytic_data(level_name):
@@ -236,83 +267,41 @@ def get_event(events, level_key):
 
 def get_totals_data(analytic_data):
     result_dict = dict()
-    result_dict["wins"] = _get_wins(analytic_data)
-    result_dict["fails"] = _get_fails(analytic_data)
-    result_dict["spent_turn"] = _get_spent_turns(analytic_data)
-    result_dict["spent_second"] = _get_spent_second(analytic_data)
+
+    if len(analytic_data) != 0:
+        class_attributes = get_class_attributes(analytic_data[0])
+        if len(class_attributes) != 0:
+            for attribute in class_attributes:
+                if attribute == "diff_time":
+                    result_dict[attribute] = _get_diff_time(analytic_data)
+                elif attribute == "level_session_id" or attribute == "start_date" or attribute == "end_date" or \
+                     attribute == "target1_name" or attribute == "user_name" or attribute == "level_name":
+                    pass
+                elif attribute == "left_turn":
+                    result_dict[attribute] = _get_data_for_left_turn(analytic_data)
+                elif attribute == "target2_count_collected" or attribute == "target2_count_collected":
+                    result_dict[attribute] = _get_data_for_target_count_collected(analytic_data, attribute)
+                    pass
+                else:
+                    result_dict[attribute] = _get_analytic_data_by_list_events(analytic_data, str(attribute))
+
     result_dict["complexity"] = _get_complexity(analytic_data)
-    result_dict["give_turn"] = _get_give_turns(analytic_data)
-    result_dict["give_second"] = _get_give_second(analytic_data)
-
-    # result_dict["first_bonus"] = _get_first_bonus(analytic_data)
-    # result_dict["second_bonus"] = _get_second_bonus(analytic_data)
-    # result_dict["third_bonus"] = _get_third_bonus(analytic_data)
-
-    result_dict["target1_count"] = _get_target1_count(analytic_data)
-    result_dict["target2_count"] = _get_target2_count(analytic_data)
-
-    result_dict["diff_time"] = _get_diff_time(analytic_data)
-
-    result_dict["red"] = _get_color_red(analytic_data)
-    result_dict["yellow"] = _get_color_yellow(analytic_data)
-    result_dict["blue"] = _get_color_blue(analytic_data)
-    result_dict["green"] = _get_color_green(analytic_data)
-    result_dict["white"] = _get_color_white(analytic_data)
-    result_dict["black"] = _get_color_black(analytic_data)
-
-    result_dict["Super_FireSpark"] = _get_Super_FireSpark(analytic_data)
-    result_dict["Super_FireRing"] = _get_Super_FireRing(analytic_data)
-    result_dict["Super_BigLightning_h"] = _get_Super_BigLightning_h(analytic_data)
-    result_dict["Super_BigLightning_v"] = _get_Super_BigLightning_v(analytic_data)
-    result_dict["Super_SmallLightning_v"] = _get_Super_SmallLightning_v(analytic_data)
-    result_dict["Super_SmallLightning_h"] = _get_Super_SmallLightning_h(analytic_data)
-    result_dict["Super_SphereOfFire"] = _get_Super_SphereOfFire(analytic_data)
-
-    result_dict["Stone"] = _get_Stone(analytic_data)
-    result_dict["Weight"] = _get_Weight(analytic_data)
-    result_dict["Lamp"] = _get_Lamp(analytic_data)
-    result_dict["Balloon"] = _get_Balloon(analytic_data)
-    result_dict["StarBonus"] = _get_StarBonus(analytic_data)
 
     return result_dict
 
 
-def _get_wins(events):
-    wins = list()
-    for row in events:
-        if row.win_game == "1":
-            wins.append(1)
-    return str(len(wins))
-
-
-def _get_fails(events):
-    fails = list()
-    for row in events:
-        if row.fail_game == "1":
-            fails.append(1)
-    return str(len(fails))
-
-
-def _get_spent_turns(events):
-    spent_turns = list()
-    for row in events:
-        if row.spent_turn != "":
-            spent_turns.append(int(row.spent_turn))
-    return __get_analytic_data(spent_turns)
-
-
-def _get_spent_second(events):
-    spent_second = list()
-    for row in events:
-        if row.spent_second != "":
-            spent_second.append(int(row.spent_second))
-    return __get_analytic_data(spent_second)
+def get_class_attributes(cls):
+    return [i for i in cls.__dict__.keys() if i[:1] != '_']
 
 
 def _get_complexity(events):
-    fails = int(_get_fails(events))
-    if fails != 0 and events != 0:
-        return str(fails) + " * 100 / " + str(len(events)) + " = " + str(round((fails * 100) / len(events), 2))
+    full_attr_value = list()
+    for row in events:
+        if str(getattr(row, "fail_game")):
+            full_attr_value.append(int(getattr(row, "fail_game")))
+    if len(full_attr_value) != 0 and events != 0:
+        return str(len(full_attr_value)) + " * 100 / " + str(len(events)) + " = " + str(
+            round((len(full_attr_value) * 100) / len(events), 2))
     else:
         return "0"
 
@@ -331,205 +320,28 @@ def _get_diff_time(events):
         return str(diff_time)[:7]
 
 
-def _get_give_turns(events):
-    give_turn = list()
+def _get_data_for_left_turn(events):
+    left_turns = list()
     for row in events:
-        if row.give_turn != "":
-            give_turn.append(int(row.give_turn))
-    return __get_analytic_data(give_turn)
+        if row.left_turn and row.win_game == "1":
+            left_turns.append(int(row.left_turn))
+    return __get_analytic_data(left_turns)
 
 
-def _get_give_second(events):
-    give_seconds = list()
+def _get_data_for_target_count_collected(events, attr):
+    target_count_collected = list()
     for row in events:
-        if row.give_seconds != "":
-            give_seconds.append(int(row.give_seconds))
-    return __get_analytic_data(give_seconds)
+        if str(getattr(row, attr)) and row.fail_game == "1":
+            target_count_collected.append(int(getattr(row, attr)))
+    return __get_analytic_data(target_count_collected)
 
 
-def _get_first_bonus(events):
-    first_bonus = list()
+def _get_analytic_data_by_list_events(events, attr):
+    full_attr_value = list()
     for row in events:
-        if bool(row.first_bonus):
-            first_bonus.append(1)
-    return __get_analytic_data(first_bonus)
-
-
-def _get_second_bonus(events):
-    second_bonus = list()
-    for row in events:
-        if bool(row.second_bonus):
-            second_bonus.append(1)
-    return __get_analytic_data(second_bonus)
-
-
-def _get_third_bonus(events):
-    third_bonus = list()
-    for row in events:
-        if bool(row.third_bonus):
-            third_bonus.append(1)
-    return __get_analytic_data(third_bonus)
-
-
-def _get_target1_count(events):
-    target1_count = list()
-    for row in events:
-        if row.target1_count != "":
-            target1_count.append(row.target1_count)
-    return __get_analytic_data(target1_count)
-
-
-def _get_target2_count(events):
-    target2_count = list()
-    for row in events:
-        if row.target2_count != "":
-            target2_count.append(row.target1_count)
-    return __get_analytic_data(target2_count)
-
-
-def _get_color_red(events):
-    color_red = list()
-    for row in events:
-        if str(row.red):
-            color_red.append(row.red)
-    print(var([1, 2, 3, 4]))
-    return __get_analytic_data(color_red)
-
-
-def _get_color_yellow(events):
-    color_yellow = list()
-    for row in events:
-        if str(row.yellow):
-            color_yellow.append(row.yellow)
-    return __get_analytic_data(color_yellow)
-
-
-def _get_color_blue(events):
-    color_blue = list()
-    for row in events:
-        if str(row.blue):
-            color_blue.append(row.blue)
-    return __get_analytic_data(color_blue)
-
-
-def _get_color_green(events):
-    color_green = list()
-    for row in events:
-        if str(row.green):
-            color_green.append(row.green)
-    return __get_analytic_data(color_green)
-
-
-def _get_color_white(events):
-    color_white = list()
-    for row in events:
-        if str(row.white):
-            color_white.append(row.white)
-    return __get_analytic_data(color_white)
-
-
-def _get_color_black(events):
-    color_black = list()
-    for row in events:
-        if str(row.black):
-            color_black.append(row.black)
-    return __get_analytic_data(color_black)
-
-
-def _get_Super_FireSpark(events):
-    super_FireSpark = list()
-    for row in events:
-        if str(row.Super_FireSpark):
-            super_FireSpark.append(row.Super_FireSpark)
-    return __get_analytic_data(super_FireSpark)
-
-
-def _get_Super_FireRing(events):
-    Super_FireRing = list()
-    for row in events:
-        if str(row.Super_FireRing):
-            Super_FireRing.append(row.Super_FireRing)
-    return __get_analytic_data(Super_FireRing)
-
-
-def _get_Super_BigLightning_h(events):
-    Super_BigLightning_h = list()
-    for row in events:
-        if str(row.Super_BigLightning_h):
-            Super_BigLightning_h.append(row.Super_BigLightning_h)
-    return __get_analytic_data(Super_BigLightning_h)
-
-
-def _get_Super_BigLightning_v(events):
-    Super_BigLightning_v = list()
-    for row in events:
-        if str(row.Super_BigLightning_v):
-            Super_BigLightning_v.append(row.Super_BigLightning_v)
-    return __get_analytic_data(Super_BigLightning_v)
-
-
-def _get_Super_SmallLightning_v(events):
-    Super_SmallLightning_v = list()
-    for row in events:
-        if str(row.Super_SmallLightning_v):
-            Super_SmallLightning_v.append(row.Super_SmallLightning_v)
-    return __get_analytic_data(Super_SmallLightning_v)
-
-
-def _get_Super_SmallLightning_h(events):
-    Super_SmallLightning_h = list()
-    for row in events:
-        if str(row.Super_SmallLightning_h):
-            Super_SmallLightning_h.append(row.Super_SmallLightning_h)
-    return __get_analytic_data(Super_SmallLightning_h)
-
-
-def _get_Super_SphereOfFire(events):
-    Super_SphereOfFire = list()
-    for row in events:
-        if str(row.Super_SphereOfFire):
-            Super_SphereOfFire.append(row.Super_SphereOfFire)
-    return __get_analytic_data(Super_SphereOfFire)
-
-
-def _get_Stone(events):
-    Stone = list()
-    for row in events:
-        if str(row.Stone):
-            Stone.append(row.Stone)
-    return __get_analytic_data(Stone)
-
-
-def _get_Weight(events):
-    Weight = list()
-    for row in events:
-        if str(row.Weight):
-            Weight.append(row.Weight)
-    return __get_analytic_data(Weight)
-
-
-def _get_Lamp(events):
-    Lamp = list()
-    for row in events:
-        if str(row.Lamp):
-            Lamp.append(row.Lamp)
-    return __get_analytic_data(Lamp)
-
-
-def _get_Balloon(events):
-    Balloon = list()
-    for row in events:
-        if str(row.Balloon):
-            Balloon.append(row.Balloon)
-    return __get_analytic_data(Balloon)
-
-
-def _get_StarBonus(events):
-    StarBonus = list()
-    for row in events:
-        if str(row.StarBonus):
-            StarBonus.append(row.StarBonus)
-    return __get_analytic_data(StarBonus)
+        if str(getattr(row, attr)):
+            full_attr_value.append(int(getattr(row, attr)))
+    return __get_analytic_data(full_attr_value)
 
 
 def __get_analytic_data(vector):

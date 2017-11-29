@@ -26,9 +26,10 @@
       <th rowspan="2" title="Затраченое время на прохождение уровня">Затрачено <br> времени</th>
       <th colspan="2" title="Итог игры">Результат</th>
       <th colspan="2" title="Затраченные ресурсы">Потрачено</th>
+      <th rowspan="2" title="Остаток ходов">Остаток ходов</th>
       <th colspan="2" title="Что требовалось собрать">Цели</th>
       <th colspan="2" title="Сколько дано ходов и секунд">Дано</th>
-{% comment %}      <th colspan="2" title="Сколько было собрано элементов цели">Собрано</th>
+     <th colspan="2" title="Сколько было собрано элементов цели">Собрано</th>{% comment %}
       <th colspan="2" title="Сколько было собрано после выполнения цели">Всего собранно</th>{% endcomment %}
       <th rowspan="2" title="Был ли активирован первый бонус">Бонус 1</th>
       <th rowspan="2" title="Был ли активирован второй бонус">Бонус 2</th>
@@ -56,7 +57,19 @@
       <th rowspan="2" title="Lamp"><img width="30" src="{% static '/icons/Lamp/lamp_lvl2.png'%}"></th>
       <th rowspan="2" title="Balloon"><img width="30" src="{% static '/icons/balloon.png'%}"></th>
       <th rowspan="2" title="StarBonus"><img width="30" src="{% static '/icons/Super-fishka/0000007.png'%}"></th>
-      <th rowspan="2" title="StarBonus">Action</th>
+
+      <th rowspan="2" title="бокс уровня 1"><img width="30" src="{% static '/icons/Caskets/Casket_lvl_01.png'%}"></th>
+      <th rowspan="2" title="бокс уровня 2"><img width="30" src="{% static '/icons/Caskets/Casket_lvl_02.png'%}"></th>
+      <th rowspan="2" title="бокс уровня 3"><img width="30" src="{% static '/icons/Caskets/Casket_lvl_03.png'%}"></th>
+
+      <th rowspan="2" title="подложка уровня 1"><img width="30" src="{% static '/icons/Pod/Pod-v1_Level_01.png'%}"></th>
+      <th rowspan="2" title="подложка уровня 2"><img width="30" src="{% static '/icons/Pod/Pod-v1_Level_02.png'%}"></th>
+      <th rowspan="2" title="подложка уровня 3"><img width="30" src="{% static '/icons/Pod/carpet03.png'%}"></th>
+
+      <th rowspan="2" title="цепь уровня 1"><img width="30" src="{% static '/icons/Chain/chain1.png'%}"></th>
+      <th rowspan="2" title="цепь уровня 2"><img width="30" src="{% static '/icons/Chain/chain2.png'%}"></th>
+      <th rowspan="2" title="цепь уровня 3"><img width="30" src="{% static '/icons/Chain/chain3.png'%}"></th>
+      <th rowspan="2" title="Actions">Action</th>
 
     </tr>
     <tr>
@@ -70,8 +83,8 @@
       <th>Цель 2 ({{ events.0.target2_name }})</th>
       <th>Ходов</th>
       <th>Секунд</th>
-{% comment %}      <th>{{ events.0.target1_name }}</th>
-      <th>{{ events.0.target2_name }}</th>
+     <th>{{ events.0.target1_name }}</th>
+      <th>{{ events.0.target2_name }}</th>{% comment %}
       <th>{{ events.0.target1_name }}</th>
       <th>{{ events.0.target2_name }}</th>{% endcomment %}
     </tr>
@@ -87,12 +100,13 @@
       <td>{{ event.fail_game }}</td>
       <td>{{ event.spent_turn }}</td>
       <td>{{ event.spent_second }}</td>
+      <td>{{ event.left_turn }}</td>
       <td>{{ event.target1_count }}</td>
       <td>{{ event.target2_count }}</td>
       <td>{{ event.give_turn }}</td>
       <td>{{ event.give_seconds }}</td>
-{% comment %}      <td>{{ event.target1_count_collected }}</td>
-      <td>{{ event.target2_count_collected }}</td>
+      <td>{{ event.target1_count_collected }}</td>
+      <td>{{ event.target2_count_collected }}</td>{% comment %}
       <td>{{ event.target1_count_overflow }}</td>
       <td>{{ event.target2_count_overflow }}</td>{% endcomment %}
       <td>{{ event.first_bonus }}</td>
@@ -120,6 +134,18 @@
       <td>{{ event.Lamp }}</td>
       <td>{{ event.Balloon }}</td>
       <td>{{ event.StarBonus }}</td>
+
+      <td>{{ event.Box_Level1 }}</td>
+      <td>{{ event.Box_Level2 }}</td>
+      <td>{{ event.Box_Level3 }}</td>
+
+      <td>{{ event.Carpet_Level1 }}</td>
+      <td>{{ event.Carpet_Level2 }}</td>
+      <td>{{ event.Carpet_Level3 }}</td>
+
+      <td>{{ event.Chain_Level1 }}</td>
+      <td>{{ event.Chain_Level2 }}</td>
+      <td>{{ event.Chain_Level3 }}</td>
       <td><a href="delete?event_id={{ event.level_session_id }}&level_name={{ event.level_name }}">Удалить</a></td>
 
     </tr>
@@ -130,16 +156,18 @@
       <th>---</th>
       <th>---</th>
       <th title="Среднее значение затраченного времени"><h4>{{ common_data.diff_time }}</h4></th>
-      <th title="Кол-во побед"><h4>{{ common_data.wins }}</h4></th>
-      <th title="Кол-во поражений"><h4>{{ common_data.fails }}</h4></th>
+      <th title="Кол-во побед"><h4>{{ common_data.win_game }}</h4></th>
+      <th title="Кол-во поражений"><h4>{{ common_data.fail_game }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение потраченных ходов"><h4>{{ common_data.spent_turn }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение потраченных секунд"><h4>{{ common_data.spent_second }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение оставшихся ходов при победе"><h4>{{ common_data.left_turn }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение цели 1"><h4>{{ common_data.target1_count }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение цели 2"><h4>{{ common_data.target2_count }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение ходов"><h4>{{ common_data.give_turn }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение секунд"><h4>{{ common_data.give_second }}</h4></th>
-{% comment %}      <th><h4>{{ common_data.target1_count_collected }}</h4></th>
-      <th><h4>{{ common_data.target2_count_collected }}</h4></th>
+
+      <th title="Медиана ± среднеквадратическое отклонение собраные цели1 при поражении"><h4>{{ common_data.target1_count_collected }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение собраные цели2 при поражении"><h4>{{ common_data.target2_count_collected }}</h4></th>{% comment %}
       <th><h4>{{ common_data.target1_count_overflow }}</h4></th>
       <th><h4>{{ common_data.target2_count_overflow }}</h4></th>{% endcomment %}
       <th title="Ничего не считается"><h4> --- </h4></th>
@@ -167,6 +195,19 @@
       <th title="Медиана ± среднеквадратическое отклонение Weight"><h4>{{ common_data.Weight }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение Lamp"><h4>{{ common_data.Lamp }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение Balloon"><h4>{{ common_data.Balloon }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
+
+
+      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
+
+      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
+
+      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
   </tr>
   </tbody>

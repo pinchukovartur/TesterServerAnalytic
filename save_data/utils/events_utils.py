@@ -59,6 +59,18 @@ class GameComponents:
         self.Balloon = 0
         self.StarBonus = 0
 
+        self.Box_Level1 = 0
+        self.Box_Level2 = 0
+        self.Box_Level3 = 0
+
+        self.Carpet_Level1 = 0
+        self.Carpet_Level2 = 0
+        self.Carpet_Level3 = 0
+
+        self.Chain_Level1 = 0
+        self.Chain_Level2 = 0
+        self.Chain_Level3 = 0
+
         if "Color6_Red" in game_component.keys():
             Color6_Red = game_component["Color6_Red"]
             if Color6_Red:
@@ -113,6 +125,44 @@ class GameComponents:
             if Super_SphereOfFire:
                 self.Super_SphereOfFire = Super_SphereOfFire
 
+        if "Box_Level1" in game_component.keys():
+            Box_Level1 = game_component["Box_Level1"]
+            if Box_Level1:
+                self.Box_Level1 = Box_Level1
+        if "Box_Level2" in game_component.keys():
+            Box_Level2 = game_component["Box_Level2"]
+            if Box_Level2:
+                self.Box_Level2 = Box_Level2
+        if "Box_Level3" in game_component.keys():
+            Box_Level3 = game_component["Box_Level3"]
+            if Box_Level3:
+                self.Box_Level3 = Box_Level3
+
+        if "Carpet_Level1" in game_component.keys():
+            Carpet_Level1 = game_component["Carpet_Level1"]
+            if Carpet_Level1:
+                self.Carpet_Level1 = Carpet_Level1
+        if "Carpet_Level2" in game_component.keys():
+            Carpet_Level2 = game_component["Carpet_Level2"]
+            if Carpet_Level2:
+                self.Carpet_Level2 = Carpet_Level2
+        if "Carpet_Level3" in game_component.keys():
+            Carpet_Level3 = game_component["Carpet_Level3"]
+            if Carpet_Level3:
+                self.Carpet_Level3 = Carpet_Level3
+
+        if "Chain_Level1" in game_component.keys():
+            Chain_Level1 = game_component["Chain_Level1"]
+            if Chain_Level1:
+                self.Chain_Level1 = Chain_Level1
+        if "Chain_Level2" in game_component.keys():
+            Chain_Level2 = game_component["Chain_Level2"]
+            if Chain_Level2:
+                self.Chain_Level2 = Chain_Level2
+        if "Chain_Level3" in game_component.keys():
+            Chain_Level3 = game_component["Chain_Level3"]
+            if Chain_Level3:
+                self.Chain_Level3 = Chain_Level3
 
         if "Stone" in game_component.keys():
             Stone = game_component["Stone"]
@@ -134,6 +184,7 @@ class GameComponents:
             StarBonus = game_component["StarBonus"]
             if StarBonus:
                 self.Color6_Black = StarBonus
+
 
 class Event:
     def __init__(self, id, key_event, json_data, user_secret_key, level_session_id, event_datetime):
@@ -196,6 +247,3 @@ def sort_by_date_time(from_date, until_date, set_level_info):
                 sort_levels.append(value)
         set_level_info = sort_levels
     return set_level_info
-
-
-
