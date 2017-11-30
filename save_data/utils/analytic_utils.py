@@ -355,4 +355,4 @@ def __get_median(vector):
 
 def __get_standard_deviation(vector):
     """ среднеквадратическое отклонение выборки"""
-    return str(round(var(vector) ** 0.5, 1))
+    return str(round((var(vector) ** 0.5), 1))
