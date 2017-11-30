@@ -49,8 +49,7 @@ class GameComponents:
         self.Super_FireRing = 0
         self.Super_BigLightning_h = 0
         self.Super_BigLightning_v = 0
-        self.Super_SmallLightning_v = 0
-        self.Super_SmallLightning_h = 0
+        self.Super_SmallLightning = 0
         self.Super_SphereOfFire = 0
 
         self.Stone = 0
@@ -115,11 +114,11 @@ class GameComponents:
         if "Super_SmallLightning_v" in game_component.keys():
             Super_SmallLightning_v = game_component["Super_SmallLightning_v"]
             if Super_SmallLightning_v:
-                self.Super_SmallLightning_v = Super_SmallLightning_v
+                self.Super_SmallLightning += Super_SmallLightning_v
         if "Super_SmallLightning_h" in game_component.keys():
             Super_SmallLightning_h = game_component["Super_SmallLightning_h"]
             if Super_SmallLightning_h:
-                self.Super_SmallLightning_h = Super_SmallLightning_h
+                self.Super_SmallLightning += Super_SmallLightning_h
         if "Super_SphereOfFire" in game_component.keys():
             Super_SphereOfFire = game_component["Super_SphereOfFire"]
             if Super_SphereOfFire:

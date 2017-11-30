@@ -53,8 +53,7 @@ class AnalyticEvenData:
         self.Super_FireRing = 0
         self.Super_BigLightning_h = 0
         self.Super_BigLightning_v = 0
-        self.Super_SmallLightning_v = 0
-        self.Super_SmallLightning_h = 0
+        self.Super_SmallLightning = 0
         self.Super_SphereOfFire = 0
 
         self.Stone = 0
@@ -76,13 +75,6 @@ class AnalyticEvenData:
         self.Chain_Level3 = 0
 
         if finish_event.level_info.game_components:
-            if finish_event.level_info.firstTarget:
-                if str(finish_event.level_info.firstTarget["m_required"]):
-                    self.target1_count_collected = finish_event.level_info.firstTarget["m_remainder"]
-            if finish_event.level_info.secondTarget:
-                if str(finish_event.level_info.secondTarget["m_required"]):
-                    self.target2_count_collected = finish_event.level_info.secondTarget["m_remainder"]
-
             if str(finish_event.level_info.game_components.Color6_Red):
                 self.red = int(finish_event.level_info.game_components.Color6_Red)
             if str(finish_event.level_info.game_components.Color6_Yellow):
@@ -104,10 +96,8 @@ class AnalyticEvenData:
                 self.Super_BigLightning_h = int(finish_event.level_info.game_components.Super_BigLightning_h)
             if str(finish_event.level_info.game_components.Super_BigLightning_v):
                 self.Super_BigLightning_v = int(finish_event.level_info.game_components.Super_BigLightning_v)
-            if str(finish_event.level_info.game_components.Super_SmallLightning_v):
-                self.Super_SmallLightning_v = int(finish_event.level_info.game_components.Super_SmallLightning_v)
-            if str(finish_event.level_info.game_components.Super_SmallLightning_h):
-                self.Super_SmallLightning_h = int(finish_event.level_info.game_components.Super_SmallLightning_h)
+            if str(finish_event.level_info.game_components.Super_SmallLightning):
+                self.Super_SmallLightning = int(finish_event.level_info.game_components.Super_SmallLightning)
             if str(finish_event.level_info.game_components.Super_SphereOfFire):
                 self.Super_SphereOfFire = int(finish_event.level_info.game_components.Super_SphereOfFire)
 
@@ -200,9 +190,9 @@ class AnalyticEvenData:
             result_game = finish_event.key_event
             if result_game:
                 if result_game == "completegame":
-                    self.win_game = "1"
+                    self.win_game = 1
                 elif result_game == "failgame":
-                    self.fail_game = "1"
+                    self.fail_game = 1
 
         if lvl_end_event:
             game_currency = lvl_end_event.level_info.gameCurrency
@@ -214,6 +204,15 @@ class AnalyticEvenData:
 
         if self.spent_turn and self.give_turn:
             self.left_turn = self.give_turn - self.spent_turn
+
+        # ЗАПОЛНЯЕМ ТОЛЬКО КОГДА ПОРАЖЕНИЕ
+        if finish_event.level_info:
+            if finish_event.level_info.firstTarget:
+                if str(finish_event.level_info.firstTarget["m_required"]) and self.fail_game:
+                    self.target1_count_collected = finish_event.level_info.firstTarget["m_remainder"]
+            if finish_event.level_info.secondTarget:
+                if str(finish_event.level_info.secondTarget["m_required"]) and self.fail_game:
+                    self.target2_count_collected = finish_event.level_info.secondTarget["m_remainder"]
 
 
 def get_analytic_data(level_name):
@@ -275,13 +274,10 @@ def get_totals_data(analytic_data):
                 if attribute == "diff_time":
                     result_dict[attribute] = _get_diff_time(analytic_data)
                 elif attribute == "level_session_id" or attribute == "start_date" or attribute == "end_date" or \
-                     attribute == "target1_name" or attribute == "user_name" or attribute == "level_name":
+                                attribute == "target1_name" or attribute == "user_name" or attribute == "level_name":
                     pass
                 elif attribute == "left_turn":
                     result_dict[attribute] = _get_data_for_left_turn(analytic_data)
-                elif attribute == "target2_count_collected" or attribute == "target2_count_collected":
-                    result_dict[attribute] = _get_data_for_target_count_collected(analytic_data, attribute)
-                    pass
                 elif attribute == "fail_game" or attribute == "win_game":
                     result_dict[attribute] = _get_count_analytic_data(analytic_data, attribute)
                 else:
@@ -336,14 +332,6 @@ def _get_data_for_left_turn(events):
     return __get_analytic_data(left_turns)
 
 
-def _get_data_for_target_count_collected(events, attr):
-    target_count_collected = list()
-    for row in events:
-        if str(getattr(row, attr)) and row.fail_game == "1":
-            target_count_collected.append(int(getattr(row, attr)))
-    return __get_analytic_data(target_count_collected)
-
-
 def _get_analytic_data_by_list_events(events, attr):
     full_attr_value = list()
     for row in events:
@@ -367,4 +355,4 @@ def __get_median(vector):
 
 def __get_standard_deviation(vector):
     """ среднеквадратическое отклонение выборки"""
-    return str(round(var(vector) ** 0.5, 4))
+    return str(round(var(vector) ** 0.5, 1))

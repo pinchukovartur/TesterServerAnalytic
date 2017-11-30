@@ -48,14 +48,13 @@
       <th rowspan="2" title="Super_FireRing"><img width="30" src="{% static '/icons/Super-fishka/0000002.png'%}"></th>
       <th rowspan="2" title="Super_BigLightning_h"><img width="30" src="{% static '/icons/Super-fishka/0000003-2.png'%}"></th>
       <th rowspan="2" title="Super_BigLightning_v"><img width="30" src="{% static '/icons/Super-fishka/0000003-1.png'%}"></th>
-      <th rowspan="2" title="Super_SmallLightning_v"><img width="30" src="{% static '/icons/Super-fishka/0000001.png'%}">V</th>
-      <th rowspan="2" title="Super_SmallLightning_h"><img width="30" src="{% static '/icons/Super-fishka/0000001.png'%}">H</th>
+      <th rowspan="2" title="Super_SmallLightning"><img width="30" src="{% static '/icons/Super-fishka/0000001.png'%}"></th>
       <th rowspan="2" title="Super_SphereOfFire"><img width="30" src="{% static '/icons/Super-fishka/0000006.png'%}"></th>
 
       <th rowspan="2" title="Stone"><img width="30" src="{% static '/icons/Stone/El_stone_01.png'%}"></th>
       <th rowspan="2" title="Weight"><img width="30" src="{% static '/icons/Weaver/Weaver.png'%}"></th>
       <th rowspan="2" title="Lamp"><img width="30" src="{% static '/icons/Lamp/lamp_lvl2.png'%}"></th>
-      <th rowspan="2" title="Balloon"><img width="30" src="{% static '/icons/balloon.png'%}"></th>
+      {% comment %}<th rowspan="2" title="Balloon"><img width="30" src="{% static '/icons/balloon.png'%}"></th>{% endcomment %}
       <th rowspan="2" title="StarBonus"><img width="30" src="{% static '/icons/Super-fishka/0000007.png'%}"></th>
 
       <th rowspan="2" title="бокс уровня 1"><img width="30" src="{% static '/icons/Caskets/Casket_lvl_01.png'%}"></th>
@@ -64,11 +63,13 @@
 
       <th rowspan="2" title="подложка уровня 1"><img width="30" src="{% static '/icons/Pod/Pod-v1_Level_01.png'%}"></th>
       <th rowspan="2" title="подложка уровня 2"><img width="30" src="{% static '/icons/Pod/Pod-v1_Level_02.png'%}"></th>
-      <th rowspan="2" title="подложка уровня 3"><img width="30" src="{% static '/icons/Pod/carpet03.png'%}"></th>
+
+      {% comment %}<th rowspan="2" title="подложка уровня 3"><img width="30" src="{% static '/icons/Pod/carpet03.png'%}"></th>{% endcomment %}
 
       <th rowspan="2" title="цепь уровня 1"><img width="30" src="{% static '/icons/Chain/chain1.png'%}"></th>
-      <th rowspan="2" title="цепь уровня 2"><img width="30" src="{% static '/icons/Chain/chain2.png'%}"></th>
-      <th rowspan="2" title="цепь уровня 3"><img width="30" src="{% static '/icons/Chain/chain3.png'%}"></th>
+
+      {% comment %}<th rowspan="2" title="цепь уровня 2"><img width="30" src="{% static '/icons/Chain/chain2.png'%}"></th>
+      <th rowspan="2" title="цепь уровня 3"><img width="30" src="{% static '/icons/Chain/chain3.png'%}"></th>{% endcomment %}
       <th rowspan="2" title="Actions">Action</th>
 
     </tr>
@@ -125,14 +126,13 @@
       <td>{{ event.Super_FireRing }}</td>
       <td>{{ event.Super_BigLightning_h }}</td>
       <td>{{ event.Super_BigLightning_v }}</td>
-      <td>{{ event.Super_SmallLightning_v }}</td>
-      <td>{{ event.Super_SmallLightning_h }}</td>
+      <td>{{ event.Super_SmallLightning}}</td>
       <td>{{ event.Super_SphereOfFire }}</td>
 
       <td>{{ event.Stone }}</td>
       <td>{{ event.Weight }}</td>
       <td>{{ event.Lamp }}</td>
-      <td>{{ event.Balloon }}</td>
+      {% comment %}<td>{{ event.Balloon }}</td>{% endcomment %}
       <td>{{ event.StarBonus }}</td>
 
       <td>{{ event.Box_Level1 }}</td>
@@ -141,11 +141,13 @@
 
       <td>{{ event.Carpet_Level1 }}</td>
       <td>{{ event.Carpet_Level2 }}</td>
-      <td>{{ event.Carpet_Level3 }}</td>
+
+      {% comment %}<td>{{ event.Carpet_Level3 }}</td>{% endcomment %}
 
       <td>{{ event.Chain_Level1 }}</td>
-      <td>{{ event.Chain_Level2 }}</td>
-      <td>{{ event.Chain_Level3 }}</td>
+
+      {% comment %}<td>{{ event.Chain_Level2 }}</td>
+      <td>{{ event.Chain_Level3 }}</td>{% endcomment %}
       <td><a href="delete?event_id={{ event.level_session_id }}&level_name={{ event.level_name }}">Удалить</a></td>
 
     </tr>
@@ -170,11 +172,11 @@
       <th title="Медиана ± среднеквадратическое отклонение собраные цели2 при поражении"><h4>{{ common_data.target2_count_collected }}</h4></th>{% comment %}
       <th><h4>{{ common_data.target1_count_overflow }}</h4></th>
       <th><h4>{{ common_data.target2_count_overflow }}</h4></th>{% endcomment %}
-      <th title="Ничего не считается"><h4> --- </h4></th>
-      <th title="Ничего не считается"><h4> --- </h4></th>
-      <th title="Ничего не считается"><h4> --- </h4></th>
-      <th title="Ничего не считается"><h4> --- </h4></th>
-      <th title="Ничего не считается"><h4> --- </h4></th>
+      <th title=""><h4> --- </h4></th>
+      <th title=""><h4> --- </h4></th>
+      <th title=""><h4> --- </h4></th>
+      <th title=""><h4> --- </h4></th>
+      <th title=""><h4> --- </h4></th>
 
       <th title="Медиана ± среднеквадратическое отклонение красных фишек"><h4>{{ common_data.red }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение желтых фишек"><h4>{{ common_data.yellow }}</h4></th>
@@ -187,28 +189,29 @@
       <th title="Медиана ± среднеквадратическое отклонение Super_FireRing"><h4>{{ common_data.Super_FireRing }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение Super_BigLightning_h"><h4>{{ common_data.Super_BigLightning_h }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение Super_BigLightning_v"><h4>{{ common_data.Super_BigLightning_v }}</h4></th>
-      <th title="Медиана ± среднеквадратическое отклонение Super_SmallLightning_v"><h4>{{ common_data.Super_SmallLightning_v }}</h4></th>
-      <th title="Медиана ± среднеквадратическое отклонение Super_SmallLightning_h"><h4>{{ common_data.Super_SmallLightning_h }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение Super_SmallLightning"><h4>{{ common_data.Super_SmallLightning }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение Super_SphereOfFire"><h4>{{ common_data.Super_SphereOfFire }}</h4></th>
 
       <th title="Медиана ± среднеквадратическое отклонение Stone"><h4>{{ common_data.Stone }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение Weight"><h4>{{ common_data.Weight }}</h4></th>
       <th title="Медиана ± среднеквадратическое отклонение Lamp"><h4>{{ common_data.Lamp }}</h4></th>
-      <th title="Медиана ± среднеквадратическое отклонение Balloon"><h4>{{ common_data.Balloon }}</h4></th>
+      {% comment %}<th title="Медиана ± среднеквадратическое отклонение Balloon"><h4>{{ common_data.Balloon }}</h4></th>{% endcomment %}
       <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
 
 
-      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
-      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
-      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение Box_Level1"><h4>{{ common_data.Box_Level1 }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение Box_Level2"><h4>{{ common_data.Box_Level2 }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение Box_Level3"><h4>{{ common_data.Box_Level3 }}</h4></th>
 
-      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
-      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
-      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение Carpet_Level1"><h4>{{ common_data.Carpet_Level1 }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение Carpet_Level2"><h4>{{ common_data.Carpet_Level2 }}</h4></th>
 
-      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
-      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
-      <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
+      {% comment %}<th title="Медиана ± среднеквадратическое отклонение Carpet_Level3"><h4>{{ common_data.Carpet_Level3 }}</h4></th>{% endcomment %}
+
+      <th title="Медиана ± среднеквадратическое отклонение Chain_Level1"><h4>{{ common_data.Chain_Level1 }}</h4></th>
+
+      {% comment %}<th title="Медиана ± среднеквадратическое отклонение Chain_Level2"><h4>{{ common_data.Chain_Level2 }}</h4></th>
+      <th title="Медиана ± среднеквадратическое отклонение Chain_Level3"><h4>{{ common_data.Chain_Level3 }}</h4></th>{% endcomment %}
   </tr>
   </tbody>
 </table>
