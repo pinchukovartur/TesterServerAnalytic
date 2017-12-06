@@ -345,6 +345,9 @@ h4 {
 
 }
 
+.secret_key_data > th {
+background-color: #36ecff;
+}
 tr > th{
     background-color: #eeff7c;
 }

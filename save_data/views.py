@@ -73,9 +73,10 @@ def get_level(request):
     if level_name == "":
         return HttpResponse("Level Not Found")
 
-    analytic_data, total_data = get_analytic_data(level_name)
+    analytic_data, total_data, list_secret_key_date = get_analytic_data(level_name)
 
     if len(analytic_data) == 0:
         return HttpResponse("Level Event Not Found")
 
-    return render(request, 'analytic_data/level.html', {'events': analytic_data, "common_data": total_data})
+    return render(request, 'analytic_data/level.html', {'events': analytic_data, "common_data": total_data,
+                                                        "list_secret_key_date": list_secret_key_date})

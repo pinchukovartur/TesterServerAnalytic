@@ -9,75 +9,64 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="{% static '/css/level_info.css' %}">
-    <script src={% static '/js/level.js' %}></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-
-    <script src="{% static '/js/fixedheadertable.js' %}"></script>
+    <link href="{% static '/css/level_info.css' %} " rel="stylesheet">
     <link href="{% static '/css/defaultTheme.css' %}" rel="stylesheet" media="screen"/>
     <link href="{% static '/css/level_info.css' %}" rel="stylesheet" media="screen"/>
 
+    <script src={% static '/js/level.js' %}></script>
+    <script src="{% static '/js/fixedheadertable.js' %}"></script>
 </head>
 <body>
+
 <div style="height:80%; overflow:hidden; border:1px solid black;">
     <table id="fixed" class="fancyTable">
         <thead>
         <tr>
             <th>№</th>
-            <th>Старт</th>
-            <th>Финиш</th>
-            <th title="Затраченое время на прохождение уровня">Затрачено <br> времени</th>
-            <th title="Итог игры">Победа</th>
-            <th title="Итог игры">Поражение</th>
-            <th title="Затраченные ресурсы">Потрачено ходов</th>
-            <th title="Затраченные ресурсы">Потрачено секунд</th>
-            <th title="Остаток ходов">Остаток ходов</th>
-            <th title="Что требовалось собрать">Цель {{ events.0.target1_name }}</th>
-            <th title="Что требовалось собрать">Цель {{ events.0.target2_name }}</th>
-            <th title="Сколько дано ходов и секунд">Дано ходов</th>
-            <th title="Сколько дано ходов и секунд">Дано секунд</th>
-            <th title="Сколько было собрано элементов цели">Собрано 1 цели</th>
-            <th title="Сколько было собрано элементов цели">Собрано 2 цели</th>
-            <th title="Сколько было собрано после выполнения цели">Всего собранно<br>цели 1</th>
-            <th title="Сколько было собрано после выполнения цели">Всего собранно<br>цели 2</th>
-
+            <th title="Дата старта уровня">Старт</th>
+            <th title="Дата финиша уровня">Финиш</th>
+            <th title="Разница между финишом и стартом уровня">Затрачено <br> времени</th>
+            <th title="1 если уровень пройден">Победа</th>
+            <th title="1 если уровень проигран">Поражение</th>
+            <th title="Количество затраченых ходы">Потрачено ходов</th>
+            <th title="Затраченно секунд из цели">Потрачено секунд</th>
+            <th title="Количество оставшихся ходов">Остаток ходов</th>
+            <th title="Что требовалось собрать">Цель№1 {{ events.0.target1_name }}</th>
+            <th title="Что требовалось собрать">Цель№2 {{ events.0.target2_name }}</th>
+            <th title="Сколько дано ходов">Дано ходов</th>
+            <th title="Сколько дано секунд">Дано секунд</th>
+            <th title="Сколько было собрано цели 1">Собрано Цели№1</th>
+            <th title="Сколько было собрано цели 2">Собрано Цели№2</th>
             <th title="Был ли активирован первый бонус">Б№1</th>
             <th title="Был ли активирован второй бонус">Б№2</th>
             <th title="Был ли активирован третий бонус">Б№3</th>
-
-            <th title="Количество собранной игровой валюты(на момент после преобразования всех ходов в бонусы)">
-                Валюты <br> собр.
-            </th>
-
-                <th title="Красные"><img src="{% static '/icons/Elements/lvl_01/Rubin_001.png' %}"/>
-                <th title="Желтые"><img src="{% static '/icons/Elements/lvl_01/Gold_001.png' %}"/>
-                <th title="Синие"><img src="{% static '/icons/Elements/lvl_01/Water_001.png' %}"/>
-                <th title="Зеленые"><img src="{% static '/icons/Elements/lvl_01/Izumrud_001.png' %}"/>
-                <th title="Белые"><img src="{% static '/icons/Elements/lvl_01/Zhemchug_white.png' %}">
-                <th title="Черные"><img src="{% static '/icons/Elements/lvl_01/Zhemchug_black.png' %}"/>
-                <th title="Super_FireSpark"><img src="{% static '/icons/Super-fishka/0000005.png' %}"/>
-                <th title="Super_FireRing"><img src="{% static '/icons/Super-fishka/0000002.png' %}"/>
-                <th title="Super_BigLightning_h"><img src="{% static '/icons/Super-fishka/0000003-2.png' %}"/>
-                <th title="Super_BigLightning_v"><img src="{% static '/icons/Super-fishka/0000003-1.png' %}"/>
-                <th title="Super_SmallLightning"><img src="{% static '/icons/Super-fishka/0000001.png' %}"/>
-                <th title="Super_SphereOfFire"><img src="{% static '/icons/Super-fishka/0000006.png' %}"/>
-
-                <th title="Stone"><img src="{% static '/icons/Stone/El_stone_01.png' %}"/>
-                <th title="Weight"><img src="{% static '/icons/Weaver/Weaver.png' %}"/>
-                <th title="Lamp"><img src="{% static '/icons/Lamp/lamp_lvl2.png' %}"/>
-                <th title="StarBonus"><img src="{% static '/icons/Super-fishka/0000007.png' %}"/>
-                <th title="бокс уровня 1"><img src="{% static '/icons/Caskets/Casket_lvl_01.png' %}"/>
-                <th title="бокс уровня 2"><img src="{% static '/icons/Caskets/Casket_lvl_02.png' %}"/>
-                <th title="бокс уровня 3"><img src="{% static '/icons/Caskets/Casket_lvl_03.png' %}"/>
-                <th title="подложка уровня 1"><img src="{% static '/icons/Pod/Pod-v1_Level_01.png' %}"/>
-                <th title="подложка уровня 2"><img src="{% static '/icons/Pod/Pod-v1_Level_02.png' %}"/>
-                <th title="цепь уровня 1"><img src="{% static '/icons/Chain/chain1.png' %}"/>
-
-            <th rowspan="1" title="Ключ тестировщика">Ключ</th>
-
-            <th rowspan="1" title="Actions">Action</th>
+            <th title="Собранной игровой валюты(на момент после преобразования всех ходов)">Валюты<br>собр.</th>
+            <th title="Красные"><img src="{% static '/icons/Elements/lvl_01/Rubin_001.png' %}"/>
+            <th title="Желтые"><img src="{% static '/icons/Elements/lvl_01/Gold_001.png' %}"/>
+            <th title="Синие"><img src="{% static '/icons/Elements/lvl_01/Water_001.png' %}"/>
+            <th title="Зеленые"><img src="{% static '/icons/Elements/lvl_01/Izumrud_001.png' %}"/>
+            <th title="Белые"><img src="{% static '/icons/Elements/lvl_01/Zhemchug_white.png' %}">
+            <th title="Черные"><img src="{% static '/icons/Elements/lvl_01/Zhemchug_black.png' %}"/>
+            <th title="Super_FireSpark"><img src="{% static '/icons/Super-fishka/0000005.png' %}"/>
+            <th title="Super_FireRing"><img src="{% static '/icons/Super-fishka/0000002.png' %}"/>
+            <th title="Super_BigLightning_h"><img src="{% static '/icons/Super-fishka/0000003-2.png' %}"/>
+            <th title="Super_BigLightning_v"><img src="{% static '/icons/Super-fishka/0000003-1.png' %}"/>
+            <th title="Super_SmallLightning"><img src="{% static '/icons/Super-fishka/0000001.png' %}"/>
+            <th title="Super_SphereOfFire"><img src="{% static '/icons/Super-fishka/0000006.png' %}"/>
+            <th title="Stone"><img src="{% static '/icons/Stone/El_stone_01.png' %}"/>
+            <th title="Weight"><img src="{% static '/icons/Weaver/Weaver.png' %}"/>
+            <th title="Lamp"><img src="{% static '/icons/Lamp/lamp_lvl2.png' %}"/>
+            <th title="StarBonus"><img src="{% static '/icons/Super-fishka/0000007.png' %}"/>
+            <th title="бокс уровня 1"><img src="{% static '/icons/Caskets/Casket_lvl_01.png' %}"/>
+            <th title="бокс уровня 2"><img src="{% static '/icons/Caskets/Casket_lvl_02.png' %}"/>
+            <th title="бокс уровня 3"><img src="{% static '/icons/Caskets/Casket_lvl_03.png' %}"/>
+            <th title="подложка уровня 1"><img src="{% static '/icons/Pod/Pod-v1_Level_01.png' %}"/>
+            <th title="подложка уровня 2"><img src="{% static '/icons/Pod/Pod-v1_Level_02.png' %}"/>
+            <th title="цепь уровня 1"><img src="{% static '/icons/Chain/chain1.png' %}"/>
+            <th title="Ключ тестировщика">Ключ</th>
+            <th title="Удалить событие">Удалить событие</th>
         </thead>
+
         <tbody>
         {% for event in events %}
             <tr>
@@ -96,20 +85,16 @@
                 <td>{{ event.give_seconds }}</td>
                 <td>{{ event.target1_count_collected }}</td>
                 <td>{{ event.target2_count_collected }}</td>
-                <td>{{ event.target1_count_overflow }}</td>
-                <td>{{ event.target2_count_overflow }}</td>
                 <td>{{ event.first_bonus }}</td>
                 <td>{{ event.second_bonus }}</td>
                 <td>{{ event.third_bonus }}</td>
                 <td>{{ event.game_currency }}</td>
-
                 <td>{{ event.red }}</td>
                 <td>{{ event.yellow }}</td>
                 <td>{{ event.blue }}</td>
                 <td>{{ event.green }}</td>
                 <td>{{ event.white }}</td>
                 <td>{{ event.black }}</td>
-
                 <td>{{ event.Super_FireSpark }}</td>
                 <td>{{ event.Super_FireRing }}</td>
                 <td>{{ event.Super_BigLightning_h }}</td>
@@ -126,89 +111,122 @@
                 <td>{{ event.Carpet_Level1 }}</td>
                 <td>{{ event.Carpet_Level2 }}</td>
                 <td>{{ event.Chain_Level1 }}</td>
-
                 <td title="{{ event.user_name }}" style="max-width: 70px; overflow: hidden">{{ event.user_name }}</td>
-
                 <td><a href="delete?event_id={{ event.level_session_id }}&level_name={{ event.level_name }}">Del</a>
                 </td>
             </tr>
         {% endfor %}
 
+        {% for secret_key_data in list_secret_key_date %}
+            <tr class="secret_key_data">
+
+                <th style="max-width: 70px; overflow: hidden;" title="Сводка {{ secret_key_data.secret_key }}">
+                    Сводка {{ secret_key_data.secret_key }}:
+                </th>
+                <th>---</th>
+                <th>---</th>
+                <th><h4>{{ secret_key_data.diff_time }}</h4></th>
+                <th><h4>{{ secret_key_data.win_game }}</h4></th>
+                <th><h4>{{ secret_key_data.fail_game }}</h4></th>
+                <th><h4>{{ secret_key_data.spent_turn }}</h4>
+                <th><h4>{{ secret_key_data.spent_second }}</h4></th>
+                <th><h4>{{ secret_key_data.left_turn }}</h4></th>
+                <th><h4>{{ secret_key_data.target1_count }}</h4></th>
+                <th><h4>{{ secret_key_data.target2_count }}</h4></th>
+                <th><h4>{{ secret_key_data.give_turn }}</h4></th>
+                <th><h4>{{ secret_key_data.give_second }}</h4></th>
+                <th><h4>{{ secret_key_data.target1_count_collected }}</h4></th>
+                <th><h4>{{ secret_key_data.target2_count_collected }}</h4></th>
+                <th><h4> --- </h4></th>
+                <th><h4> --- </h4></th>
+                <th><h4> --- </h4></th>
+                <th><h4> --- </h4></th>
+                <th><h4>{{ secret_key_data.red }}</h4></th>
+                <th><h4>{{ secret_key_data.yellow }}</h4></th>
+                <th><h4>{{ secret_key_data.blue }}</h4></th>
+                <th><h4>{{ secret_key_data.green }}</h4></th>
+                <th><h4>{{ secret_key_data.white }}</h4></th>
+                <th><h4>{{ secret_key_data.black }}</h4></th>
+                <th><h4>{{ secret_key_data.Super_FireSpark }}</h4></th>
+                <th><h4>{{ secret_key_data.Super_FireRing }}</h4></th>
+                <th><h4>{{ secret_key_data.Super_BigLightning_h }}</h4></th>
+                <th><h4>{{ secret_key_data.Super_BigLightning_v }}</h4></th>
+                <th><h4>{{ secret_key_data.Super_SmallLightning }}</h4></th>
+                <th><h4>{{ secret_key_data.Super_SphereOfFire }}</h4></th>
+                <th><h4>{{ secret_key_data.Stone }}</h4></th>
+                <th><h4>{{ secret_key_data.Weight }}</h4></th>
+                <th><h4>{{ secret_key_data.Lamp }}</h4></th>
+                <th><h4>{{ secret_key_data.StarBonus }}</h4></th>
+                <th><h4>{{ secret_key_data.Box_Level1 }}</h4></th>
+                <th><h4>{{ secret_key_data.Box_Level2 }}</h4></th>
+                <th><h4>{{ secret_key_data.Box_Level3 }}</h4></th>
+                <th><h4>{{ secret_key_data.Carpet_Level1 }}</h4></th>
+                <th><h4>{{ secret_key_data.Carpet_Level2 }}</h4></th>
+                <th><h4>{{ secret_key_data.Chain_Level1 }}</h4></th>
+                <th style="max-width: 70px; overflow: hidden;"><h4> {{ secret_key_data.secret_key }} </h4></th>
+                <th><h4> --- </h4></th>
+
+            </tr>
+        {% endfor %}
 
         <tr>
-        <th title="среднеквадратическое отклонение считается по английским стандартам">Сводка:</th>
-        <th>---</th>
-        <th>---</th>
-        <th title="Среднее значение затраченного времени"><h4>{{ common_data.diff_time }}</h4></th>
-        <th title="Кол-во побед"><h4>{{ common_data.win_game }}</h4></th>
-        <th title="Кол-во поражений"><h4>{{ common_data.fail_game }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение потраченных ходов"><h4>{{ common_data.spent_turn }}</h4>
-        </th>
-        <th title="Медиана ± среднеквадратическое отклонение потраченных секунд"><h4>{{ common_data.spent_second }}</h4>
-        </th>
-        <th title="Медиана ± среднеквадратическое отклонение оставшихся ходов при победе">
-            <h4>{{ common_data.left_turn }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение цели 1"><h4>{{ common_data.target1_count }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение цели 2"><h4>{{ common_data.target2_count }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение ходов"><h4>{{ common_data.give_turn }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение секунд"><h4>{{ common_data.give_second }}</h4></th>
+            <th>Общая сводка:</th>
+            <th>---</th>
+            <th>---</th>
+            <th><h4>{{ common_data.diff_time }}</h4></th>
+            <th><h4>{{ common_data.win_game }}</h4></th>
+            <th><h4>{{ common_data.fail_game }}</h4></th>
+            <th><h4>{{ common_data.spent_turn }}</h4>
+            <th><h4>{{ common_data.spent_second }}</h4></th>
+            <th><h4>{{ common_data.left_turn }}</h4></th>
+            <th><h4>{{ common_data.target1_count }}</h4></th>
+            <th><h4>{{ common_data.target2_count }}</h4></th>
+            <th><h4>{{ common_data.give_turn }}</h4></th>
+            <th><h4>{{ common_data.give_second }}</h4></th>
+            <th><h4>{{ common_data.target1_count_collected }}</h4></th>
+            <th><h4>{{ common_data.target2_count_collected }}</h4></th>
+            <th><h4> --- </h4></th>
+            <th><h4> --- </h4></th>
+            <th><h4> --- </h4></th>
+            <th><h4> --- </h4></th>
+            <th><h4>{{ common_data.red }}</h4></th>
+            <th><h4>{{ common_data.yellow }}</h4></th>
+            <th><h4>{{ common_data.blue }}</h4></th>
+            <th><h4>{{ common_data.green }}</h4></th>
+            <th><h4>{{ common_data.white }}</h4></th>
+            <th><h4>{{ common_data.black }}</h4></th>
+            <th><h4>{{ common_data.Super_FireSpark }}</h4></th>
+            <th><h4>{{ common_data.Super_FireRing }}</h4></th>
+            <th><h4>{{ common_data.Super_BigLightning_h }}</h4></th>
+            <th><h4>{{ common_data.Super_BigLightning_v }}</h4></th>
+            <th><h4>{{ common_data.Super_SmallLightning }}</h4></th>
+            <th><h4>{{ common_data.Super_SphereOfFire }}</h4></th>
+            <th><h4>{{ common_data.Stone }}</h4></th>
+            <th><h4>{{ common_data.Weight }}</h4></th>
+            <th><h4>{{ common_data.Lamp }}</h4></th>
+            <th><h4>{{ common_data.StarBonus }}</h4></th>
+            <th><h4>{{ common_data.Box_Level1 }}</h4></th>
+            <th><h4>{{ common_data.Box_Level2 }}</h4></th>
+            <th><h4>{{ common_data.Box_Level3 }}</h4></th>
+            <th><h4>{{ common_data.Carpet_Level1 }}</h4></th>
+            <th><h4>{{ common_data.Carpet_Level2 }}</h4></th>
+            <th><h4>{{ common_data.Chain_Level1 }}</h4></th>
+            <th><h4> --- </h4></th>
+            <th><h4> --- </h4></th>
 
-        <th title="Медиана ± среднеквадратическое отклонение собраные цели1 при поражении">
-            <h4>{{ common_data.target1_count_collected }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение собраные цели2 при поражении">
-            <h4>{{ common_data.target2_count_collected }}</h4></th>
-        <th><h4>{{ common_data.target1_count_overflow }}</h4></th>
-        <th><h4>{{ common_data.target2_count_overflow }}</h4></th>
-        <th title=""><h4> --- </h4></th>
-        <th title=""><h4> --- </h4></th>
-        <th title=""><h4> --- </h4></th>
-        <th title=""><h4> --- </h4></th>
-
-
-                <th title="Медиана ± среднеквадратическое отклонение красных фишек"><h4>{{ common_data.red }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение желтых фишек"><h4>{{ common_data.yellow }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение синих фишек"><h4>{{ common_data.blue }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение зеленых фишек"><h4>{{ common_data.green }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение белых фишек"><h4>{{ common_data.white }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение черных фишек"><h4>{{ common_data.black }}</h4></th>
-
-        <th title="Медиана ± среднеквадратическое отклонение Super_FireSpark"><h4>{{ common_data.Super_FireSpark }}</h4>
-        </th>
-        <th title="Медиана ± среднеквадратическое отклонение Super_FireRing"><h4>{{ common_data.Super_FireRing }}</h4>
-        </th>
-        <th title="Медиана ± среднеквадратическое отклонение Super_BigLightning_h">
-            <h4>{{ common_data.Super_BigLightning_h }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение Super_BigLightning_v">
-            <h4>{{ common_data.Super_BigLightning_v }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение Super_SmallLightning">
-            <h4>{{ common_data.Super_SmallLightning }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение Super_SphereOfFire">
-            <h4>{{ common_data.Super_SphereOfFire }}</h4></th>
-
-        <th title="Медиана ± среднеквадратическое отклонение Stone"><h4>{{ common_data.Stone }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение Weight"><h4>{{ common_data.Weight }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение Lamp"><h4>{{ common_data.Lamp }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение StarBonus"><h4>{{ common_data.StarBonus }}</h4></th>
-
-
-        <th title="Медиана ± среднеквадратическое отклонение Box_Level1"><h4>{{ common_data.Box_Level1 }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение Box_Level2"><h4>{{ common_data.Box_Level2 }}</h4></th>
-        <th title="Медиана ± среднеквадратическое отклонение Box_Level3"><h4>{{ common_data.Box_Level3 }}</h4></th>
-
-        <th title="Медиана ± среднеквадратическое отклонение Carpet_Level1"><h4>{{ common_data.Carpet_Level1 }}</h4>
-        </th>
-        <th title="Медиана ± среднеквадратическое отклонение Carpet_Level2"><h4>{{ common_data.Carpet_Level2 }}</h4>
-        </th>
-        <th title="Медиана ± среднеквадратическое отклонение Chain_Level1"><h4>{{ common_data.Chain_Level1 }}</h4></th>
-
-               <th title=""><h4> --- </h4></th>
-
-    </tr>
+        </tr>
 
         </tbody>
     </table>
 </div>
-<p> Сложность уровня = {{ common_data.complexity }} %</p>
+<div>
+    <p> Сложность уровня = {{ common_data.complexity }} %</p>
 
+    {% for secret_key_data in list_secret_key_date %}
+        <p> Сложность уровня для секретного ключа: {{ secret_key_data.secret_key }} = {{ secret_key_data.complexity }}
+            %</p>
+
+    {% endfor %}
+</div>
 </body>
 </html>

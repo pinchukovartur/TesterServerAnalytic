@@ -223,7 +223,7 @@ def get_analytic_data(level_name):
         if event.level_info.levelID == level_name:
             level_events.append(event)
 
-    finished_levels = list()
+    finished_events = list()
 
     start_game_events = list()
     target_complete_events = list()
@@ -244,17 +244,40 @@ def get_analytic_data(level_name):
 
         fail_event = get_event(fail_game_events, start_event.level_session_id)
         if fail_event is not None:
-            finished_levels.append(AnalyticEvenData(start_event, fail_event, None, level_name))
+            finished_events.append(AnalyticEvenData(start_event, fail_event, None, level_name))
 
         else:
 
             complete_lvl_event = get_event(level_complete_events, start_event.level_session_id)
             target_event = get_event(target_complete_events, start_event.level_session_id)
             if complete_lvl_event is not None and target_event is not None:
-                finished_levels.append(AnalyticEvenData(start_event, target_event, complete_lvl_event, level_name))
+                finished_events.append(AnalyticEvenData(start_event, target_event, complete_lvl_event, level_name))
             elif target_event is not None:
-                finished_levels.append(AnalyticEvenData(start_event, target_event, None, level_name))
-    return finished_levels, get_totals_data(finished_levels)
+                finished_events.append(AnalyticEvenData(start_event, target_event, None, level_name))
+
+    secret_keys = get_all_secret_key_in_level(finished_events)
+    list_secret_key_date = list()
+    for secret_key in secret_keys:
+        secret_ket_data = get_total_data_by_secret_get(finished_events, secret_key)
+        secret_ket_data["secret_key"] = secret_key
+        list_secret_key_date.append(secret_ket_data)
+
+    return finished_events, get_totals_data(finished_events), list_secret_key_date
+
+
+def get_total_data_by_secret_get(finished_events, secret_key):
+    events = list()
+    for event in finished_events:
+        if secret_key == event.user_name:
+            events.append(event)
+    return get_totals_data(events)
+
+
+def get_all_secret_key_in_level(finished_events):
+    secret_keys = set()
+    for event in finished_events:
+        secret_keys.add(event.user_name)
+    return secret_keys
 
 
 def get_event(events, level_key):
