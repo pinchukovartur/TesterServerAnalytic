@@ -22,7 +22,7 @@ class AnalyticEvenData:
         self.give_turn = 0
         self.give_seconds = 0
 
-        self.left_turn = 0
+        self.left_turn = ''
 
         self.fail_game = 0
         self.win_game = 0
@@ -327,7 +327,7 @@ def _get_diff_time(events):
 def _get_data_for_left_turn(events):
     left_turns = list()
     for row in events:
-        if row.left_turn and row.win_game == "1":
+        if row.left_turn and row.win_game:
             left_turns.append(int(row.left_turn))
     return __get_analytic_data(left_turns)
 
