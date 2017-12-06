@@ -11,148 +11,131 @@
 
     <link rel="stylesheet" href="{% static '/css/level_info.css' %}">
     <script src={% static '/js/level.js' %}></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+
+    <script src="{% static '/js/fixedheadertable.js' %}"></script>
+    <link href="{% static '/css/defaultTheme.css' %}" rel="stylesheet" media="screen"/>
+    <link href="{% static '/css/level_info.css' %}" rel="stylesheet" media="screen"/>
+
 </head>
 <body>
-
-<table class="anal_table">
-    <thead>
-    <tr>
-        <th rowspan="2">№</th>
-        <th rowspan="2" width="500">Старт</th>
-        <th rowspan="2">Финиш</th>
-        <th rowspan="2" title="Затраченое время на прохождение уровня">Затрачено <br> времени</th>
-        <th colspan="2" title="Итог игры">Результат</th>
-        <th colspan="2" title="Затраченные ресурсы">Потрачено</th>
-        <th rowspan="2" title="Остаток ходов">Остаток ходов</th>
-        <th colspan="2" title="Что требовалось собрать">Цели</th>
-        <th colspan="2" title="Сколько дано ходов и секунд">Дано</th>
-        <th colspan="2" title="Сколько было собрано элементов цели">Собрано</th>
-        <th colspan="2" title="Сколько было собрано после выполнения цели">Всего собранно</th>
-        <th rowspan="2" title="Был ли активирован первый бонус">Б№1</th>
-        <th rowspan="2" title="Был ли активирован второй бонус">Б№2</th>
-        <th rowspan="2" title="Был ли активирован третий бонус">Б№3</th>
-        <th rowspan="2" title="Количество собранной игровой валюты(на момент после преобразования всех ходов в бонусы)">
-            Валюты <br> собр.
-        </th>
-
-
-        <th rowspan="2" title="Красные"><img width="30" src="{% static '/icons/Elements/lvl_01/Rubin_001.png' %}"></th>
-        <th rowspan="2" title="Желтые"><img width="30" src="{% static '/icons/Elements/lvl_01/Gold_001.png' %}"></th>
-        <th rowspan="2" title="Синие"><img width="30" src="{% static '/icons/Elements/lvl_01/Water_001.png' %}"></th>
-        <th rowspan="2" title="Зеленые"><img width="30" src="{% static '/icons/Elements/lvl_01/Izumrud_001.png' %}">
-        </th>
-        <th rowspan="2" title="Белые"><img width="30" src="{% static '/icons/Elements/lvl_01/Zhemchug_white.png' %}">
-        </th>
-        <th rowspan="2" title="Черные"><img width="30" src="{% static '/icons/Elements/lvl_01/Zhemchug_black.png' %}">
-        </th>
-        <th rowspan="2" title="Super_FireSpark"><img width="30" src="{% static '/icons/Super-fishka/0000005.png' %}">
-        </th>
-        <th rowspan="2" title="Super_FireRing"><img width="30" src="{% static '/icons/Super-fishka/0000002.png' %}">
-        </th>
-        <th rowspan="2" title="Super_BigLightning_h"><img width="30"
-                                                          src="{% static '/icons/Super-fishka/0000003-2.png' %}"></th>
-        <th rowspan="2" title="Super_BigLightning_v"><img width="30"
-                                                          src="{% static '/icons/Super-fishka/0000003-1.png' %}"></th>
-        <th rowspan="2" title="Super_SmallLightning"><img width="30"
-                                                          src="{% static '/icons/Super-fishka/0000001.png' %}"></th>
-        <th rowspan="2" title="Super_SphereOfFire"><img width="30" src="{% static '/icons/Super-fishka/0000006.png' %}">
-        </th>
-
-        <th rowspan="2" title="Stone"><img width="30" src="{% static '/icons/Stone/El_stone_01.png' %}"></th>
-        <th rowspan="2" title="Weight"><img width="30" src="{% static '/icons/Weaver/Weaver.png' %}"></th>
-        <th rowspan="2" title="Lamp"><img width="30" src="{% static '/icons/Lamp/lamp_lvl2.png' %}"></th>
-        <th rowspan="2" title="StarBonus"><img width="30" src="{% static '/icons/Super-fishka/0000007.png' %}"></th>
-
-        <th rowspan="2" title="бокс уровня 1"><img width="30" src="{% static '/icons/Caskets/Casket_lvl_01.png' %}">
-        </th>
-        <th rowspan="2" title="бокс уровня 2"><img width="30" src="{% static '/icons/Caskets/Casket_lvl_02.png' %}">
-        </th>
-        <th rowspan="2" title="бокс уровня 3"><img width="30" src="{% static '/icons/Caskets/Casket_lvl_03.png' %}">
-        </th>
-        <th rowspan="2" title="подложка уровня 1"><img width="30" src="{% static '/icons/Pod/Pod-v1_Level_01.png' %}">
-        </th>
-        <th rowspan="2" title="подложка уровня 2"><img width="30" src="{% static '/icons/Pod/Pod-v1_Level_02.png' %}">
-        </th>
-        <th rowspan="2" title="цепь уровня 1"><img width="30" src="{% static '/icons/Chain/chain1.png' %}"></th>
-
-        <th rowspan="2" title="Ключ тестировщика">Ключ</th>
-
-        <th rowspan="2" title="Actions">Action</th>
-
-    </tr>
-    <tr>
-        <th>Победа</th>
-        <th>Поражение</th>
-        <th>Ходов</th>
-        <th>Секунд</th>
-        <th>{{ events.0.target1_name }}</th>
-        <th>{{ events.0.target2_name }}</th>
-        <th>Ходов</th>
-        <th>Секунд</th>
-        <th>{{ events.0.target1_name }}</th>
-        <th>{{ events.0.target2_name }}</th>
-        <th>{{ events.0.target1_name }}</th>
-        <th>{{ events.0.target2_name }}</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for event in events %}
+<div style="height:80%; overflow:hidden; border:1px solid black;">
+    <table id="fixed" class="fancyTable">
+        <thead>
         <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ event.start_date|date:"M d, H:m:s" }}</td>
-            <td>{{ event.end_date|date:"M d, H:m:s" }}</td>
-            <td>{{ event.diff_time }}</td>
-            <td>{{ event.win_game }}</td>
-            <td>{{ event.fail_game }}</td>
-            <td>{{ event.spent_turn }}</td>
-            <td>{{ event.spent_second }}</td>
-            <td>{{ event.left_turn }}</td>
-            <td>{{ event.target1_count }}</td>
-            <td>{{ event.target2_count }}</td>
-            <td>{{ event.give_turn }}</td>
-            <td>{{ event.give_seconds }}</td>
-            <td>{{ event.target1_count_collected }}</td>
-            <td>{{ event.target2_count_collected }}</td>
-            <td>{{ event.target1_count_overflow }}</td>
-            <td>{{ event.target2_count_overflow }}</td>
-            <td>{{ event.first_bonus }}</td>
-            <td>{{ event.second_bonus }}</td>
-            <td>{{ event.third_bonus }}</td>
-            <td>{{ event.game_currency }}</td>
+            <th>№</th>
+            <th>Старт</th>
+            <th>Финиш</th>
+            <th title="Затраченое время на прохождение уровня">Затрачено <br> времени</th>
+            <th title="Итог игры">Победа</th>
+            <th title="Итог игры">Поражение</th>
+            <th title="Затраченные ресурсы">Потрачено ходов</th>
+            <th title="Затраченные ресурсы">Потрачено секунд</th>
+            <th title="Остаток ходов">Остаток ходов</th>
+            <th title="Что требовалось собрать">Цель {{ events.0.target1_name }}</th>
+            <th title="Что требовалось собрать">Цель {{ events.0.target2_name }}</th>
+            <th title="Сколько дано ходов и секунд">Дано ходов</th>
+            <th title="Сколько дано ходов и секунд">Дано секунд</th>
+            <th title="Сколько было собрано элементов цели">Собрано 1 цели</th>
+            <th title="Сколько было собрано элементов цели">Собрано 2 цели</th>
+            <th title="Сколько было собрано после выполнения цели">Всего собранно<br>цели 1</th>
+            <th title="Сколько было собрано после выполнения цели">Всего собранно<br>цели 2</th>
 
-            <td>{{ event.red }}</td>
-            <td>{{ event.yellow }}</td>
-            <td>{{ event.blue }}</td>
-            <td>{{ event.green }}</td>
-            <td>{{ event.white }}</td>
-            <td>{{ event.black }}</td>
+            <th title="Был ли активирован первый бонус">Б№1</th>
+            <th title="Был ли активирован второй бонус">Б№2</th>
+            <th title="Был ли активирован третий бонус">Б№3</th>
 
-            <td>{{ event.Super_FireSpark }}</td>
-            <td>{{ event.Super_FireRing }}</td>
-            <td>{{ event.Super_BigLightning_h }}</td>
-            <td>{{ event.Super_BigLightning_v }}</td>
-            <td>{{ event.Super_SmallLightning }}</td>
-            <td>{{ event.Super_SphereOfFire }}</td>
-            <td>{{ event.Stone }}</td>
-            <td>{{ event.Weight }}</td>
-            <td>{{ event.Lamp }}</td>
-            <td>{{ event.StarBonus }}</td>
-            <td>{{ event.Box_Level1 }}</td>
-            <td>{{ event.Box_Level2 }}</td>
-            <td>{{ event.Box_Level3 }}</td>
-            <td>{{ event.Carpet_Level1 }}</td>
-            <td>{{ event.Carpet_Level2 }}</td>
-            <td>{{ event.Chain_Level1 }}</td>
+            <th title="Количество собранной игровой валюты(на момент после преобразования всех ходов в бонусы)">
+                Валюты <br> собр.
+            </th>
 
-            <td title="{{ event.user_name }}" style="max-width: 70px; overflow: hidden">{{ event.user_name }}</td>
+                <th title="Красные"><img src="{% static '/icons/Elements/lvl_01/Rubin_001.png' %}"/>
+                <th title="Желтые"><img src="{% static '/icons/Elements/lvl_01/Gold_001.png' %}"/>
+                <th title="Синие"><img src="{% static '/icons/Elements/lvl_01/Water_001.png' %}"/>
+                <th title="Зеленые"><img src="{% static '/icons/Elements/lvl_01/Izumrud_001.png' %}"/>
+                <th title="Белые"><img src="{% static '/icons/Elements/lvl_01/Zhemchug_white.png' %}">
+                <th title="Черные"><img src="{% static '/icons/Elements/lvl_01/Zhemchug_black.png' %}"/>
+                <th title="Super_FireSpark"><img src="{% static '/icons/Super-fishka/0000005.png' %}"/>
+                <th title="Super_FireRing"><img src="{% static '/icons/Super-fishka/0000002.png' %}"/>
+                <th title="Super_BigLightning_h"><img src="{% static '/icons/Super-fishka/0000003-2.png' %}"/>
+                <th title="Super_BigLightning_v"><img src="{% static '/icons/Super-fishka/0000003-1.png' %}"/>
+                <th title="Super_SmallLightning"><img src="{% static '/icons/Super-fishka/0000001.png' %}"/>
+                <th title="Super_SphereOfFire"><img src="{% static '/icons/Super-fishka/0000006.png' %}"/>
 
-            <td><a href="delete?event_id={{ event.level_session_id }}&level_name={{ event.level_name }}">Del</a>
-            </td>
-        </tr>
-    {% endfor %}
+                <th title="Stone"><img src="{% static '/icons/Stone/El_stone_01.png' %}"/>
+                <th title="Weight"><img src="{% static '/icons/Weaver/Weaver.png' %}"/>
+                <th title="Lamp"><img src="{% static '/icons/Lamp/lamp_lvl2.png' %}"/>
+                <th title="StarBonus"><img src="{% static '/icons/Super-fishka/0000007.png' %}"/>
+                <th title="бокс уровня 1"><img src="{% static '/icons/Caskets/Casket_lvl_01.png' %}"/>
+                <th title="бокс уровня 2"><img src="{% static '/icons/Caskets/Casket_lvl_02.png' %}"/>
+                <th title="бокс уровня 3"><img src="{% static '/icons/Caskets/Casket_lvl_03.png' %}"/>
+                <th title="подложка уровня 1"><img src="{% static '/icons/Pod/Pod-v1_Level_01.png' %}"/>
+                <th title="подложка уровня 2"><img src="{% static '/icons/Pod/Pod-v1_Level_02.png' %}"/>
+                <th title="цепь уровня 1"><img src="{% static '/icons/Chain/chain1.png' %}"/>
+
+            <th rowspan="1" title="Ключ тестировщика">Ключ</th>
+
+            <th rowspan="1" title="Actions">Action</th>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ event.start_date|date:"M d, H:m:s" }}</td>
+                <td>{{ event.end_date|date:"M d, H:m:s" }}</td>
+                <td>{{ event.diff_time }}</td>
+                <td>{{ event.win_game }}</td>
+                <td>{{ event.fail_game }}</td>
+                <td>{{ event.spent_turn }}</td>
+                <td>{{ event.spent_second }}</td>
+                <td>{{ event.left_turn }}</td>
+                <td>{{ event.target1_count }}</td>
+                <td>{{ event.target2_count }}</td>
+                <td>{{ event.give_turn }}</td>
+                <td>{{ event.give_seconds }}</td>
+                <td>{{ event.target1_count_collected }}</td>
+                <td>{{ event.target2_count_collected }}</td>
+                <td>{{ event.target1_count_overflow }}</td>
+                <td>{{ event.target2_count_overflow }}</td>
+                <td>{{ event.first_bonus }}</td>
+                <td>{{ event.second_bonus }}</td>
+                <td>{{ event.third_bonus }}</td>
+                <td>{{ event.game_currency }}</td>
+
+                <td>{{ event.red }}</td>
+                <td>{{ event.yellow }}</td>
+                <td>{{ event.blue }}</td>
+                <td>{{ event.green }}</td>
+                <td>{{ event.white }}</td>
+                <td>{{ event.black }}</td>
+
+                <td>{{ event.Super_FireSpark }}</td>
+                <td>{{ event.Super_FireRing }}</td>
+                <td>{{ event.Super_BigLightning_h }}</td>
+                <td>{{ event.Super_BigLightning_v }}</td>
+                <td>{{ event.Super_SmallLightning }}</td>
+                <td>{{ event.Super_SphereOfFire }}</td>
+                <td>{{ event.Stone }}</td>
+                <td>{{ event.Weight }}</td>
+                <td>{{ event.Lamp }}</td>
+                <td>{{ event.StarBonus }}</td>
+                <td>{{ event.Box_Level1 }}</td>
+                <td>{{ event.Box_Level2 }}</td>
+                <td>{{ event.Box_Level3 }}</td>
+                <td>{{ event.Carpet_Level1 }}</td>
+                <td>{{ event.Carpet_Level2 }}</td>
+                <td>{{ event.Chain_Level1 }}</td>
+
+                <td title="{{ event.user_name }}" style="max-width: 70px; overflow: hidden">{{ event.user_name }}</td>
+
+                <td><a href="delete?event_id={{ event.level_session_id }}&level_name={{ event.level_name }}">Del</a>
+                </td>
+            </tr>
+        {% endfor %}
 
 
-    <tr>
+        <tr>
         <th title="среднеквадратическое отклонение считается по английским стандартам">Сводка:</th>
         <th>---</th>
         <th>---</th>
@@ -180,9 +163,9 @@
         <th title=""><h4> --- </h4></th>
         <th title=""><h4> --- </h4></th>
         <th title=""><h4> --- </h4></th>
-        <th title=""><h4> --- </h4></th>
 
-        <th title="Медиана ± среднеквадратическое отклонение красных фишек"><h4>{{ common_data.red }}</h4></th>
+
+                <th title="Медиана ± среднеквадратическое отклонение красных фишек"><h4>{{ common_data.red }}</h4></th>
         <th title="Медиана ± среднеквадратическое отклонение желтых фишек"><h4>{{ common_data.yellow }}</h4></th>
         <th title="Медиана ± среднеквадратическое отклонение синих фишек"><h4>{{ common_data.blue }}</h4></th>
         <th title="Медиана ± среднеквадратическое отклонение зеленых фишек"><h4>{{ common_data.green }}</h4></th>
@@ -216,13 +199,15 @@
         </th>
         <th title="Медиана ± среднеквадратическое отклонение Carpet_Level2"><h4>{{ common_data.Carpet_Level2 }}</h4>
         </th>
-
         <th title="Медиана ± среднеквадратическое отклонение Chain_Level1"><h4>{{ common_data.Chain_Level1 }}</h4></th>
+
+               <th title=""><h4> --- </h4></th>
+
     </tr>
 
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
 <p> Сложность уровня = {{ common_data.complexity }} %</p>
 
 </body>
