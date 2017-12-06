@@ -145,12 +145,12 @@ class AnalyticEvenData:
             if start_event.level_info.firstTarget:
                 target1_name = start_event.level_info.firstTarget["m_type"]
                 if target1_name:
-                    self.target1_name = target1_name
+                    self.target1_name = str(target1_name).replace("Color6:", "")
 
             if start_event.level_info.secondTarget:
                 target2_name = start_event.level_info.secondTarget["m_type"]
                 if target2_name:
-                    self.target2_name = target2_name
+                    self.target2_name = str(target2_name).replace("Color6:", "")
             if start_event.level_info.firstTarget:
                 target1_count = start_event.level_info.firstTarget["m_required"]
                 if target1_count:

@@ -1,31 +1,80 @@
-body
-{
-width: 100%;
-}
+body{
+  font:1.2em normal Arial,sans-serif;
+  color:#34495E;
+  width: 100%;
 
-table
-{
 
 }
 
-/*tittle*/
-th{
-    color: black;
-    font-size: 68%;
-    font-weight: bold;
+h1{
+  text-align:center;
+  text-transform:uppercase;
+  letter-spacing:-2px;
+  font-size:2.5em;
+  margin:20px 0;
 }
 
-/*event_data*/
-td
-{
-    font-size: 75%;
-    color: #010c41;
+.container{
+
+  width:100%;
+  margin:auto;
+  overflow: scroll;
 }
 
-/*common*/
-h4
-{
-    color: #8d1118;
-    font-size: 85%;
-    font-weight: bold;
+table{
+  border-collapse:collapse;
+  width:90%;
+  table-layout: inherit;
+}
+
+
+.anal_table{
+  border:2px solid #ffffff;
+}
+
+.anal_table thead{
+  background: #ffffff;
+}
+
+thead{
+  color:black;
+}
+
+tr > th{
+  font-size: 12px;
+  outline: grey solid 1px;
+}
+
+th,td{
+
+  text-align:center;
+
+
+}
+
+tbody tr:nth-child(even){
+  background:#ECF0F1;
+
+}
+
+tbody tr:hover{
+background:#BDC3C7;
+  color:#FFFFFF;
+
+}
+
+.fixed{
+  top:0;
+  position:fixed;
+  width:auto;
+  display:none;
+  border:none;
+}
+
+.scrollMore{
+  margin-top:600px;
+}
+
+.up{
+  cursor:pointer;
 }
