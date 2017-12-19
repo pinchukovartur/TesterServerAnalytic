@@ -40,6 +40,7 @@
             <th title="Был ли активирован первый бонус">Б№1</th>
             <th title="Был ли активирован второй бонус">Б№2</th>
             <th title="Был ли активирован третий бонус">Б№3</th>
+            <th title="Molot">Molotok</th>
             <th title="Собранной игровой валюты(на момент после преобразования всех ходов)">Валюты<br>собр.</th>
             <th title="Красные"><img src="{% static '/icons/Elements/lvl_01/Rubin_001.png' %}"/>
             <th title="Желтые"><img src="{% static '/icons/Elements/lvl_01/Gold_001.png' %}"/>
@@ -88,6 +89,7 @@
                 <td>{{ event.first_bonus }}</td>
                 <td>{{ event.second_bonus }}</td>
                 <td>{{ event.third_bonus }}</td>
+                <td>{{ event.countUseBombBonys }}</td>
                 <td>{{ event.game_currency }}</td>
                 <td>{{ event.red }}</td>
                 <td>{{ event.yellow }}</td>
@@ -140,6 +142,7 @@
                 <th><h4> --- </h4></th>
                 <th><h4> --- </h4></th>
                 <th><h4> --- </h4></th>
+                <th><h4> {{ common_data.countUseBombBonys }} </h4></th>
                 <th><h4> --- </h4></th>
                 <th><h4>{{ secret_key_data.red }}</h4></th>
                 <th><h4>{{ secret_key_data.yellow }}</h4></th>
@@ -188,6 +191,7 @@
             <th><h4> --- </h4></th>
             <th><h4> --- </h4></th>
             <th><h4> --- </h4></th>
+            <th><h4> {{ common_data.countUseBombBonys }} </h4></th>
             <th><h4> --- </h4></th>
             <th><h4>{{ common_data.red }}</h4></th>
             <th><h4>{{ common_data.yellow }}</h4></th>

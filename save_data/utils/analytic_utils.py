@@ -39,6 +39,8 @@ class AnalyticEvenData:
         # self.target1_count_overflow = ""
         # self.target2_count_overflow = ""
 
+        self.countUseBombBonys = 0
+
         self.diff_time = ""
         self.user_name = ""
 
@@ -178,6 +180,9 @@ class AnalyticEvenData:
             self.user_name = start_event.level_info.userName
 
         if finish_event:
+            if finish_event.level_info:
+                self.countUseBombBonys = finish_event.level_info.countUseBombBonys
+
             spent_turn = int(finish_event.level_info.turns)
             if spent_turn > 0:
                 self.spent_turn = spent_turn

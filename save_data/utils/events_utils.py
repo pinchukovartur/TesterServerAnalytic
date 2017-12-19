@@ -24,6 +24,7 @@ class LevelInfo:
             self.thirdBonus = ""
             self.userName = ""
             self.gameCurrency = ""
+            self.countUseBombBonys = ""
             if "m_gameCurrencyCount" in json_data.keys():
                 self.gameCurrency = json_data["m_gameCurrencyCount"]
             if "m_firstBonus" in json_data.keys():
@@ -34,6 +35,9 @@ class LevelInfo:
                 self.thirdBonus = json_data["m_thirdBonus"]
             if "m_userName" in json_data.keys():
                 self.userName = json_data["m_userName"]
+            if "m_countUseBombBonys" in json_data.keys():
+                self.countUseBombBonys = json_data["m_countUseBombBonys"]
+
 
 
 class GameComponents:
