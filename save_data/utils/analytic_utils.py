@@ -201,7 +201,8 @@ class AnalyticEvenData:
 
         if lvl_end_event:
             game_currency = lvl_end_event.level_info.gameCurrency
-            if game_currency:
+            print (game_currency)
+            if game_currency or game_currency == 0:
                 self.game_currency = game_currency
 
         if self.start_date and self.end_date:
