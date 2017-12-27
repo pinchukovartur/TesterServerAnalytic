@@ -1,4 +1,4 @@
-from save_data.utils.events_utils import get_events
+from save_data.utils.events_utils import get_events, get_event_by_session_key
 from numpy import var, median
 import datetime
 
@@ -248,14 +248,14 @@ def get_analytic_data(level_name):
 
     for start_event in start_game_events:
 
-        fail_event = get_event(fail_game_events, start_event.level_session_id)
+        fail_event = get_event_by_session_key(fail_game_events, start_event.level_session_id)
         if fail_event is not None:
             finished_events.append(AnalyticEvenData(start_event, fail_event, None, level_name))
 
         else:
 
-            complete_lvl_event = get_event(level_complete_events, start_event.level_session_id)
-            target_event = get_event(target_complete_events, start_event.level_session_id)
+            complete_lvl_event = get_event_by_session_key(level_complete_events, start_event.level_session_id)
+            target_event = get_event_by_session_key(target_complete_events, start_event.level_session_id)
             if complete_lvl_event is not None and target_event is not None:
                 finished_events.append(AnalyticEvenData(start_event, target_event, complete_lvl_event, level_name))
             elif target_event is not None:
@@ -286,11 +286,6 @@ def get_all_secret_key_in_level(finished_events):
     return secret_keys
 
 
-def get_event(events, level_key):
-    for event in events:
-        if event.level_session_id == level_key:
-            return event
-    return None
 
 
 def get_totals_data(analytic_data):

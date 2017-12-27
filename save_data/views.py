@@ -8,7 +8,7 @@ from django.shortcuts import render
 
 from save_data.utils.db_utils import insert, delete
 from save_data.utils.events_utils import get_events, sort_by_key_event, sort_by_event_datetime, \
-    delete_copy_event_with_big_date, sort_by_date_time
+    delete_copy_event_with_big_date, sort_by_date_time, get_count_exit_game
 
 from save_data.utils.analytic_utils import get_analytic_data
 
@@ -33,6 +33,7 @@ def save_data(request):
 
 
 def index(request):
+    levels = get_count_exit_game()
     return render(request, 'analytic_data/index.html')
 
 
@@ -54,7 +55,6 @@ def delete_events(request):
     if event_id == "" or level_name == "":
         return HttpResponse("event_id or level_name cannot be null")
     delete(event_id)
-    print(level_name)
     return redirect("/levels.html/level.html?level_name=" + level_name)
 
 
@@ -63,6 +63,7 @@ def sort_levels(request):
 
     until_date = request.GET.get('until', "12/12/3012 0:00 PM")
     from_date = request.GET.get('from', "12/12/2012 0:00 PM")
+
 
     return render(request, 'analytic_data/levels.html',
                   {'levels': sort_by_date_time(from_date, until_date, set_level_info)})
@@ -78,5 +79,9 @@ def get_level(request):
     if len(analytic_data) == 0:
         return HttpResponse("Level Event Not Found")
 
+    level_info = get_count_exit_game(level_name)
+
+
     return render(request, 'analytic_data/level.html', {'events': analytic_data, "common_data": total_data,
-                                                        "list_secret_key_date": list_secret_key_date})
+                                                        "list_secret_key_date": list_secret_key_date,
+                                                        "level_info": level_info})

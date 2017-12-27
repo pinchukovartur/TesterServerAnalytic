@@ -39,7 +39,6 @@ class LevelInfo:
                 self.countUseBombBonys = json_data["m_countUseBombBonys"]
 
 
-
 class GameComponents:
     def __init__(self, game_component):
         self.Color6_Red = 0
@@ -231,6 +230,36 @@ def delete_copy_event_with_big_date(events):
     return level_date
 
 
+def get_levels_with_min_date():
+    levels = get_levels()
+
+    for key in levels.keys():
+
+        data = 0
+
+        for event in levels[key]:
+            if event.level_info.levelID in data:
+                if data > event.event_datetime:
+                    data = {event.event_datetime, 0}
+            else:
+                data = (event.event_datetime, 0)
+
+        tmp = list()
+        tmp.append(levels[key])
+        tmp.append(data)
+
+        levels[key] = tmp
+
+    return levels
+
+
+def get_event_by_session_key(events, level_key):
+    for event in events:
+        if event.level_session_id == level_key:
+            return event
+    return None
+
+
 def sort_by_date_time(from_date, until_date, set_level_info):
     if from_date:
         from_date = datetime.datetime.strptime(str(from_date), "%m/%d/%Y %H:%M %p")
@@ -250,3 +279,66 @@ def sort_by_date_time(from_date, until_date, set_level_info):
                 sort_levels.append(value)
         set_level_info = sort_levels
     return set_level_info
+
+
+def get_event_by_lvl_name(lvl_name):
+    events = get_events()
+    lvl_events = list()
+    for event in events:
+        if event.level_info.levelID == lvl_name:
+            lvl_events.append(event)
+
+    return lvl_events
+
+
+def get_levels():
+    levels = dict()
+    events = get_events()
+    for event in events:
+        if event.level_info.levelID in levels:
+            levels[event.level_info.levelID].append(event)
+        else:
+            levels[event.level_info.levelID] = list()
+            levels[event.level_info.levelID].append(event)
+
+    return levels
+
+
+def get_count_exit_game(level_name):
+    levels = get_levels()
+
+    if level_name not in levels.keys():
+        return None
+
+    exit_count = 0
+
+    without_finish = 0
+
+    start_game_events = list()
+    target_complete_events = list()
+    level_complete_events = list()
+    fail_game_events = list()
+
+    for lvl_event in levels[level_name]:
+            if lvl_event.key_event == "startgame":
+                start_game_events.append(lvl_event)
+            elif lvl_event.key_event == "failgame":
+                fail_game_events.append(lvl_event)
+            elif lvl_event.key_event == "completegame":
+                target_complete_events.append(lvl_event)
+            elif lvl_event.key_event == "finishlevel":
+                level_complete_events.append(lvl_event)
+
+    for start_event in start_game_events:
+
+        fail_event = get_event_by_session_key(fail_game_events, start_event.level_session_id)
+        if fail_event is None:
+            target_complete_event = get_event_by_session_key(target_complete_events, start_event.level_session_id)
+            if target_complete_event is None:
+                exit_count += 1
+
+        complete_event = get_event_by_session_key(level_complete_events, start_event.level_session_id)
+        if complete_event is None and fail_event is None:
+            without_finish += 1
+
+    return level_name, exit_count, without_finish - exit_count
