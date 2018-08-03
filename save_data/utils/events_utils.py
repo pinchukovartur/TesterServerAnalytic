@@ -12,7 +12,7 @@ class LevelInfo:
             self.levelID = json_data["m_levelID"]
             self.firstTarget = json_data["m_firstTarget"]
             self.secondTarget = json_data["m_secondTarget"]
-            self.seconds = json_data["m_seconds"]
+            self.seconds = '-1'#json_data["m_seconds"] //nikolayku; time was removed from games
             self.turns = json_data["m_turns"]
 
             self.game_components = ""

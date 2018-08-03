@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
 import mysql.connector
+import datetime
 
 # the method return user script
 from django.views.decorators.csrf import csrf_exempt
@@ -33,7 +34,6 @@ def save_data(request):
 
 
 def index(request):
-    levels = get_count_exit_game()
     return render(request, 'analytic_data/index.html')
 
 
