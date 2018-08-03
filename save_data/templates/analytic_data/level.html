@@ -67,7 +67,12 @@
             <th title="бокс уровня 3"><img src="{% static '/icons/Caskets/Casket_lvl_03.png' %}"/>
             <th title="подложка уровня 1"><img src="{% static '/icons/Pod/Pod-v1_Level_01.png' %}"/>
             <th title="подложка уровня 2"><img src="{% static '/icons/Pod/Pod-v1_Level_02.png' %}"/>
-            <th title="цепь уровня 1"><img src="{% static '/icons/Chain/chain1.png' %}"/>
+            <th title="Цепь уровня 1"><img src="{% static '/icons/Chain/chain1.png' %}"/>
+            <th title="Хрустальный шар"><img src="{% static '/icons/Hrustal-shar_00.png' %}"/>
+            <th title="Алмаз уровня 1"><img src="{% static '/icons/diamondLevel1.PNG' %}"/>
+            <th title="Алмаз уровня 2"><img src="{% static '/icons/diamondLevel2.PNG' %}"/>
+            <th title="Алмаз уровня 3"><img src="{% static '/icons/diamondLevel3.PNG' %}"/>
+            <th title="Песок"><img src="{% static '/icons/simpleSand.png' %}"/>
             <th title="Ключ тестировщика">Ключ</th>
             <th title="Удалить событие">Удалить событие</th>
         </thead>
@@ -117,6 +122,11 @@
                 <td>{{ event.Carpet_Level1 }}</td>
                 <td>{{ event.Carpet_Level2 }}</td>
                 <td>{{ event.Chain_Level1 }}</td>
+                <td>{{ event.CrystalBall }}</td>
+                <td>{{ event.Diamond_Level1 }}</td>
+                <td>{{ event.Diamond_Level2 }}</td>
+                <td>{{ event.Diamond_Level3 }}</td>
+                <td>{{ event.Sand }}</td>
                 <td title="{{ event.user_name }}" style="max-width: 70px; overflow: hidden">{{ event.user_name }}</td>
                 <td><a href="delete?event_id={{ event.level_session_id }}&level_name={{ event.level_name }}">Del</a>
                 </td>
@@ -170,6 +180,11 @@
                 <th><h4>{{ secret_key_data.Carpet_Level1 }}</h4></th>
                 <th><h4>{{ secret_key_data.Carpet_Level2 }}</h4></th>
                 <th><h4>{{ secret_key_data.Chain_Level1 }}</h4></th>
+                <th><h4>{{ secret_key_data.CrystalBall }}</h4></th>
+                <th><h4>{{ secret_key_data.Diamond_Level1 }}</h4></th>
+                <th><h4>{{ secret_key_data.Diamond_Level2 }}</h4></th>
+                <th><h4>{{ secret_key_data.Diamond_Level3 }}</h4></th>
+                <th><h4>{{ secret_key_data.Sand }}</h4></th>
                 <th style="max-width: 70px; overflow: hidden;"><h4> {{ secret_key_data.secret_key }} </h4></th>
                 <th><h4> --- </h4></th>
 
@@ -219,6 +234,11 @@
             <th><h4>{{ common_data.Carpet_Level1 }}</h4></th>
             <th><h4>{{ common_data.Carpet_Level2 }}</h4></th>
             <th><h4>{{ common_data.Chain_Level1 }}</h4></th>
+            <th><h4>{{ common_data.CrystalBall }}</h4></th>
+            <th><h4>{{ common_data.Diamond_Level1 }}</h4></th>
+            <th><h4>{{ common_data.Diamond_Level2 }}</h4></th>
+            <th><h4>{{ common_data.Diamond_Level3 }}</h4></th>
+            <th><h4>{{ common_data.Sand }}</h4></th>
             <th><h4> --- </h4></th>
             <th><h4> --- </h4></th>
 

@@ -60,6 +60,8 @@ class GameComponents:
         self.Lamp = 0
         self.Balloon = 0
         self.StarBonus = 0
+        self.CrystalBall = 0
+        self.Sand = 0
 
         self.Box_Level1 = 0
         self.Box_Level2 = 0
@@ -72,6 +74,10 @@ class GameComponents:
         self.Chain_Level1 = 0
         self.Chain_Level2 = 0
         self.Chain_Level3 = 0
+
+        self.Diamond_Level1 = 0
+        self.Diamond_Level2 = 0
+        self.Diamond_Level3 = 0
 
         if "Color6_Red" in game_component.keys():
             Color6_Red = game_component["Color6_Red"]
@@ -126,6 +132,19 @@ class GameComponents:
             Super_SphereOfFire = game_component["Super_SphereOfFire"]
             if Super_SphereOfFire:
                 self.Super_SphereOfFire = Super_SphereOfFire
+
+        if "Diamond_Level1" in game_component.keys():
+            Diamond_Level1 = game_component["Diamond_Level1"]
+            if Diamond_Level1:
+                self.Diamond_Level1 = Diamond_Level1
+        if "Diamond_Level2" in game_component.keys():
+            Diamond_Level2 = game_component["Diamond_Level2"]
+            if Diamond_Level2:
+                self.Diamond_Level2 = Diamond_Level2
+        if "Diamond_Level3" in game_component.keys():
+            Diamond_Level3 = game_component["Diamond_Level3"]
+            if Diamond_Level3:
+                self.Diamond_Level3 = Diamond_Level3
 
         if "Box_Level1" in game_component.keys():
             Box_Level1 = game_component["Box_Level1"]
@@ -185,7 +204,15 @@ class GameComponents:
         if "StarBonus" in game_component.keys():
             StarBonus = game_component["StarBonus"]
             if StarBonus:
-                self.Color6_Black = StarBonus
+                self.StarBonus = StarBonus
+        if "CrystalBall" in game_component.keys():
+            CrystalBall = game_component["CrystalBall"]
+            if CrystalBall:
+                self.CrystalBall = CrystalBall
+        if "Sand" in game_component.keys():
+            Sand = game_component["Sand"]
+            if Sand:
+                self.Sand = Sand
 
 
 class Event:

@@ -63,6 +63,8 @@ class AnalyticEvenData:
         self.Lamp = 0
         self.Balloon = 0
         self.StarBonus = 0
+        self.CrystalBall = 0
+        self.Sand = 0
 
         self.Box_Level1 = 0
         self.Box_Level2 = 0
@@ -75,6 +77,10 @@ class AnalyticEvenData:
         self.Chain_Level1 = 0
         self.Chain_Level2 = 0
         self.Chain_Level3 = 0
+
+        self.Diamond_Level1 = 0
+        self.Diamond_Level2 = 0
+        self.Diamond_Level3 = 0
 
         if finish_event.level_info.game_components:
             if str(finish_event.level_info.game_components.Color6_Red):
@@ -113,6 +119,17 @@ class AnalyticEvenData:
                 self.Balloon = int(finish_event.level_info.game_components.Balloon)
             if str(finish_event.level_info.game_components.StarBonus):
                 self.StarBonus = int(finish_event.level_info.game_components.StarBonus)
+            if str(finish_event.level_info.game_components.CrystalBall):
+                self.CrystalBall = int(finish_event.level_info.game_components.CrystalBall)
+            if str(finish_event.level_info.game_components.Sand):
+                self.Sand = int(finish_event.level_info.game_components.Sand)
+
+            if str(finish_event.level_info.game_components.Diamond_Level1):
+                self.Diamond_Level1 = int(finish_event.level_info.game_components.Diamond_Level1)
+            if str(finish_event.level_info.game_components.Diamond_Level2):
+                self.Diamond_Level2 = int(finish_event.level_info.game_components.Diamond_Level2)
+            if str(finish_event.level_info.game_components.Diamond_Level3):
+                self.Diamond_Level3 = int(finish_event.level_info.game_components.Diamond_Level3)
 
             if str(finish_event.level_info.game_components.Box_Level1):
                 self.Box_Level1 = int(finish_event.level_info.game_components.Box_Level1)
