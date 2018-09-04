@@ -46,7 +46,31 @@ def __get_sorted_levels():
 
 def get_list_levels(request):
     set_level_info = __get_sorted_levels()
-    return render(request, 'analytic_data/levels.html', {'levels': set_level_info})
+    #set_level_info = sorted(set_level_info, key=lambda x: x[0])
+    date_type = "rev"
+    name_type = "simple"
+    if "sort" in request.GET.keys():
+        sort = request.GET["sort"]
+
+        if sort == "date":
+            if "type" in request.GET.keys():
+                date_type = request.GET["type"]
+                if date_type == "rev":
+                    set_level_info = reversed(set_level_info)
+                    date_type = "simple"
+                else:
+                    date_type = "rev"
+        if sort == "name":
+            if "type" in request.GET.keys():
+                name_type = request.GET["type"]
+                if name_type == "rev":
+                    set_level_info = reversed(sorted(set_level_info, key=lambda x: x[0]))
+                    name_type = "simple"
+                else:
+                    name_type = "rev"
+                    set_level_info = sorted(set_level_info, key=lambda x: x[0])
+
+    return render(request, 'analytic_data/levels.html', {'levels': set_level_info, "date_type": date_type,  "name_type": name_type})
 
 
 def delete_events(request):

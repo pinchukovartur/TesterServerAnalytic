@@ -70,13 +70,13 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Level Name</th>
-                    <th>Date</th>
+                    <th> <a href="/levels.html?sort=name&type={{ name_type }}">Level Name</a> </th>
+                    <th> <a href="/levels.html?sort=date&type={{ date_type }}">Date</a> </th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for value in levels reversed %}
+                {% for value in levels %}
                     <tr>
                         <th>{{ value.0 }}</th>
                         <th>{{ value.1 }}</th>
