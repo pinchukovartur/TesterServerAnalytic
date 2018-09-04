@@ -82,6 +82,12 @@ class AnalyticEvenData:
         self.Diamond_Level2 = 0
         self.Diamond_Level3 = 0
 
+        self.Granite_Level1 = 0
+        self.Granite_Level2 = 0
+
+        self.Ice_Level1 = 0
+        self.Ice_Level2 = 0
+
         if finish_event.level_info.game_components:
             if str(finish_event.level_info.game_components.Color6_Red):
                 self.red = int(finish_event.level_info.game_components.Color6_Red)
@@ -151,6 +157,15 @@ class AnalyticEvenData:
                 self.Chain_Level2 = int(finish_event.level_info.game_components.Chain_Level2)
             if str(finish_event.level_info.game_components.Chain_Level3):
                 self.Chain_Level3 = int(finish_event.level_info.game_components.Chain_Level3)
+
+            if str(finish_event.level_info.game_components.Granite_Level1):
+                self.Granite_Level1 = int(finish_event.level_info.game_components.Granite_Level1)
+            if str(finish_event.level_info.game_components.Granite_Level2):
+                self.Granite_Level2 = int(finish_event.level_info.game_components.Granite_Level2)
+            if str(finish_event.level_info.game_components.Ice_Level1):
+                self.Ice_Level1 = int(finish_event.level_info.game_components.Ice_Level1)
+            if str(finish_event.level_info.game_components.Ice_Level2):
+                self.Ice_Level2 = int(finish_event.level_info.game_components.Ice_Level2)
 
         if start_event:
 

@@ -73,6 +73,10 @@
             <th title="Алмаз уровня 2"><img src="{% static '/icons/diamondLevel2.PNG' %}"/>
             <th title="Алмаз уровня 3"><img src="{% static '/icons/diamondLevel3.PNG' %}"/>
             <th title="Песок"><img src="{% static '/icons/simpleSand.png' %}"/>
+            <th title="Гранит уровня 1"><img src="{% static '/icons/Betonplita_02.png' %}"/>
+            <th title="Гранит уровня 2"><img src="{% static '/icons/Betonplita_01.png' %}"/>
+            <th title="Лед уровня 1"><img src="{% static '/icons/Hrustal_lvl01-01.png' %}"/>
+            <th title="Лед уровня 2"><img src="{% static '/icons/Hrustal_lvl2.png' %}"/>
             <th title="Ключ тестировщика">Ключ</th>
             <th title="Удалить событие">Удалить событие</th>
         </thead>
@@ -127,6 +131,10 @@
                 <td>{{ event.Diamond_Level2 }}</td>
                 <td>{{ event.Diamond_Level3 }}</td>
                 <td>{{ event.Sand }}</td>
+                <td>{{ event.Granite_Level1 }}</td>
+                <td>{{ event.Granite_Level2 }}</td>
+                <td>{{ event.Ice_Level1 }}</td>
+                <td>{{ event.Ice_Level2 }}</td>
                 <td title="{{ event.user_name }}" style="max-width: 70px; overflow: hidden">{{ event.user_name }}</td>
                 <td><a href="delete?event_id={{ event.level_session_id }}&level_name={{ event.level_name }}">Del</a>
                 </td>
@@ -185,6 +193,10 @@
                 <th><h4>{{ secret_key_data.Diamond_Level2 }}</h4></th>
                 <th><h4>{{ secret_key_data.Diamond_Level3 }}</h4></th>
                 <th><h4>{{ secret_key_data.Sand }}</h4></th>
+                <th><h4>{{ secret_key_data.Granite_Level1 }}</h4></th>
+                <th><h4>{{ secret_key_data.Granite_Level2 }}</h4></th>
+                <th><h4>{{ secret_key_data.Ice_Level1 }}</h4></th>
+                <th><h4>{{ secret_key_data.Ice_Level2 }}</h4></th>
                 <th style="max-width: 70px; overflow: hidden;"><h4> {{ secret_key_data.secret_key }} </h4></th>
                 <th><h4> --- </h4></th>
 
@@ -239,6 +251,10 @@
             <th><h4>{{ common_data.Diamond_Level2 }}</h4></th>
             <th><h4>{{ common_data.Diamond_Level3 }}</h4></th>
             <th><h4>{{ common_data.Sand }}</h4></th>
+            <th><h4>{{ common_data.Granite_Level1 }}</h4></th>
+            <th><h4>{{ common_data.Granite_Level2 }}</h4></th>
+            <th><h4>{{ common_data.Ice_Level1 }}</h4></th>
+            <th><h4>{{ common_data.Ice_Level2 }}</h4></th>
             <th><h4> --- </h4></th>
             <th><h4> --- </h4></th>
 

@@ -79,6 +79,12 @@ class GameComponents:
         self.Diamond_Level2 = 0
         self.Diamond_Level3 = 0
 
+        self.Granite_Level1 = 0
+        self.Granite_Level2 = 0
+
+        self.Ice_Level1 = 0
+        self.Ice_Level2 = 0
+
         if "Color6_Red" in game_component.keys():
             Color6_Red = game_component["Color6_Red"]
             if Color6_Red:
@@ -213,6 +219,24 @@ class GameComponents:
             Sand = game_component["Sand"]
             if Sand:
                 self.Sand = Sand
+
+        if "Granite_Level1" in game_component.keys():
+            Granite_Level1 = game_component["Granite_Level1"]
+            if Granite_Level1:
+                self.Granite_Level1 = Granite_Level1
+        if "Granite_Level2" in game_component.keys():
+            Granite_Level2 = game_component["Granite_Level2"]
+            if Granite_Level2:
+                self.Granite_Level2 = Granite_Level2
+
+        if "Ice_Level1" in game_component.keys():
+            Ice_Level1 = game_component["Ice_Level1"]
+            if Ice_Level1:
+                self.Ice_Level1 = Ice_Level1
+        if "Ice_Level2" in game_component.keys():
+            Ice_Level2 = game_component["Ice_Level2"]
+            if Ice_Level2:
+                self.Ice_Level2 = Ice_Level2
 
 
 class Event:
