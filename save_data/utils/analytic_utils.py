@@ -233,7 +233,6 @@ class AnalyticEvenData:
 
         if lvl_end_event:
             game_currency = lvl_end_event.level_info.gameCurrency
-            print (game_currency)
             if game_currency or game_currency == 0:
                 self.game_currency = game_currency
 
@@ -308,6 +307,7 @@ def get_total_data_by_secret_get(finished_events, secret_key):
     for event in finished_events:
         if secret_key == event.user_name:
             events.append(event)
+
     return get_totals_data(events)
 
 
@@ -316,8 +316,6 @@ def get_all_secret_key_in_level(finished_events):
     for event in finished_events:
         secret_keys.add(event.user_name)
     return secret_keys
-
-
 
 
 def get_totals_data(analytic_data):
@@ -336,12 +334,39 @@ def get_totals_data(analytic_data):
                     result_dict[attribute] = _get_data_for_left_turn(analytic_data)
                 elif attribute == "fail_game" or attribute == "win_game":
                     result_dict[attribute] = _get_count_analytic_data(analytic_data, attribute)
+                elif attribute == "game_currency":
+                    result_dict[attribute] = _get_analytic_data_by_list_events(analytic_data, attribute) + ", " + \
+                                             _get_sred_arefmetic(analytic_data, attribute)
                 else:
                     result_dict[attribute] = _get_analytic_data_by_list_events(analytic_data, attribute)
 
     result_dict["complexity"] = _get_complexity(analytic_data)
-
     return result_dict
+
+
+def _get_sred_arefmetic(analytic_data, attr, is_only_win=True):
+    sum = 0
+    count = 0
+
+    for row in analytic_data:
+        if is_only_win:
+            if row.win_game == 1:
+                if not str(row.game_currency).isdigit():
+                    count += 1
+                else:
+                    sum += int(row.game_currency)
+                    count += 1
+        else:
+            if not str(row.game_currency).isdigit():
+                count += 1
+            else:
+                sum += int(row.game_currency)
+                count += 1
+
+    if sum == 0 or count == 0:
+        return ""
+
+    return str(sum / count)
 
 
 def __get_class_attributes(cls):

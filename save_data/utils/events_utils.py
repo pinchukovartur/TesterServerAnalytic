@@ -85,6 +85,16 @@ class GameComponents:
         self.Ice_Level1 = 0
         self.Ice_Level2 = 0
 
+        self.ChipMoves = 0
+
+        self.MultiStoneLevel1 = 0
+        self.MultiStoneLevel2 = 0
+        self.MultiStoneLevel3 = 0
+
+        self.Bear = 0
+
+        self.GunShot = 0
+
         if "Color6_Red" in game_component.keys():
             Color6_Red = game_component["Color6_Red"]
             if Color6_Red:
