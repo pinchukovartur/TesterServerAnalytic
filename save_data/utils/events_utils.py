@@ -85,14 +85,12 @@ class GameComponents:
         self.Ice_Level1 = 0
         self.Ice_Level2 = 0
 
-        self.ChipMoves = 0
-
         self.MultiStoneLevel1 = 0
         self.MultiStoneLevel2 = 0
         self.MultiStoneLevel3 = 0
 
         self.Bear = 0
-
+        self.ChipMoves = 0
         self.GunShot = 0
 
         if "Color6_Red" in game_component.keys():
@@ -247,6 +245,32 @@ class GameComponents:
             Ice_Level2 = game_component["Ice_Level2"]
             if Ice_Level2:
                 self.Ice_Level2 = Ice_Level2
+
+        if "MultiStoneLevel1" in game_component.keys():
+            MultiStoneLevel1 = game_component["MultiStoneLevel1"]
+            if MultiStoneLevel1:
+                self.MultiStoneLevel1 = MultiStoneLevel1
+        if "MultiStoneLevel2" in game_component.keys():
+            MultiStoneLevel2 = game_component["MultiStoneLevel2"]
+            if MultiStoneLevel2:
+                self.MultiStoneLevel2 = MultiStoneLevel2
+        if "MultiStoneLevel3" in game_component.keys():
+            MultiStoneLevel3 = game_component["MultiStoneLevel3"]
+            if MultiStoneLevel3:
+                self.MultiStoneLevel3 = MultiStoneLevel3
+
+        if "Bear" in game_component.keys():
+            Bear = game_component["Bear"]
+            if Bear:
+                self.Bear = Bear
+        if "ChipMoves" in game_component.keys():
+            ChipMoves = game_component["ChipMoves"]
+            if ChipMoves:
+                self.ChipMoves = ChipMoves
+        if "GunShot" in game_component.keys():
+            GunShot = game_component["GunShot"]
+            if GunShot:
+                self.GunShot = GunShot
 
 
 class Event:

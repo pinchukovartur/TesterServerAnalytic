@@ -88,6 +88,14 @@ class AnalyticEvenData:
         self.Ice_Level1 = 0
         self.Ice_Level2 = 0
 
+        self.MultiStoneLevel1 = 0
+        self.MultiStoneLevel2 = 0
+        self.MultiStoneLevel3 = 0
+
+        self.Bear = 0
+        self.ChipMoves = 0
+        self.GunShot = 0
+
         if finish_event.level_info.game_components:
             if str(finish_event.level_info.game_components.Color6_Red):
                 self.red = int(finish_event.level_info.game_components.Color6_Red)
@@ -166,6 +174,20 @@ class AnalyticEvenData:
                 self.Ice_Level1 = int(finish_event.level_info.game_components.Ice_Level1)
             if str(finish_event.level_info.game_components.Ice_Level2):
                 self.Ice_Level2 = int(finish_event.level_info.game_components.Ice_Level2)
+
+            if str(finish_event.level_info.game_components.MultiStoneLevel1):
+                self.MultiStoneLevel1 = int(finish_event.level_info.game_components.MultiStoneLevel1)
+            if str(finish_event.level_info.game_components.MultiStoneLevel2):
+                self.MultiStoneLevel2 = int(finish_event.level_info.game_components.MultiStoneLevel2)
+            if str(finish_event.level_info.game_components.MultiStoneLevel3):
+                self.MultiStoneLevel3 = int(finish_event.level_info.game_components.MultiStoneLevel3)
+
+            if str(finish_event.level_info.game_components.Bear):
+                self.Bear = int(finish_event.level_info.game_components.Bear)
+            if str(finish_event.level_info.game_components.ChipMoves):
+                self.ChipMoves = int(finish_event.level_info.game_components.ChipMoves)
+            if str(finish_event.level_info.game_components.GunShot):
+                self.GunShot = int(finish_event.level_info.game_components.GunShot)
 
         if start_event:
 

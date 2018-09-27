@@ -77,6 +77,14 @@
             <th title="Гранит уровня 2"><img src="{% static '/icons/Betonplita_01.png' %}"/>
             <th title="Лед уровня 1"><img src="{% static '/icons/Hrustal_lvl01-01.png' %}"/>
             <th title="Лед уровня 2"><img src="{% static '/icons/Hrustal_lvl2.png' %}"/>
+
+            <th title=""><img src="{% static '/icons/Stone_lvl01.png' %}"/>
+            <th title=""><img src="{% static '/icons/Stone_lvl02.png' %}"/>
+            <th title=""><img src="{% static '/icons/Stone_lvl03.png' %}"/>
+
+            <th title=""><img src="{% static '/icons/Gaun.png' %}"/>
+            <th title=""><img src="{% static '/icons/Bear.png' %}"/>
+            <th title=""><img src="{% static '/icons/ChipMoves_black.png' %}"/>
             <th title="Ключ тестировщика">Ключ</th>
             <th title="Удалить событие">Удалить событие</th>
         </thead>
@@ -135,6 +143,12 @@
                 <td>{{ event.Granite_Level2 }}</td>
                 <td>{{ event.Ice_Level1 }}</td>
                 <td>{{ event.Ice_Level2 }}</td>
+                <td>{{ event.MultiStoneLevel1 }}</td>
+                <td>{{ event.MultiStoneLevel2 }}</td>
+                <td>{{ event.MultiStoneLevel3 }}</td>
+                <td>{{ event.Bear }}</td>
+                <td>{{ event.ChipMoves }}</td>
+                <td>{{ event.GunShot }}</td>
                 <td title="{{ event.user_name }}" style="max-width: 70px; overflow: hidden">{{ event.user_name }}</td>
                 <td><a href="delete?event_id={{ event.level_session_id }}&level_name={{ event.level_name }}">Del</a>
                 </td>
@@ -197,6 +211,12 @@
                 <th><h4>{{ secret_key_data.Granite_Level2 }}</h4></th>
                 <th><h4>{{ secret_key_data.Ice_Level1 }}</h4></th>
                 <th><h4>{{ secret_key_data.Ice_Level2 }}</h4></th>
+                <th><h4>{{ secret_key_data.MultiStoneLevel1 }}</h4></th>
+                <th><h4>{{ secret_key_data.MultiStoneLevel2 }}</h4></th>
+                <th><h4>{{ secret_key_data.MultiStoneLevel3 }}</h4></th>
+                <th><h4>{{ secret_key_data.Bear }}</h4></th>
+                <th><h4>{{ secret_key_data.ChipMoves }}</h4></th>
+                <th><h4>{{ secret_key_data.GunShot }}</h4></th>
                 <th style="max-width: 70px; overflow: hidden;"><h4> {{ secret_key_data.secret_key }} </h4></th>
                 <th><h4> --- </h4></th>
 
@@ -255,6 +275,12 @@
             <th><h4>{{ common_data.Granite_Level2 }}</h4></th>
             <th><h4>{{ common_data.Ice_Level1 }}</h4></th>
             <th><h4>{{ common_data.Ice_Level2 }}</h4></th>
+            <th><h4>{{ common_data.MultiStoneLevel1 }}</h4></th>
+            <th><h4>{{ common_data.MultiStoneLevel2 }}</h4></th>
+            <th><h4>{{ common_data.MultiStoneLevel3 }}</h4></th>
+            <th><h4>{{ common_data.Bear }}</h4></th>
+            <th><h4>{{ common_data.ChipMoves }}</h4></th>
+            <th><h4>{{ common_data.GunShot }}</h4></th>
             <th><h4> --- </h4></th>
             <th><h4> --- </h4></th>
 
