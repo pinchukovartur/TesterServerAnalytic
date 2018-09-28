@@ -246,16 +246,16 @@ class GameComponents:
             if Ice_Level2:
                 self.Ice_Level2 = Ice_Level2
 
-        if "MultiStoneLevel1" in game_component.keys():
-            MultiStoneLevel1 = game_component["MultiStoneLevel1"]
+        if "MultilevelStone_Level1" in game_component.keys():
+            MultiStoneLevel1 = game_component["MultilevelStone_Level1"]
             if MultiStoneLevel1:
                 self.MultiStoneLevel1 = MultiStoneLevel1
-        if "MultiStoneLevel2" in game_component.keys():
-            MultiStoneLevel2 = game_component["MultiStoneLevel2"]
+        if "MultilevelStone_Level2" in game_component.keys():
+            MultiStoneLevel2 = game_component["MultilevelStone_Level2"]
             if MultiStoneLevel2:
                 self.MultiStoneLevel2 = MultiStoneLevel2
-        if "MultiStoneLevel3" in game_component.keys():
-            MultiStoneLevel3 = game_component["MultiStoneLevel3"]
+        if "MultilevelStone_Level3" in game_component.keys():
+            MultiStoneLevel3 = game_component["MultilevelStone_Level3"]
             if MultiStoneLevel3:
                 self.MultiStoneLevel3 = MultiStoneLevel3
 
@@ -271,6 +271,9 @@ class GameComponents:
             GunShot = game_component["GunShot"]
             if GunShot:
                 self.GunShot = GunShot
+
+        #for vail in game_component.keys():
+        #    print(vail)
 
 
 class Event:
