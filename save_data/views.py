@@ -46,6 +46,7 @@ def __get_sorted_levels():
 
 def get_list_levels(request):
     set_level_info = __get_sorted_levels()
+    print(len(set_level_info))
     #set_level_info = sorted(set_level_info, key=lambda x: x[0])
     date_type = "rev"
     name_type = "simple"
@@ -79,10 +80,11 @@ def delete_events(request):
     if event_id == "" or level_name == "":
         return HttpResponse("event_id or level_name cannot be null")
     delete(event_id)
-    return redirect("/levels.html/level.html?level_name=" + level_name)
+    return redirect("/levels/level?level_name=" + level_name)
 
 
 def sort_levels(request):
+    print("aaaa")
     set_level_info = __get_sorted_levels()
 
     until_date = request.GET.get('until', "12/12/3012 0:00 PM")

@@ -70,8 +70,8 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th> <a href="/levels.html?sort=name&type={{ name_type }}">Level Name</a> </th>
-                    <th> <a href="/levels.html?sort=date&type={{ date_type }}">Date</a> </th>
+                    <th> <a href="/levels?sort=name&type={{ name_type }}">Level Name</a> </th>
+                    <th> <a href="/levels?sort=date&type={{ date_type }}">Date</a> </th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -80,7 +80,7 @@
                     <tr>
                         <th>{{ value.0 }}</th>
                         <th>{{ value.1 }}</th>
-                        <th><a href="level.html?level_name={{ value.0 }}">show data</a></th>
+                        <th><a href="levels\level?level_name={{ value.0 }}">show data</a></th>
                     </tr>
                 {% endfor %}
                 </tbody>
