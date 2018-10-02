@@ -272,6 +272,39 @@ class GameComponents:
             if GunShot:
                 self.GunShot = GunShot
 
+        if "ChipMoves_Red" in game_component.keys():
+            ChipMoves = game_component["ChipMoves_Red"]
+            if ChipMoves:
+                self.ChipMoves += ChipMoves
+
+        if "ChipMoves_Blue" in game_component.keys():
+            ChipMoves = game_component["ChipMoves_Blue"]
+            if ChipMoves:
+                self.ChipMoves += ChipMoves
+
+        if "ChipMoves_Black" in game_component.keys():
+            ChipMoves = game_component["ChipMoves_Black"]
+            if ChipMoves:
+                self.ChipMoves += ChipMoves
+
+        if "ChipMoves_Yellow" in game_component.keys():
+            ChipMoves = game_component["ChipMoves_Yellow"]
+            if ChipMoves:
+                self.ChipMoves += ChipMoves
+
+        if "ChipMoves_White" in game_component.keys():
+            ChipMoves = game_component["ChipMoves_White"]
+            if ChipMoves:
+                self.ChipMoves += ChipMoves
+
+        if "ChipMoves_Green" in game_component.keys():
+            ChipMoves = game_component["ChipMoves_Green"]
+            if ChipMoves:
+                self.ChipMoves += ChipMoves
+
+
+
+
         #for vail in game_component.keys():
         #    print(vail)
 
