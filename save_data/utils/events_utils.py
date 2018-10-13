@@ -93,6 +93,18 @@ class GameComponents:
         self.ChipMoves = 0
         self.GunShot = 0
 
+        self.FenceDestroy = 0
+        self.PearlBank = 0
+        self.SandBank = 0
+        self.Gift = 0
+
+        self.FlowerGreen = 0
+        self.FlowerRed = 0
+        self.FlowerWhite = 0
+        self.FlowerBlack = 0
+        self.FlowerBlue = 0
+        self.FlowerYellow = 0
+
         if "Color6_Red" in game_component.keys():
             Color6_Red = game_component["Color6_Red"]
             if Color6_Red:
@@ -302,8 +314,55 @@ class GameComponents:
             if ChipMoves:
                 self.ChipMoves += ChipMoves
 
+        if "DestroyFence" in game_component.keys():
+            FenceDestroy = game_component["DestroyFence"]
+            if FenceDestroy:
+                self.FenceDestroy = FenceDestroy
 
+        if "FlyPearl" in game_component.keys():
+            PearlBank = game_component["FlyPearl"]
+            if PearlBank:
+                self.PearlBank = PearlBank
 
+        if "SandBank" in game_component.keys():
+            SandBank = game_component["SandBank"]
+            if SandBank:
+                self.SandBank = SandBank
+
+        if "GiftExplosion" in game_component.keys():
+            Gift = game_component["GiftExplosion"]
+            if Gift:
+                self.Gift = Gift
+
+        if "Flower_Green" in game_component.keys():
+            FlowerGreen = game_component["Flower_Green"]
+            if FlowerGreen:
+                self.FlowerGreen = FlowerGreen
+
+        if "Flower_Black" in game_component.keys():
+            FlowerBlack = game_component["Flower_Black"]
+            if FlowerBlack:
+                self.FlowerBlack = FlowerBlack
+
+        if "Flower_Red" in game_component.keys():
+            FlowerRed = game_component["Flower_Red"]
+            if FlowerRed:
+                self.FlowerRed = FlowerRed
+
+        if "Flower_White" in game_component.keys():
+            FlowerWhite = game_component["Flower_White"]
+            if FlowerWhite:
+                self.FlowerWhite = FlowerWhite
+
+        if "Flower_Yellow" in game_component.keys():
+            FlowerYellow = game_component["Flower_Yellow"]
+            if FlowerYellow:
+                self.FlowerYellow = FlowerYellow
+
+        if "Flower_Blue" in game_component.keys():
+            FlowerBlue = game_component["Flower_Blue"]
+            if FlowerBlue:
+                self.FlowerBlue = FlowerBlue
 
         #for vail in game_component.keys():
         #    print(vail)

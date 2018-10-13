@@ -96,6 +96,18 @@ class AnalyticEvenData:
         self.ChipMoves = 0
         self.GunShot = 0
 
+        self.FenceDestroy = 0
+        self.PearlBank = 0
+        self.SandBank = 0
+        self.Gift = 0
+
+        self.FlowerGreen = 0
+        self.FlowerRed = 0
+        self.FlowerWhite = 0
+        self.FlowerBlack = 0
+        self.FlowerBlue = 0
+        self.FlowerYellow = 0
+
         if finish_event.level_info.game_components:
             if str(finish_event.level_info.game_components.Color6_Red):
                 self.red = int(finish_event.level_info.game_components.Color6_Red)
@@ -188,6 +200,28 @@ class AnalyticEvenData:
                 self.ChipMoves = int(finish_event.level_info.game_components.ChipMoves)
             if str(finish_event.level_info.game_components.GunShot):
                 self.GunShot = int(finish_event.level_info.game_components.GunShot)
+
+            if str(finish_event.level_info.game_components.FenceDestroy):
+                self.FenceDestroy = int(finish_event.level_info.game_components.FenceDestroy)
+            if str(finish_event.level_info.game_components.PearlBank):
+                self.PearlBank = int(finish_event.level_info.game_components.PearlBank)
+            if str(finish_event.level_info.game_components.SandBank):
+                self.SandBank = int(finish_event.level_info.game_components.SandBank)
+            if str(finish_event.level_info.game_components.Gift):
+                self.Gift = int(finish_event.level_info.game_components.Gift)
+
+            if str(finish_event.level_info.game_components.FlowerGreen):
+                self.FlowerGreen = int(finish_event.level_info.game_components.FlowerGreen)
+            if str(finish_event.level_info.game_components.FlowerRed):
+                self.FlowerRed = int(finish_event.level_info.game_components.FlowerRed)
+            if str(finish_event.level_info.game_components.FlowerWhite):
+                self.FlowerWhite = int(finish_event.level_info.game_components.FlowerWhite)
+            if str(finish_event.level_info.game_components.FlowerBlack):
+                self.FlowerBlack = int(finish_event.level_info.game_components.FlowerBlack)
+            if str(finish_event.level_info.game_components.FlowerYellow):
+                self.FlowerYellow = int(finish_event.level_info.game_components.FlowerYellow)
+            if str(finish_event.level_info.game_components.FlowerBlue):
+                self.FlowerBlue = int(finish_event.level_info.game_components.FlowerBlue)
 
         if start_event:
 

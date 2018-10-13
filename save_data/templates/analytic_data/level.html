@@ -19,7 +19,8 @@
 <body>
 
 <div>
-уровень: {{ level_info.0 }} , кол-во выходов из уровня: {{ level_info.1 }} , кол-во уровней без преобразования супер фишек: {{ level_info.2 }}
+    уровень: {{ level_info.0 }} , кол-во выходов из уровня: {{ level_info.1 }} , кол-во уровней без преобразования супер
+    фишек: {{ level_info.2 }}
 </div>
 
 <div style="height:80%; overflow:hidden; border:1px solid black;">
@@ -86,7 +87,19 @@
             <th title=""><img src="{% static '/icons/Bear.png' %}"/>
             <th title=""><img src="{% static '/icons/ChipMoves_black.png' %}"/>
             <th title=""><img src="{% static '/icons/Gaun.png' %}"/>
-            
+
+            <th title="">FenceDestroy
+            <th title="">PearlBank
+            <th title="">SandBank
+            <th title="">Gift
+
+            <th title="">FlowerGreen
+            <th title="">FlowerRed
+            <th title="">FlowerWhite
+            <th title="">FlowerBlack
+            <th title="">FlowerBlue
+            <th title="">FlowerYellow
+
             <th title="Ключ тестировщика">Ключ</th>
             <th title="Удалить событие">Удалить событие</th>
         </thead>
@@ -151,6 +164,19 @@
                 <td>{{ event.Bear }}</td>
                 <td>{{ event.ChipMoves }}</td>
                 <td>{{ event.GunShot }}</td>
+
+                <td>{{ event.FenceDestroy }}</td>
+                <td>{{ event.PearlBank }}</td>
+                <td>{{ event.SandBank }}</td>
+                <td>{{ event.Gift }}</td>
+
+                <td>{{ event.FlowerGreen }}</td>
+                <td>{{ event.FlowerRed }}</td>
+                <td>{{ event.FlowerWhite }}</td>
+                <td>{{ event.FlowerBlack }}</td>
+                <td>{{ event.FlowerBlue }}</td>
+                <td>{{ event.FlowerYellow }}</td>
+
                 <td title="{{ event.user_name }}" style="max-width: 70px; overflow: hidden">{{ event.user_name }}</td>
                 <td><a href="delete?event_id={{ event.level_session_id }}&level_name={{ event.level_name }}">Del</a>
                 </td>
@@ -219,6 +245,19 @@
                 <th><h4>{{ secret_key_data.Bear }}</h4></th>
                 <th><h4>{{ secret_key_data.ChipMoves }}</h4></th>
                 <th><h4>{{ secret_key_data.GunShot }}</h4></th>
+
+                <th><h4>{{ secret_key_data.FenceDestroy }}</h4></th>
+                <th><h4>{{ secret_key_data.PearlBank }}</h4></th>
+                <th><h4>{{ secret_key_data.SandBank }}</h4></th>
+                <th><h4>{{ secret_key_data.Gift }}</h4></th>
+
+                <th><h4>{{ secret_key_data.FlowerGreen }}</h4></th>
+                <th><h4>{{ secret_key_data.FlowerRed }}</h4></th>
+                <th><h4>{{ secret_key_data.FlowerWhite }}</h4></th>
+                <th><h4>{{ secret_key_data.FlowerBlack }}</h4></th>
+                <th><h4>{{ secret_key_data.FlowerBlue }}</h4></th>
+                <th><h4>{{ secret_key_data.FlowerYellow }}</h4></th>
+
                 <th style="max-width: 70px; overflow: hidden;"><h4> {{ secret_key_data.secret_key }} </h4></th>
                 <th><h4> --- </h4></th>
 
@@ -283,6 +322,19 @@
             <th><h4>{{ common_data.Bear }}</h4></th>
             <th><h4>{{ common_data.ChipMoves }}</h4></th>
             <th><h4>{{ common_data.GunShot }}</h4></th>
+
+            <th><h4>{{ common_data.FenceDestroy }}</h4></th>
+            <th><h4>{{ common_data.PearlBank }}</h4></th>
+            <th><h4>{{ common_data.SandBank }}</h4></th>
+            <th><h4>{{ common_data.Gift }}</h4></th>
+
+            <th><h4>{{ common_data.FlowerGreen }}</h4></th>
+            <th><h4>{{ common_data.FlowerRed }}</h4></th>
+            <th><h4>{{ common_data.FlowerWhite }}</h4></th>
+            <th><h4>{{ common_data.FlowerBlack }}</h4></th>
+            <th><h4>{{ common_data.FlowerBlue }}</h4></th>
+            <th><h4>{{ common_data.FlowerYellow }}</h4></th>
+
             <th><h4> --- </h4></th>
             <th><h4> --- </h4></th>
 
