@@ -441,8 +441,13 @@ def _get_complexity(events):
     fails = _get_count_analytic_data(events, "fail_game")
 
     if fails != 0 and events != 0:
-        return str(fails) + " * 100 / " + str(len(events)) + " = " + str(
-            round(((fails) * 100) / len(events), 2))
+        percents = str(fails) + " * 100 / " + str(len(events)) + " = " + str(
+            round(((fails) * 100) / len(events), 2)) + "%"
+
+        tryes = str(len(events)) + ' / ' + str(len(events) - fails) + " = " + \
+                str(round((len(events) / (len(events) - fails)), 2))
+
+        return percents + "  |  попытка: " + tryes
     else:
         return "0"
 

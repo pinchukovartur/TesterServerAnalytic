@@ -344,11 +344,11 @@
     </table>
 </div>
 <div>
-    <p> Сложность уровня = {{ common_data.complexity }} %</p>
+    <p> Сложность уровня = {{ common_data.complexity }}</p>
 
     {% for secret_key_data in list_secret_key_date %}
         <p> Сложность уровня для секретного ключа: {{ secret_key_data.secret_key }} = {{ secret_key_data.complexity }}
-            %</p>
+            </p>
 
     {% endfor %}
 </div>
