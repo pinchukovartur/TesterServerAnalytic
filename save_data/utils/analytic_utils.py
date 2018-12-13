@@ -439,15 +439,29 @@ def _get_count_analytic_data(events, attr):
 
 def _get_complexity(events):
     fails = _get_count_analytic_data(events, "fail_game")
+    all = len(events)
+    wins = all - fails
+    is_new_statistics = False
+    date_start_new_statistics = datetime.datetime(2018, 12, 1, 0, 0)
+    for event in events:
+        if event.start_date:
+            if event.start_date > date_start_new_statistics:
+                is_new_statistics = True
 
-    if fails != 0 and events != 0:
-        percents = str(fails) + " * 100 / " + str(len(events)) + " = " + str(
-            round(((fails) * 100) / len(events), 2)) + "%"
+    if fails != 0 and all != 0:
+        percents = str(fails) + " * 100 / " + str(all) + " = " + str(
+            round((fails * 100) / all, 2)) + "%"
 
-        tryes = str(len(events)) + ' / ' + str(len(events) - fails) + " = " + \
-                str(round((len(events) / (len(events) - fails)), 2))
+        if wins == 0:
+            tryes = str(all) + ' / ' + str(wins) + " = -"
+        else:
+            tryes = str(all) + ' / ' + str(wins) + " = " + \
+                str(round((all / wins), 2))
 
-        return percents + "  |  попытка: " + tryes
+        if is_new_statistics:
+            return tryes
+        else:
+            return percents + "  |  попытка: " + tryes
     else:
         return "0"
 
