@@ -36,6 +36,9 @@ class AnalyticEvenData:
         self.target1_count_collected = ""
         self.target2_count_collected = ""
 
+        self.first_target_penalty_count = ""
+        self.second_target_penalty_count = ""
+
         # self.target1_count_overflow = ""
         # self.target2_count_overflow = ""
 
@@ -301,9 +304,13 @@ class AnalyticEvenData:
         # ЗАПОЛНЯЕМ ТОЛЬКО КОГДА ПОРАЖЕНИЕ
         if finish_event.level_info:
             if finish_event.level_info.firstTarget:
+                if "m_penalty" in finish_event.level_info.firstTarget.keys():
+                    self.first_target_penalty_count = finish_event.level_info.firstTarget["m_penalty"]
                 if str(finish_event.level_info.firstTarget["m_required"]) and self.fail_game:
                     self.target1_count_collected = finish_event.level_info.firstTarget["m_remainder"]
             if finish_event.level_info.secondTarget:
+                if "m_penalty" in finish_event.level_info.secondTarget.keys():
+                    self.second_target_penalty_count = finish_event.level_info.secondTarget["m_penalty"]
                 if str(finish_event.level_info.secondTarget["m_required"]) and self.fail_game:
                     self.target2_count_collected = finish_event.level_info.secondTarget["m_remainder"]
 

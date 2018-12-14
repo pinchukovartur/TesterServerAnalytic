@@ -38,6 +38,8 @@
             <th title="Количество оставшихся ходов">Остаток ходов</th>
             <th title="Что требовалось собрать">Цель№1 {{ events.0.target1_name }}</th>
             <th title="Что требовалось собрать">Цель№2 {{ events.0.target2_name }}</th>
+            <th title="Penalty Target 1">Penalty Target 1</th>
+            <th title="Penalty Target 2">Penalty Target 2</th>
             <th title="Сколько дано ходов">Дано ходов</th>
             <th title="Сколько дано секунд">Дано секунд</th>
             <th title="Сколько было собрано цели 1">Собрано Цели№1</th>
@@ -118,6 +120,8 @@
                 <td>{{ event.left_turn }}</td>
                 <td>{{ event.target1_count }}</td>
                 <td>{{ event.target2_count }}</td>
+                <td>{{ event.first_target_penalty_count }}</td>
+                <td>{{ event.second_target_penalty_count }}</td>
                 <td>{{ event.give_turn }}</td>
                 <td>{{ event.give_seconds }}</td>
                 <td>{{ event.target1_count_collected }}</td>
@@ -199,6 +203,8 @@
                 <th><h4>{{ secret_key_data.left_turn }}</h4></th>
                 <th><h4>{{ secret_key_data.target1_count }}</h4></th>
                 <th><h4>{{ secret_key_data.target2_count }}</h4></th>
+                <th><h4>{{ secret_key_data.first_target_penalty_count }}</h4></th>
+                <th><h4>{{ secret_key_data.second_target_penalty_count }}</h4></th>
                 <th><h4>{{ secret_key_data.give_turn }}</h4></th>
                 <th><h4>{{ secret_key_data.give_second }}</h4></th>
                 <th><h4>{{ secret_key_data.target1_count_collected }}</h4></th>
@@ -276,6 +282,8 @@
             <th><h4>{{ common_data.left_turn }}</h4></th>
             <th><h4>{{ common_data.target1_count }}</h4></th>
             <th><h4>{{ common_data.target2_count }}</h4></th>
+            <th><h4>{{ common_data.first_target_penalty_count }}</h4></th>
+            <th><h4>{{ common_data.second_target_penalty_count }}</h4></th>
             <th><h4>{{ common_data.give_turn }}</h4></th>
             <th><h4>{{ common_data.give_second }}</h4></th>
             <th><h4>{{ common_data.target1_count_collected }}</h4></th>
